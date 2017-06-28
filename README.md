@@ -3,11 +3,7 @@ Programming notes of interest
 
 * [Regular Expressions](./regular_expressions/regular_expressions.md)
 * [Tail Recursion](./tail_recursion/example.js)
-
-## Servers
-Run a simple http server in any directory on mac: `python -m SimpleHTTPServer [port number]`
-
-Example: `python -m SimpleHTTPServer 8005`
+* [Servers](./servers/servers.md)
 
 ## Event-Driven
 
