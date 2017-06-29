@@ -7,6 +7,7 @@ function mul(factorA) {
     if (factorB === undefined) {
       return factorA;
     } else {
+      // closure: factorA is accessible after mul has been called
       factorA = factorA * factorB;
       return multiply;  
     }

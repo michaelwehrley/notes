@@ -8,11 +8,13 @@ function isAnagram(phrase1, phrase2) {
   return phrase1.split('').sort().join('') === phrase2.split('').sort().join('');
 }
 
-isAnagram("fbg", "bfg");
+isAnagram("fbg", "bfg"); // true
+isAnagram("fbg", "bfgg"); // false
 ```
 
 Using `RegExp` and allowing numbers
-* note the `g` (globa) matching flag.
+* _note_ the `g` (globa) matching flag.
+* _note_ `\w`	will match any word character (letter, number, underscore)
 ```JavaScript
 function isAnagram(phrase1, phrase2) {
   phrase1 = String(phrase1);
@@ -21,16 +23,18 @@ function isAnagram(phrase1, phrase2) {
   return phrase1.match(/\w/g).sort().join('') === phrase2.match(/\w/g).sort().join('');
 }
 
-isAnagram("fbg", "bfg");
+isAnagram("f5bg", "bfg5"); // true
+isAnagram("f5bg", "bfg 5"); // true
+isAnagram("f$#5bg", "bfg 5"); // true
 ```
 
 ## Slice()
-`slice()` is a nice *functional* approach to keep original array in take
+`slice()` is a nice *functional* approach to keep original array intact:
 ```JavaScript
 a = ["m", "i", "k", "e"];
 b = a.slice(2);
-b // ["k", "e"]
 a // ["m", "i", "k", "e"]
+b // ["k", "e"]
 ```
 
 ```JavaScript
@@ -63,7 +67,7 @@ a.length = 0;
 a // []
 ```
 
-Resetting arrays don't change the pointer of referenced arrays in memory:
+Redefining an array doesn't change the pointer of referenced arrays in memory:
 ```JavaScript
 a = ["m", "i", "k", "e"];
 b = a;
@@ -72,7 +76,7 @@ a // []
 b // ["m", "i", "k", "e"]
 ```
 
-Updating the place in memory will update all references:
+Using `splice` to update the place in memory will update all references:
 ```JavaScript
 a = ["m", "i", "k", "e"];
 b = a;

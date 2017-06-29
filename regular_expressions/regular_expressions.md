@@ -31,15 +31,19 @@ An example: [isAnagram](./example.js)
 
 Other options for a regular expression:
 ```JavaScript
-"foobarfoo".match(/foo/g) // returns an array containing the entire match result and any parentheses-captured matched results; null if there were no matches.
-"foobar".replace(re, "!") // replaces the first found regex with second parameter (unless it is a global search)
-"foobar".search(re) // returns the index of the first match (even if it is a global search)
+// returns an array containing the entire match result and any parentheses-captured matched results
+// null if there were no matches.
+"foobarfoo".match(/foo/g);
+// replaces the first found regex with second parameter (unless it is a global search)
+"foobar".replace(re, "!");
+// returns the index of the first match (even if it is a global search)
+"foobar".search(re);
 
 var RE = /^foo(bar)$/;
 RE.test("foobar"); // true
 ```
 
-Remember calling `replace` with a string option only replaces the first occurrence.
+Remember calling `replace` with a string option replaces only the *first* occurrence.
 ```JavaScript
 "foobar".replace("o", "!"); // "f!obar"
 ```

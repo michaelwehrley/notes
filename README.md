@@ -3,6 +3,9 @@ Programming notes of interest
 
 * [Regular Expressions](./regular_expressions/regular_expressions.md)
 * [Undefined & Null](./undefined_null.md)
+* [Arrays](./arrays.md)
+* [Objects](./objects.md)
+* [Functions](./functions.md)
 * [Closure](./closure.md)
 * [Tail Recursion](./tail_recursion/example.js)
 * [Servers](./servers/servers.md)
