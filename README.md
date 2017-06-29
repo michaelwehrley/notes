@@ -9,6 +9,11 @@ Programming notes of interest
 * [Closure](./closure.md)
 * [Tail Recursion](./tail_recursion/example.js)
 * [Servers](./servers/servers.md)
+* Module pattern
+* this
+* ["use strict";](https://www.toptal.com/javascript/interview-questions)
+* [semicolon insertion](semicolon_insertion.md)
+* [NaN](nan.md)
 
 ## Event-Driven
 
