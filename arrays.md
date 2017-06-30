@@ -1,5 +1,25 @@
 # Arrays
 
+`slice`, `splice`, `push`, `shift`, `unshift`, `reverse`
+
+`reverse` and `splice` are not functional b/c they change the existing array
+
+```JavaScript
+var array = ['foo', 34, 2, 12, 3, 'b'];
+
+array.slice(0); // ['foo', 34, 2, 12, 3, 'b']
+array.slice(3); // [2, 12, 3, 'b']
+array.slice(-1); // ['b']
+```
+
+```JavaScript
+var array = ['foo', 34, 2, 12, 3, 'b'];
+
+array.slice(0); // ['foo', 34, 2, 12, 3, 'b']
+array.slice(3); // [2, 12, 3, 'b']
+array.slice(-1); // ['b']
+```
+
 ## Strings
 
 Using `split` to build an array from a string and `join` to build a string again.

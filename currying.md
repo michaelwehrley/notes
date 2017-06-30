@@ -10,5 +10,24 @@ function add(x) {
     }
   }
 }
+```
+
+Note that we are binding `arguments` as the `this` of `slice`.
+```JavaScript
+function sum(x) {
+  var args = [].slice.call(arguments, 0);
+
+  if (args.length > 1) {
+    // return args[0] + args[1];
+    return sum(args[0])(args[1]);
+  }
+
+  return function(y) {
+    return x + y;
+  }
+}
+
+sum(2, 3); // 6
+sum(2)(3); // 6
 
 ```
