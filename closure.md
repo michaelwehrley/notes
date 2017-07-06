@@ -46,3 +46,11 @@ function buttonClick(i) {
   document.body.appendChild(btn);
 }
 ```
+
+```JavaScript
+for (var index = 1; index <= 5; index++) {
+  $("#star" + index).click(function () {
+    $("#feedback_rating").val(index); // value is ALWAYS 6! Whoops!
+  });
+}
+```

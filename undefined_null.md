@@ -51,7 +51,7 @@ undefined = 3 // will fail silently
 
 ```JavaScript
 // ES 3
-"use strict;"
+"use strict";
 undefined = 3 // will assign
 ```
 

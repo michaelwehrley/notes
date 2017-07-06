@@ -34,6 +34,11 @@ If you don't specify this, logs will be outputted to the console.
 $ pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
 
+## Deamons
+
+Files with `d` or `.d` suffix stand for Deamon.
+Example: `/etc/init.d/nginx`
+
 ## Downloading Remote Serve SQL
 
 1. SSH into the remote server: `$ ssh mike@11.111.11.11`

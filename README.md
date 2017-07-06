@@ -8,6 +8,7 @@ Programming notes of interest
 * [Currying](./currying.md)
 * [EventLoop](./event_loop.md)
 * [Functions](./functions.md)
+* [Patterns & the Gang of 4](./gang_of_four/gang_of_four.md)
 * [Lexical Scope](./objects.md)
 * [NaN](nan.md)
 * [Objects](./objects.md)
