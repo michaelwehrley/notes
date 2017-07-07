@@ -1,10 +1,31 @@
 # Servers
 
-## SimpleHTTPServer
+## SimpleHTTPServer (Python)
 
 Run a simple http server in any directory on mac: `$ python -m SimpleHTTPServer [port number]`
 
 Example: `$ python -m SimpleHTTPServer 8005`
+
+## Simple HTTP Server (ruby)
+
+1. Run a simple http server in any directory on mac: `$ ruby hello_world_server.rb` [see file](./hello_world_server.rb)
+
+2. Run a more complex http server. For each incoming request, we’ll parse the *Request-URI* header and translate it into a path to a file within the server’s public folder:
+
+```ruby
+ext = File.extname(path).split(".").last
+```
+
+If we’re able to find a match, we’ll respond with its contents, using the file’s size to determine the *Content-Length* and its extension to determine the *Content-Type*:
+
+```ruby
+"HTTP/1.1 200 OK\r\n" +
+"Content-Type: #{content_type(file)}\r\n" +
+"Content-Length: #{file.size}\r\n" +
+"Connection: close\r\n"
+```
+
+If no matching file can be found, we’ll respond with a 404 Not Found error status.
 
 ## PostgreSQL Server
 
