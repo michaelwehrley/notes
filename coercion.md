@@ -9,8 +9,12 @@
 // ES6
 "foo".repeat(2); // 'foofoo' only for ES6
 
-String(9) // returns the primitive "9"
-new String(3) // returns a string object
+String(9); // returns the primitive "9"
+new String(3); // returns a string object
 
-String(3) === new String(3) // false
+String(3) === new String(3); // false
+```
+
+```JavaScript
+String({ foo: "bar" }); // "[object Object]"
 ```

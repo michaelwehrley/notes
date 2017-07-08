@@ -1,24 +1,25 @@
 # Notes
 Programming notes of interest
 
-* [Regular Expressions](./regular_expressions/regular_expressions.md)
 * [Arrays](./arrays.md)
 * [Closure](./closure.md)
 * [Coercion](./coercion.md)
 * [Currying](./currying.md)
 * [EventLoop](./event_loop.md)
 * [Functions](./functions.md)
-* [Patterns & the Gang of 4](./gang_of_four/gang_of_four.md)
 * [Lexical Scope](./objects.md)
+* [Module pattern](./)
+* [Patterns & the Gang of 4](./gang_of_four/gang_of_four.md)
 * [NaN](./nan.md)
 * [Numbers](./numbers.md)
 * [Objects](./objects.md)
+* [Regular Expressions](./regular_expressions/regular_expressions.md)
 * [Semicolon Insertion](./semicolon_insertion.md)
 * [Servers](./servers/servers.md)
 * [Sorting](./sorting.md)
 * [Tail Recursion](./tail_recursion/example.js)
-* [Module pattern](./)
 * [this](./)
+* [Threads](./threads.md)
 * ["use strict";](https://www.toptal.com/javascript/interview-questions)
 * [Undefined & Null](./undefined_null.md)
 
