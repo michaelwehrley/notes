@@ -27,11 +27,15 @@ loop do
   # to let the client know the size and type of data
   # contained in the response. Note that HTTP is whitespace
   # sensitive, and expects each header line to end with CRLF (i.e. "\r\n")
-  # socket.print ""
+
+  # The browser won't render without "HTTP/1.1 200 OK"
   socket.print "HTTP/1.1 200 OK\r\n" +
+
+  # Response Headers...
                "Content-Type: text/plain\r\n" +
               #  "Content-Type: text/html\r\n" +
-               "Content-Length: 1\r\n" +
+               "Content-Length: #{response.size}\r\n" + # 13
+              #  "Content-Length: 1\r\n" +
                "Connection: close\r\n"
 
   # Print a blank line to separate the header from the response body,

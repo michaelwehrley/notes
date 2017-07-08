@@ -1,3 +1,7 @@
+# Git
+
+## Cleaning
+
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -15,3 +19,34 @@ Untracked files:
 	tools_and_modules.csv
 
 `$ git clean -f`
+
+## Updating a Branch
+
+`$ git fetch`
+`$ git rebase origin/master`
+
+## Clean branches
+
+`$ git remote prune origin`
+
+## Deleting Tags
+
+Tag named 0.1.0
+`$ git tag -d 0.1.0`
+`$ git push origin :refs/tags/0.1.0`
+
+*refs* is for instance 'git@github.com:michaelwehrley/notes.git'
+
+## Undo Last Commit
+
+Leave existing changes staged: `$ git reset --soft HEAD~`.
+
+Unstage changes: `$ git reset HEAD~`.
+
+## Amending a Commit
+
+`$ git comment --amend`
+
+## Pushing to Branch
+
+`$ git push origin HEAD -f`
