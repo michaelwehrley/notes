@@ -1,5 +1,7 @@
 # Functions
 
+* [Constructor Functions](./constructor_functions.md)
+
 ## Named Function Expression (NFE)
 
 ```JavaScript

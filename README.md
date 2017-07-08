@@ -6,7 +6,7 @@ Programming notes of interest
 * [Coercion](./coercion.md)
 * [Currying](./currying.md)
 * [EventLoop](./event_loop.md)
-* [Functions](./functions.md)
+* [Functions](./functions/functions.md)
 * [Lexical Scope](./objects.md)
 * [Module pattern](./)
 * [Patterns & the Gang of 4](./gang_of_four/gang_of_four.md)
