@@ -1,8 +1,17 @@
 # Constructor Functions
 
+## Sequence
+
+When calling `new Foo();`
+
+1. Object is created and referenced by `this`;
+1. `this` is linked to `Object.prototype`;
+1. Properties and functions are added to `this`; and
+1. If no return object is returned explicitly, then `this` is returned implicitly.
+
 ## Prototypes and Privacy
 
-* One draw back of the constructor function is that _private_ are created every time a constructor is evoked to create a new object.
+* One draw back of the constructor function is that _private_ properties and functions are re-created every time a constructor is invoked to create a new object.
 
 ```JavaScript
 "use strict";

@@ -1,6 +1,7 @@
 # Functions
 
 * [Constructor Functions](./constructor_functions.md)
+* [IIFE](./IIFE.md)
 
 ## Named Function Expression (NFE)
 
