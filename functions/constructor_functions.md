@@ -1,6 +1,47 @@
 # Constructor Functions
 
-## Sequence
+## Circumvent `new` Problem
+
+```JavaScript
+// "use strict";
+
+function Foo(name) {
+  this.foo = function() {
+    return name;
+  }
+}
+
+var foo1 = new Foo('mike');
+foo1.foo(); // "mike"
+
+var foo2 = Foo('mike');
+foo // function that is attached to the global object b/c of `this`
+foo2.foo(); // Uncaught TypeError: Cannot read property 'foo' of undefined
+```
+The solution is to make sure the object has a constructor via `instanceof`:
+
+```JavaScript
+function Foo(name) {
+  var args = Array.prototype.slice.call(arguments);
+
+  // only run if not using `new`
+  if (!(this instanceof Foo)) {
+    return new Foo(...args);
+  }
+
+  this.foo = function() {
+    return name;
+  }
+}
+
+var foo1 = new Foo('mike');
+foo1.foo(); // "mike"
+
+var foo2 = Foo('mike');
+foo2.foo(); // "mike"
+```
+
+## Sequence of Events
 
 When calling `new Foo();`
 
@@ -101,3 +142,9 @@ foo.bar(); // "bar"
 var foo2 = new Foo("mike", "wehrley");
 foo2.getName(); //  "mike wehrley"
 ```
+<!--
+foo1.__proto__ === Foo.prototype // true
+foo1.constructor === Foo // true
+Foo.prototype === foo // true
+
+foo1.__proto__.__proto__ === Object.prototype // true -->
