@@ -47,6 +47,10 @@ Unstage changes: `$ git reset HEAD~`.
 
 `$ git comment --amend`
 
+## Rebasing
+
+Rebase last 2 commits: `$ git rebase -i HEAD~2`
+
 ## Pushing to Branch
 
 `$ git push origin HEAD -f`

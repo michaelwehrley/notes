@@ -9,12 +9,14 @@ _Synchronized Programming_
 ```JavaScript
 (function() {
   console.log(1);
-  setTimeout(function(){console.log(2)}, 1000);
-  setTimeout(function(){console.log(3)}, 0);
+  setTimeout(function(){ console.log(2) }, 1000);
+  setTimeout(function(){ console.log(3) }, 0);
   console.log(4);
 })();
 // 1,4,3,3
 ```
+
+![alt text](/assets/concurrency_model_and_event_loop.png "Event Loop")
 
 ## Node & EventLoop
 
