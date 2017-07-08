@@ -16,7 +16,7 @@ _Synchronized Programming_
 // 1,4,3,3
 ```
 
-![alt text](/assets/concurrency_model_and_event_loop.png "Event Loop")
+![Event Loop](/assets/concurrency_model_and_event_loop.png)
 
 ## Node & EventLoop
 

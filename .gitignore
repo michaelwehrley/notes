@@ -1,3 +1,5 @@
 test.js
 test.html
 .DS_Store
+*.c
+*.out

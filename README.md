@@ -20,6 +20,7 @@ Programming notes of interest
 * [Tail Recursion](./tail_recursion/example.js)
 * [this](./)
 * [Threads](./threads.md)
+* [Types & Casting](./types_and_casting.md)
 * ["use strict";](https://www.toptal.com/javascript/interview-questions)
 * [Undefined & Null](./undefined_null.md)
 

