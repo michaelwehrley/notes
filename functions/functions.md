@@ -2,6 +2,7 @@
 
 * [Configuration Object](./configuration_object.md)
 * [Constructor Functions](./constructor_functions.md)
+* [Currying](./currying.md)
 * [Fibonacci Series](./fibonacci_series.md)
 * [Self-Defining Functions](./self_defining_functions.md)
 * [IIFE](./IIFE.md)

@@ -29,5 +29,20 @@ function fibonacci(n) {
 }
 
 fibonacci(8); // 21
+```
 
+```Ruby
+class Compute
+  def self.calculation
+    n = 100
+    @calculation ||= self.factorial(n) # memoization
+  end
+
+  def self.factorial(n)
+    ((1..n).inject(:*))
+  end
+end
+
+Compute.calculation # 8709782...
+Compute.calculation # 8709782...
 ```
