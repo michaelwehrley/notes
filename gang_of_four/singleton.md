@@ -9,6 +9,7 @@ uni1 === uni2; // true
 
 ## Necessary Background
 * [*Constructor* functions](/functions/constructor_functions.md)
+* [Memoization](/functions/memoization.md)
 * *Public static* properties
 * *Closure* & *private static* properties
 * *Self-Defining* functions

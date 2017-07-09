@@ -8,9 +8,15 @@ It says it all...
 *Immediately-Invoked:*
 
 ```JavaScript
-(function foo() {
-  // ...
-}());
+var count = 0;
+
+(function foo(value) {
+  if (count < 10) {
+    count++;
+    console.log(value);
+    return foo(value);  
+  }
+}("bar"));
 ```
 
 *Expressions:*

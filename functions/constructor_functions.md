@@ -2,11 +2,11 @@
 
 ## Sequence of Events
 
-When calling `new Foo();` a constructor creates an object that is *linked* to its own *prototype*.
+When calling `new Foo();`
 
 1. Brand new object is created;
-1. The new object gets linked to constructor's prototype;
-1. Context is set to the `this`;
+1. The new object gets _linked_ to constructor's _prototype_;
+1. Context is set to the `this`; and
 1. If no return object is returned explicitly, then `this` is returned implicitly.
 
 ## Prototypes and Privacy

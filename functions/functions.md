@@ -1,8 +1,11 @@
 # Functions
 
+* [Configuration Object](./configuration_object.md)
 * [Constructor Functions](./constructor_functions.md)
+* [Fibonacci Series](./fibonacci_series.md)
 * [Self-Defining Functions](./self_defining_functions.md)
 * [IIFE](./IIFE.md)
+* [Memoization](./memoization.md)
 
 ## Named Function Expression (NFE)
 
