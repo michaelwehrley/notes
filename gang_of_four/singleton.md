@@ -7,6 +7,15 @@ var uni2 = new Universe();
 uni1 === uni2; // true
 ```
 
+## Necessary Background
+* [*Constructor* functions](/functions/constructor_functions.md)
+* *Public static* properties
+* *Closure* & *private static* properties
+* *Self-Defining* functions
+
+### Examples
+
+
 ## Option 1: Static Property on the Constructor
 
 The drawback is a *publicly accessible* `instance` property via `Universe.instance`
