@@ -1,12 +1,16 @@
 # Functions
 
+* [Chaining](./chaining.md)
+* [Closure](./closure.md)
 * [Configuration Object](./configuration_object.md)
 * [Constructor Functions](./constructor_functions.md)
 * [Currying](./currying.md)
 * [Fibonacci Series](./fibonacci_series.md)
-* [Self-Defining Functions](./self_defining_functions.md)
 * [IIFE](./IIFE.md)
 * [Memoization](./memoization.md)
+* [Private Static Members](./private_static_members.md)
+* [Public Static Members](./public_static_members.md)
+* [Self-Defining Functions](./self_defining_functions.md)
 
 ## Named Function Expression (NFE)
 
