@@ -1,4 +1,5 @@
 # Closure
+
 * Functions are first class objects.
 
 ```JavaScript
@@ -20,6 +21,7 @@ mul(2)(3)(4)() // 24
 ```
 
 Create closure with an IFEE
+
 ```JavaScript
 for (var i = 0; i < 5; i++) {
   (function(i) {
@@ -33,6 +35,7 @@ for (var i = 0; i < 5; i++) {
 ```
 
 Create closure by creating a function
+
 ```JavaScript
 for (var i = 0; i < 5; i++) {
   buttonClick(i);

@@ -1,3 +1,23 @@
+"use strict";
+
+function bar() {
+  foo.call(this, 1);
+}
+
+function foo(num) {
+  debugger;
+}
+
+var me = {
+  bar2: (function bobby() {
+    return function() {
+      bar();
+    }
+  }())
+}
+
+me.bar2();
+
 (function() {
   "use strict";
   // Tail Calling

@@ -1,5 +1,9 @@
-test.js
-test.html
+.byebug_history
 .DS_Store
+
 *.c
 *.out
+
+test.js
+test.html
+test.rb

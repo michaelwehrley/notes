@@ -3,6 +3,8 @@
 For background info about [fibonacci series function](./recursion.md).
 
 ```JavaScript
+// JavaScript example
+
 function fibonacci(n) {
   var memo = [];
   // var memo = {}
@@ -32,6 +34,8 @@ fibonacci(8); // 21
 ```
 
 ```Ruby
+# Ruby example
+
 class Compute
   def self.calculation
     n = 100
