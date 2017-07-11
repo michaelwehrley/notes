@@ -1,3 +1,4 @@
 # Gang of Four
 
-* [Singleton](./singleton.md)
+* [Singleton Method](./singleton.md)
+* [Factory Method](./factory.md)

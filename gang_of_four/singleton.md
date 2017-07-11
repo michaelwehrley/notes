@@ -1,4 +1,4 @@
-# Singleton
+# Singleton Method
 
 A design pattern that restricts "instantiation" of a "class" to only one "instance."
 
