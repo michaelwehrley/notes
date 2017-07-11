@@ -154,3 +154,5 @@ SELECT ?,?,? FROM ? WHERE ? LIKE %hammer% UNION (SELECT uLogin, uHash, uType FRO
 ```
 
 ![SQL_Injected_Products_Table](/assets/sql_injected_products_table.png)
+
+## HTTP vs TCP vs UDP

@@ -49,3 +49,5 @@ Remember calling `replace` with a string option replaces only the *first* occurr
 ```
 
 ## Ruby
+
+("#{locale_prefix}#{url}" =~ /#{current_path}$/).present?

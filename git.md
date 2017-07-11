@@ -54,3 +54,12 @@ Rebase last 2 commits: `$ git rebase -i HEAD~2`
 ## Pushing to Branch
 
 `$ git push origin HEAD -f`
+
+## Working on Someone Else's Branch
+
+`$ git checkout remotes/origin/test` # You are in a 'detached HEAD' state
+`$ git checkout -b test`
+
+To push the current branch and set the remote as upstream, use
+
+`$ git push --set-upstream origin test`

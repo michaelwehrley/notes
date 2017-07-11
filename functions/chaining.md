@@ -5,14 +5,16 @@
 * Common practice with jQuery & DOM API (document.getElementById('foo').appendChild('div')); but
 * Robert Martin finds fault in the fact that this pattern can fail silently.
 
+Examples:
+
 ```JavaScript
 // JavaScript
-one().plus().two().equals() // 3
+one().add().two().equals() // 3
 ```
 
 ```Ruby
 # Ruby
-one.plus.two.equals # Ruby
+one.add.two.equals # Ruby
 ```
 
 ## Javascript
@@ -20,73 +22,86 @@ one.plus.two.equals # Ruby
 ```JavaScript
 "use strict";
 
-var current;
-var previous;
-var operation;
-
-function calc() {
-  if (operation && previous && current) {
-    current = operation(previous, current);
-    operation = null
-  }
-}
-
-var calculator = {
-  one: one,
-  two: two,
-  three: three,
-  add: function() {
-    operation = function(a, b) {
-      return a + b;
+var calculator = (function() {
+  function calculate(value) {
+    if (this.operation && this.previous && this.current) {
+      this.current = this.operation(this.previous, this.current);
+      this.operation = null
     }
+  }
 
-    return calculator;
-  },
-  subtract: function() {
-    operation = function(a, b) {
-      return a - b;
+  function setOperands(value) {
+    if (this.current) {
+      this.previous = this.current;
     }
-
-    return calculator;
-  },
-  equals: function() {
-    console.log(current);
+    this.current = value
+    calculate.call(this);
   }
-}
 
-function setOperands() {
-  if (current) {
-    previous = current;
+  var publicApi = {
+    FUNCTION_ARRAY: [
+      "zero",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine"
+    ],
+    add: function() {
+      this.operation = function(a, b) {
+        return a + b;
+      }
+
+      return this;
+    },
+    divide: function() {
+      this.operation = function(a, b) {
+        return a / b;
+      }
+
+      return this;
+    },
+    multiply: function() {
+      this.operation = function(a, b) {
+        return a * b;
+      }
+
+      return this;
+    },
+    subtract: function() {
+      this.operation = function(a, b) {
+        return a - b;
+      }
+
+      return this;
+    },
+    equals: function() {
+      console.log(this.current);
+    }
   }
-}
 
-function one() {
-  setOperands();
-  current = 1;
-  calc();
+  for (var i = 0; i < publicApi.FUNCTION_ARRAY.length; i++) {
+    (function(i) {
+      var name = publicApi.FUNCTION_ARRAY[i];
+      publicApi[name] = window[name] = function() {
+        setOperands.call(publicApi, i);
 
-  return calculator;
-}
+        return calculator;
+      }
+    }(i));
+  }
 
-function two() {
-  setOperands();
-  current = 2;
-  calc();
-
-  return calculator;
-}
-
-function three() {
-  setOperands();
-  current = 3;
-  calc();
-
-  return calculator;
-}
+  return publicApi;
+}());
 
 one().add().two().equals(); // 3
 one().subtract().two().equals(); // -1
 one().subtract().three().add().two().equals(); // 0
+nine().multiply().three().subtract().seven().divide().five().equals(); // 4
 ```
 
 ## Ruby
@@ -107,10 +122,10 @@ class Calculator
   ]
 
   OPERATIONS = {
-    plus: :+,
-    minus: :-,
+    add: :+,
+    divide: :/,
     multiply: :*,
-    divided_by: :/
+    subtract: :-
   }
 
   NUMBERS.each do |key, value|
@@ -147,7 +162,7 @@ class Calculator
   end
 end
 
-Calculator.new.one.plus.two.plus.three.equals # 6
-Calculator.new.one.plus.eight.minus.three.divided_by.two.equals # 3
-Calculator.new.one.plus.three.minus.zero.plus.two.multiply.nine.equals # 54
+Calculator.new.one.add.two.add.three.equals # 6
+Calculator.new.one.add.eight.subtract.three.divide.two.equals # 3
+Calculator.new.one.add.three.subtract.zero.add.two.multiply.nine.equals # 54
 ```
