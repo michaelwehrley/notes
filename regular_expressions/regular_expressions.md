@@ -48,6 +48,19 @@ Remember calling `replace` with a string option replaces only the *first* occurr
 "foobar".replace("o", "!"); // "f!obar"
 ```
 
+## Gotcha
+
+When writing multi-line comments, there can be an issue in that it will lead to breaking code:
+
+```Javascript
+/*
+A RegExp
+
+@param { regExp } The RegExp /a*/g
+...
+*/
+```
+
 ## Ruby
 
 ("#{locale_prefix}#{url}" =~ /#{current_path}$/).present?

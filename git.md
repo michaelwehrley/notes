@@ -35,6 +35,22 @@ Then you can run `$ git fetch origin` and it will run:
 * Which means a remote `heads/test` will be local `remotes/origin/test`
 * The plus sign means they'll be updated even if they are not fast-forward.
 
+## Origin (rough draft)
+
+`$ git remote -v`
+
+```
+origin	git@github.com:michaelwehrley/notes.git (fetch)
+origin	git@github.com:michaelwehrley/notes.git (push)
+```
+
+`git fetch` is the same as `git fetch git@github.com:michaelwehrley/notes.git master`
+
+When no _remote_ is specified, by default the _origin remote_ will be used, unless there’s an upstream branch configured for the current branch.
+
+`$ git fetch origin/master` means fetch from repo named 'origin/master'.
+origin is named origin not origin/master
+
 ## Cleaning
 
 Untracked files:
@@ -76,6 +92,10 @@ This is helpful when you just added a commit and you want to "fixup" the last co
 ## Rebasing
 
 Rebase last 2 commits: `$ git rebase -i HEAD~2`
+
+Rebase from the tracking branch of origin `$ git rebase origin`
+
+Rebase from the branch master of origin `$ git rebase origin/master`
 
 ## Pushing to Branch
 
