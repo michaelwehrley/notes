@@ -1,8 +1,27 @@
 # Objects
 
+```JavaScript
+typeof 1; // "number"
+typeof "1"; // "string"
+typeof {}; // "object"
+typeof []; // "object"
+typeof function() {}; // "function"
+typeof new function() {}; // "function"
+typeof new Function("return 'hi'"); // function
+typeof null; // "object"
+typeof undefined; // "undefined"
+typeof true; // "boolean"
+typeof Boolean; // "function"
+typeof new Boolean(); // "object"
+```
+
+## hasOwnProperty
+
+## defineProperty
+
 ## Properties
 
-### Stringify
+## Stringify
 
 JavaScript will implicitly stringify the parameter value.
 
@@ -57,7 +76,3 @@ for (attr in obj1) {
   obj1[attr];  // mike; wehrley; 401; brussel sprouts;
 }
 ```
-
-### hasOwnProperty
-
-### defineProperty

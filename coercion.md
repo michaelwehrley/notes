@@ -1,5 +1,26 @@
 # Coercion
 
+## Unicode
+
+```JavaScript
+// Sorting without a comparative function sorts based on Unicode
+[3, 9, -3, 10].sort(); // [-3, 10, 3, 9]
+```
+
+```JavaScript
+function isSorted(array) {
+  return array.sort(compareNumbers) === array;
+
+  function compareNumbers(a, b) {
+    // -1 will be that a is less than b
+    // 1 will be that a is greater than b
+    // 0 will say they are equal
+    return a - b;
+  }
+}
+```
+
+
 ```JavaScript
 +"4" // 4
 "" + 5 // "5"

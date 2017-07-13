@@ -53,6 +53,9 @@ if (typeof Number.myIsIntegerFunc === "undefined") {
   Number.prototype.myIsIntegerFunc = myIsIntegerFunc;
 }
 
+// Similarily you could...
+// Number.myIsIntegerFunc = Number.myIsIntegerFunc || myIsIntegerFunc;
+
 var num = 3;
 num.myIsIntegerFunc(); // true
 ```

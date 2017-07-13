@@ -1,8 +1,20 @@
 # Undefined & Null
 
 * `undefined` is a property of the global object; `window.undefined => undefined`
+* `undefined` is a primitive value automatically assigned to variables that have just been declared or to formal arguments for which there are no actual arguments.
+
+| Property attributes of undefined|    |
+|---                              |--- |
+| Writable                        | no |
+| Enumerable                      | no |
+| Configurable                    | no |
+
 * In ES3 the variable `undefined` is mutable, while in ES5 it is immutable.
 * `null` is a JavaScript keyword - thus `null` inherently unassignable `(Uncaught ReferenceError: Invalid left-hand side in assignment)`
+
+```JavaScript
+typeof null // "object"
+```
 
 `undefined` is not defined.
 ```JavaScript
@@ -51,7 +63,6 @@ undefined = 3 // will fail silently
 
 ```JavaScript
 // ES 3
-"use strict";
 undefined = 3 // will assign
 ```
 

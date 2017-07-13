@@ -20,6 +20,11 @@ array.slice(3); // [2, 12, 3, 'b']
 array.slice(-1); // ['b']
 ```
 
+## Type...
+
+```JavaScript
+Object.prototype.toString.call([1,2]) // "[object Array]"
+```
 ## Strings
 
 Using `split` to build an array from a string and `join` to build a string again.
@@ -103,4 +108,24 @@ b = a;
 a.splice(); // a.splice(0) or a.splice(0, a.length);
 a // []
 b // []
+```
+
+## Sorting
+
+```JavaScript
+console.log(isSorted([]))                        // true
+console.log(isSorted([-Infinity, -5, 0, 3, 9]))  // true
+console.log(isSorted([3, 9, 100, -3, 10]))       // false
+
+function isSorted(array) {
+  var newArray = array.slice(0);
+  return array.sort(compareNumbers).join(",") === newArray.join(",");
+
+  function compareNumbers(a, b) {
+    // -1 will be that a is less than b
+    // 1 will be that a is greater than b
+    // 0 will say they are equal
+    return a - b;
+  }
+}
 ```
