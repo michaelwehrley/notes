@@ -25,3 +25,13 @@ This is not in Google's [V8](https://developers.google.com/v8/) JS Engine.
 Other web [APIs](https://developer.mozilla.org/en-US/docs/Web/API):
 * `window` & `document`
 * `XMLHttpRequest`
+
+```JavaScript
+var timeoutId = window.setTimeout(function () { // increments
+  function ajaxCall() {
+    //
+  }
+}, 200);
+
+window.clearTimeout(timeoutId);
+```

@@ -10,14 +10,26 @@ var array = ['foo', 34, 2, 12, 3, 'b'];
 array.slice(0); // ['foo', 34, 2, 12, 3, 'b']
 array.slice(3); // [2, 12, 3, 'b']
 array.slice(-1); // ['b']
+array // ['foo', 34, 2, 12, 3, 'b']
 ```
 
 ```JavaScript
-var array = ['foo', 34, 2, 12, 3, 'b'];
+var array, array2;
 
-array.slice(0); // ['foo', 34, 2, 12, 3, 'b']
-array.slice(3); // [2, 12, 3, 'b']
-array.slice(-1); // ['b']
+array = ['foo', 34, 2, 12, 3, 'b'];
+array2 = array.splice(0); // ['foo', 34, 2, 12, 3, 'b']
+array2 // ['foo', 34, 2, 12, 3, 'b']
+array // []
+
+array = ['foo', 34, 2, 12, 3, 'b'];
+array2 = array.splice(3); // [12, 3, 'b']
+array2 // [12, 3, 'b']
+array = ['foo', 34, 2];
+
+array = ['foo', 34, 2, 12, 3, 'b'];
+array2 = array.splice(-1); // ['b']
+array2 // ['b']
+array // ['foo', 34, 2, 12, 3];
 ```
 
 ## Type...
