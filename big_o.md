@@ -58,7 +58,7 @@ tuples([1,2,3]); // [[1, 2], [1, 3], [2, 3]]
 "use strict";
 
 function bubbleSort(array) {
-  var current, next, swapped, temp;
+  var current, next, swapped, temp, nextPosition;
 
   do {
     swapped = false;
@@ -66,11 +66,12 @@ function bubbleSort(array) {
     // for(var i = 0; i < array.length - 1; i++) {
     for(var i = 0, length = array.length - 1; i < length; i++) {
       current = array[i];
-      next = array[i + 1];
+      nextPosition = i + 1;
+      next = array[nextPosition];
 
       if (current > next) {
         temp = next;
-        array[i + 1] = current;
+        array[nextPosition] = current;
         array[i] = temp;
 
         swapped = true;

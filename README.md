@@ -2,6 +2,7 @@
 Programming notes of interest
 
 * [Arrays](./arrays.md)
+* [Big O](./big_o.md)
 * [Closure](./closure.md)
 * [Coercion](./coercion.md)
 * [Currying](./currying.md)
@@ -16,6 +17,7 @@ Programming notes of interest
 * [Regular Expressions](./regular_expressions/regular_expressions.md)
 * [Semicolon Insertion](./semicolon_insertion.md)
 * [Servers](./servers/servers.md)
+* [SOLID](./solid/solid.md)
 * [Sorting](./sorting.md)
 * [Tail Recursion](./tail_recursion/example.js)
 * [this](./this.md)
