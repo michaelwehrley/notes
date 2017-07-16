@@ -8,11 +8,11 @@ Algorithmic time doesn't change as the data increases.
 ```JavaScript
 "use strict";
 
-var array = ["a", 2, {}, [], 5];
-
-function getFirst(array, position) {
-  return array[position]
+function getFirst(array) {
+  return array[0]
 }
+
+getFirst(["c", 2, {}, [], 5]); // "c"
 ```
 
 ## Linear O(n)
@@ -48,6 +48,30 @@ function tuples(array) { // combinations
 }
 
 tuples([1,2,3]); // [[1, 2], [1, 3], [2, 3]]
+```
+
+### Permutation
+```JavaScript
+"use strict";
+
+function permute(array) {
+  // var newArray = [];
+  //
+  //
+  // for(var i = 0, length = array.length; i < length; i++) {
+  //   for(var j = length - 1; j >= 0; j--) {
+  //     if (array[i] !== array[j]) {
+  //       newArray.push([array[i] + array[j]]);        
+  //     }
+  //   }
+  // }
+  //
+  // return console.log(newArray);
+}
+
+permute('');    // []
+permute('ab');  // ['ab', 'ba']
+permute('abc'); // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 ```
 
 ### Bubble Sort
@@ -105,12 +129,15 @@ function recursion(max, current) {
 }
 ```
 
+## O(2^n)
 Classic fibonacci sequence O(2^n)
+* [Fibonacci sequence using memoization](/functions/memoization.md)
+
 ```JavaScript
 "use strict";
 
 function fibonacci(n) {
-  if (n <= 2) { return 1 }
+  if (n <= 2) { return 1 } // Base Case
 
   // What is the fib - it is getting the current
   // term by adding the two previous terms
@@ -127,8 +154,8 @@ Classic factorial example.
 // 4! = 4 * 3!
 
 function factorial(n) {
-  if (n === 1) {
-    return 1; // basecase!
+  if (n === 1) {  // Base Case
+    return 1;
   } else {
     return n * factorial(n - 1);
   }
