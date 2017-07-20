@@ -51,7 +51,28 @@ Example: `$ pg_ctl start [-D datadir] [-l filename]`
 * `-l filename`: Append the server log output to filename.
 If you don't specify this, logs will be outputted to the console.
 
-```Unix
+```Shell
+$ pg_ctl -D /usr/local/var/postgres -l logfile start
+```
+
+### My Common Rails Errors
+
+* Database doesn't exist
+`ActiveRecord::NoDatabaseError: FATAL:  database "foo_development" does not exist`
+
+* Build database cluster
+```Shell
+$ rm -rf /usr/local/var/postgres && initdb /usr/local/var/postgres
+```
+<!-- The files belonging to this database system will be owned by user "...".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.UTF-8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english". -->
+
+* Start the server:
+```Shell
 $ pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
 
