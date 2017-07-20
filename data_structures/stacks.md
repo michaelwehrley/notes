@@ -82,7 +82,7 @@ var stack = new Stack();
 
 stack.push("foo");
 stack.push("bar");
-stack.peek(); // "foo"
+stack.peek(); // "bar"
 stack.size(); // 2
 stack.pop();  // "bar"
 stack.size(); // 1
