@@ -5,7 +5,7 @@
 * [Configuration Object](./configuration_object.md)
 * [Constructor Functions](./constructor_functions.md)
 * [Currying](./currying.md)
-* [Fibonacci Series](./fibonacci_series.md)
+* [Recursion (Fibonacci Series)](./recursion.md)
 * [IIFE](./IIFE.md)
 * [Memoization](./memoization.md)
 * [Private Static Members](./private_static_members.md)

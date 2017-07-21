@@ -2,7 +2,7 @@
 
 ## Fibonacci Series
 
-0,1,1,2,3,5,8,13,...
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...
 
 The two recursive calls repeat the same work.
 However, to calculate the 50th number, the recursive function must be called over 40 billion times!
@@ -11,7 +11,7 @@ However, to calculate the 50th number, the recursive function must be called ove
 "use strict";
 
 fibonacci(7); // 13
-
+// next value = previous value and previous's previous value
 function fibonacci(n) {
   if (n === 0 || n === 1) {
     return n;
@@ -21,28 +21,27 @@ function fibonacci(n) {
 }
 ```
 
-This example runs 'n' times:
+Compared Recursion to Looping
 ```JavaScript
 "use strict";
 
+fibonacci(3); // 2
 fibonacci(7); // 13
+fibonacci(10); // 55
 
 function fibonacci(n) {
-  var count = 1
-  var previous = 0;
-  var current = 1;
+  var next;
+  var previous = 1;
+  var total = 1;
 
-  return (function f(n, previous, current) {
-    if (n === 0 || n === 1) {
-      return n;
-    }
+  if (n < 2) { return 1; }
 
-    if (count < n) {
-      count++;
-      f(n, current, previous + current);
-    } else {
-      console.log(current)
-    }
-  }(n, previous, current));
+  for(var i = 2; i < n; i++) {
+    next = total + previous;
+    previous = total;
+    total = next;
+  }
+
+  return total;
 }
 ````

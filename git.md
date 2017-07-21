@@ -66,6 +66,8 @@ Untracked files:
 
 `$ git rebase origin/master`
 
+TODO: How does the rebased commit get merged/rebased into master? - Where go?
+
 ## Clean branches
 
 `$ git remote prune origin`
