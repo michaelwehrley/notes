@@ -44,10 +44,6 @@ Stack.prototype = (function() {
     }
   }
 
-  function size() {
-    return length;
-  }
-
   publicAPI = {
     peek: function peek() {
       var topItemIndex = data.indexOf(delimiter);
@@ -63,7 +59,7 @@ Stack.prototype = (function() {
       return topItem;
     },
     push: function push(value) {
-      if (size() > 0) {
+      if (this.size() > 0) {
         data = value + delimiter + data;
       } else {
         data = value;
@@ -102,10 +98,6 @@ Stack.prototype = (function() {
   var data = {};
   var length = 0;
 
-  function size() {
-    return length;
-  }
-
   publicAPI = {
     peek: function() {
       return data[length];
@@ -139,4 +131,80 @@ stack.size(); // 2
 stack.pop();  // "bar"
 stack.size(); // 1
 stack.pop();  // "foo"
+```
+
+## Minimum Stack
+
+Implement a stack with a `minimum` method which returns the minimum element currently in the stack.
+This method should have _O(1)_ time complexity.
+Make sure your implementation handles duplicates.
+
+```JavaScript
+"use strict";
+
+function miniStack() {
+  var publicAPI;
+  var data = {};
+  var minimumData = {};
+  var length = 0;
+
+  function popFromMinimumStack(minimumData, length) {
+    delete minimumData[length];
+  }
+
+  function pushOnMinimumStack(minimumData, length, value) {
+    var previous = minimumData[length - 1];
+
+    if (previous === undefined || value < previous) { // WOW!!
+      minimumData[length] = value;
+    } else {
+      minimumData[length] = previous;
+    }
+  }
+
+  publicAPI = {
+    minimum: function minimum() {
+      return minimumData[length];
+    },
+    peek: function() {
+      return data[length];
+    },
+    pop: function pop() {
+      if (length > 0) {
+        var topItem = data[length];
+        delete data[length];
+        popFromMinimumStack(minimumData, length);
+        length -= 1;
+
+        return topItem;
+      }
+    },
+    push: function push(value) {
+      data[length += 1] = value;
+      pushOnMinimumStack(minimumData, length, value);
+    },
+    size: function size() {
+      return length;
+    }
+  };
+
+  return publicAPI;
+}
+
+var stack = miniStack();
+
+stack.push(4);
+stack.minimum(); // 4
+stack.push(3);
+stack.minimum(); // 3
+stack.push(3);
+stack.minimum(); // 3
+stack.push(8);
+stack.minimum(); // 3
+stack.push(2);
+stack.minimum(); // 2
+stack.peek();    // 2
+stack.size();    // 5
+stack.pop();     // 2
+stack.minimum(); // 3
 ```

@@ -4,17 +4,24 @@
 * Compare to [stacks](./stacks.md)
 
 ```JavaScript
+/**
+ * Implements a basic queue
+ * @param { Number } capacity - The default queue capacity
+ */
+
 "use strict";
 
 function Queue(capacity) {
-  this.capacity = capacity;
+  this.capacity = capacity || Infinity;
 }
 
 Queue.prototype = (function() {
   var ERROR_MESSAGE =
       "Max capacity already reached. " +
       "Remove element before adding a new one.";
-  var current = 0;
+  var MISSING_MESSAGE = "Sorry, but the value isn't in the queue";
+  var first = 1;
+  var last = 0;
   var length = 0;
   var data = {};
 
@@ -28,47 +35,84 @@ Queue.prototype = (function() {
 
       return false;
     },
+
     enqueue: function enqueue(value) {
-      if (length === this.capacity) { return (ERROR_MESSAGE); }
-      current++;
-      length++;
-      data[current] = value;
+      if (length < this.capacity) {
+        last += 1;
+        length += 1;
+        data[last] = value;
+        return this.size(); // JS implementation
+      } else {
+        return (ERROR_MESSAGE);
+      }
     },
 
     dequeue: function dequeue() {
       var item;
 
       if (length > 0) {
-        item = data[length];
+        item = data[first];
 
-        delete data[length];
+        delete data[first];
+        first += 1;
         length -= 1;
 
         return item;
       }
     },
 
+    // O(1)
+    // Element that would be dequeued
     peek: function peek() {
-      return data[length];
+      return data[first];
     },
 
+    // O(1)
+    // Size of the queue
     size: function size() {
       return length;
+    },
+
+    // O(n)
+    // Number of dequeues until you get to a certain value
+    until: function until(value) {
+      if (this.contains(value)) {
+        for (var key in data) {
+          if (data[key] === value) {
+            return key - first + 1;
+          }
+        }
+      } else {
+        return MISSING_MESSAGE; // Sorry, but the value isn't..
+      }
     }
   };
 
   return publicAPI;
 }());
 
-var queue = new Queue(2);
+var queue = new Queue(4);
 
-queue.enqueue("foo");
-queue.enqueue("bar");
-queue.contains("foo"); // true
-queue.enqueue("baz");  // Max capacity already reached...
-queue.peek();          // "bar"
-queue.size();          // 2
-queue.dequeue();       // "bar"
-queue.size();          // 1
-queue.dequeue();       // "foo"
+queue.enqueue("foo");   // 1
+queue.peek();           // "foo"
+queue.enqueue("bar");   // 2
+queue.peek();           // "bar"
+queue.contains("foo");  // true
+queue.contains("hello");  // true
+queue.enqueue("hello"); // 3
+queue.until("hello");   // 3
+queue.enqueue("baz");   // Max capacity already reached...
+queue.peek();           // "foo"
+queue.size();           // 3
+queue.dequeue();        // "foo"
+queue.enqueue("baz");   // 3
+queue.size();           // 3
+queue.dequeue();        // "bar"
 ```
+
+## Double-Ended Queue
+
+![Double-Ended Queue](/assets/double_ended_queue.png)
+
+Implement a double-ended queue, with the following methods:
+enqueueLeft, dequeueLeft, enqueueRight, dequeueRight.
