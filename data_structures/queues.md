@@ -115,4 +115,5 @@ queue.dequeue();        // "bar"
 ![Double-Ended Queue](/assets/double_ended_queue.png)
 
 Implement a double-ended queue, with the following methods:
-enqueueLeft, dequeueLeft, enqueueRight, dequeueRight.
+
+`enqueueLeft`, `dequeueLeft`, `enqueueRight`, `dequeueRight`.
