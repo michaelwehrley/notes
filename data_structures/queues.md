@@ -117,3 +117,50 @@ queue.dequeue();        // "bar"
 Implement a double-ended queue, with the following methods:
 
 `enqueueLeft`, `dequeueLeft`, `enqueueRight`, `dequeueRight`.
+
+```JavaScript
+"use strict";
+
+function Queue() {
+  this._data = {};
+  this._count = 0;
+  this._current = 0;
+}
+
+Queue.prototype.enqueue = function(value) {
+
+  this._data[this._count] = value;
+  this._count++;
+};
+
+Queue.prototype.dequeue = function() {
+  if (this._data[this._current]) {
+    delete this._data[this._current];
+    this._current++;
+  }
+};
+
+function DoubleQueue() {
+  this._leftQueue = new Queue();
+  this._rightQueue = new Queue();
+}
+
+DoubleQueue.prototype.enqueueLeft = function(value) {
+  this._leftQueue.enqueue(value);
+};
+
+DoubleQueue.prototype.denqueueLeft = function() {
+  this._leftQueue.denqueue();
+};
+
+DoubleQueue.prototype.enqueueRight = function(value) {
+  this._rightQueue.enqueue(value);
+};
+
+DoubleQueue.prototype.denqueueRight = function() {
+  this._rightQueue.denqueue();
+};
+
+var double = new DoubleQueue();
+double.enqueueLeft("foo");
+```
