@@ -121,28 +121,28 @@ Implement a double-ended queue, with the following methods:
 ```JavaScript
 "use strict";
 
-function Queue() {
+function Stack() {
   this._data = {};
   this._count = 0;
-  this._current = 0;
 }
 
-Queue.prototype.enqueue = function(value) {
-
+Stack.prototype.push = function(value) {
   this._data[this._count] = value;
   this._count++;
 };
 
-Queue.prototype.dequeue = function() {
-  if (this._data[this._current]) {
-    delete this._data[this._current];
-    this._current++;
+Stack.prototype.pop = function() {
+  if (this._data[this._count]) {
+    delete this._data[this._count];
+    this._count -= 1;
   }
 };
 
+debugger;
+
 function DoubleQueue() {
-  this._leftQueue = new Queue();
-  this._rightQueue = new Queue();
+  this._leftQueue = new Stack();
+  this._rightQueue = new Stack();
 }
 
 DoubleQueue.prototype.enqueueLeft = function(value) {
