@@ -51,6 +51,12 @@ When no _remote_ is specified, by default the _origin remote_ will be used, unle
 `$ git fetch origin/master` means fetch from repo named 'origin/master'.
 origin is named origin not origin/master
 
+## Setting Up/Updating Origin
+
+Via SSH:
+`git remote rm origin git@github.com:michaelwehrley/notes.git`
+`git remote add origin git@github.com:michaelwehrley/notes.git`
+
 ## Cleaning
 
 Untracked files:
