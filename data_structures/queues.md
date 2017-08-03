@@ -164,3 +164,63 @@ DoubleQueue.prototype.denqueueRight = function() {
 var double = new DoubleQueue();
 double.enqueueLeft("foo");
 ```
+
+## Queue Using Two Stacks.
+
+```JavaScript
+"use strict";
+
+function Stack() {
+  this._data = {};
+  this._length = 0;
+}
+
+Stack.prototype.push = function(value) {
+  this._data[this._length += 1] = value;
+};
+
+Stack.prototype.pop = function() {
+  var length = this._length;
+
+  if (this._data[length]) {
+    var topItem = this._data[length];
+
+    delete this._data[length];
+    this._length -= 1;
+
+    return topItem;
+  }
+};
+
+function TwoStackQueue() {
+  this.stack1 = new Stack();
+  this.stack2 = new Stack();
+}
+
+TwoStackQueue.prototype.enqueue = function enqueue(value) {
+  for(var i = 0, length = this.stack2._length; i < length; i++) {
+    this.stack1.push(this.stack2.pop());
+  }
+
+  return this.stack1.push(value);
+}
+
+TwoStackQueue.prototype.dequeue = function dequeue() {
+  for(var i = 0, length = this.stack1._length; i < length; i++) {
+    this.stack2.push(this.stack1.pop());
+  }
+
+  return this.stack2.pop();
+}
+
+var queue = new TwoStackQueue();
+queue.enqueue(3);
+queue.enqueue(5);
+queue.enqueue(2);
+queue.dequeue(); // 3
+queue.enqueue(111);
+queue.enqueue(11);
+queue.dequeue(); // 5
+queue.dequeue(); // 2
+queue.dequeue(); // 111
+```
