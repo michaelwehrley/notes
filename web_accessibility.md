@@ -1,6 +1,6 @@
 # Web Accessibility (a11y)
 
-People with disabilities can _perceive, understand, navigate, and interact_ with the Web, and that they can _contribute_ to the Web.
+People with disabilities can *perceive, understand, navigate, and interact* with the Web, and that they can *contribute* to the Web.
 
 * 1/6 Americans 45 years+ report vision impairment even when wearing glasses or corrective lenses;
 * ~8 million persons (age 6 and older) have difficulty seeing words and letters in ordinary newspaper print;
@@ -19,7 +19,7 @@ People with disabilities can _perceive, understand, navigate, and interact_ with
 
 ## Assistive Technology
 
-1. Keyboard only (i.e. VIM commands) - _super users_
+1. Keyboard only (i.e. VIM commands) - *super users*
 1. Head want and mouthstick
 1. Single switch
 1. Screen reader
@@ -31,27 +31,28 @@ People with disabilities can _perceive, understand, navigate, and interact_ with
 | Open a new tab | Command + t |
 
 ### Navigation
-* Tabbable: _Shift + Tab_ v. _Tab_
-  - <a>
-  - <button>
-  - <input>
-  - <select>
-  - <textarea>
-  - <iframe>
+* Tabbable: *Shift + Tab* v. *Tab*
+  - `<a>`
+  - `<button>`
+  - `<input>`
+  - `<select>`
+  - `<textarea>`
+  - `<iframe>`
 * Tabindex (similar idea as `z-index`):
   ```html
     <div tabindex=“0”>I’m focusable</div>
   ```
-  - _Negative_ value allows for focusing but not be reachability through keyboard navigation;
-  - _0_ value allows for focusability and reachability via sequential keyboard navigation in relative order;
-  - _Positive_ value will add priority to focusability and reachability then relative order follows if equal.
+  - *Negative* value allows for focusing but not be reachability through keyboard navigation;
+  - *0* value allows for focusability and reachability via sequential keyboard navigation in relative order;
+  - *Positive* value will add priority to focusability and reachability then relative order follows if equal.
 
 ### Visible Focus (WebAIM 2.4.7)
 Bootstrap brought this to the forefront with their styling
 
 ### Skip Links (WebAIM 2.4.1)
 
-![Skip to navigation example for NYTimes](/assets/skip_links.jpg)
+![Skip to navigation example for NYTimes](/assets/skip_links.png)
+
 Output of click: https://www.nytimes.com/?WT.z_jog=1&hF=t&vS=undefined#top-news
 
 These links allow a user to skip over excessive tabbable content:
@@ -59,9 +60,9 @@ These links allow a user to skip over excessive tabbable content:
   * Skip to comments
   * Skip to content
 
-![Default page displaying main content](/assets/main_content.jpg)
-![Skip to content button highlighted](/assets/skip_to_content.jpg)
-![Main content highlighted after skipping](/assets/main_content_highlighted.jpg)
+1. ![Default page displaying main content](/assets/main_content.png)
+1. ![Skip to content button highlighted](/assets/skip_to_content.png)
+1. ![Main content highlighted after skipping](/assets/main_content_highlighted.png)
 
 Example 1:
 ```html
