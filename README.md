@@ -1,13 +1,16 @@
 # Notes
 Programming notes of interest
 
+* [a11y](./web_accessibility.md)
 * [Arrays](./arrays.md)
 * [Big O](./big_o.md)
 * [Closure](./closure.md)
 * [Coercion](./coercion.md)
 * [Currying](./currying.md)
+* [DataModeling](./data_modeling.md)
 * [EventLoop](./event_loop.md)
 * [Functions](./functions/functions.md)
+* [Git](./git.md)
 * [Lexical Scope](./objects.md)
 * [Module pattern](./)
 * [Patterns & the Gang of 4](./gang_of_four/gang_of_four.md)
@@ -19,6 +22,8 @@ Programming notes of interest
 * [Servers](./servers/servers.md)
 * [SOLID](./solid/solid.md)
 * [Sorting](./sorting.md)
+* [SQL](./sql.md)
+* [SSH](./ssh.md)
 * [Tail Recursion](./tail_recursion/example.js)
 * [this](./this.md)
 * [Threads](./threads.md)
