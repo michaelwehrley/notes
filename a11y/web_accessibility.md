@@ -8,6 +8,8 @@ People with disabilities can *perceive, understand, navigate, and interact* with
 * ~8 million persons (age 6 and older) have difficulty seeing words and letters in ordinary newspaper print;
 * ~20% of people had a disability in 2010;
 * [First website in 1991](http://info.cern.ch/hypertext/WWW/TheProject.html)
+* [WebAIM](http://webaim.org/)
+* [WebAIM Guidelines & Levels A, AA, AAA](http://webaim.org/standards/wcag/)
 
 ## Types of Disabilities
 
@@ -26,7 +28,9 @@ People with disabilities can *perceive, understand, navigate, and interact* with
 1. Single switch
 1. Screen reader
 
-## Keyboard Navigation
+## Keyboard Navigation (WebAIM 2.1)
+
+_WebAIM 2.1: Make all functionality available from a keyboard_
 
 1. The form at the bottom can’t be submitted with just a keyboard.
 1. There is no “skip link” for tabbing straight into the content.
@@ -106,7 +110,30 @@ Example CSS:
 </html>
 ```
 
-### Focus (WebAIM 3.2.1)
+## Focus (WebAIM 3.1)
 
+*DO NOT* listen to `onfocus` - listen to `onkeyup` or `onclick`.
 Happens all the time when people are just tabbing through your site.
-Have JS listen to `onkeyup` or `onclick` - not on focus.
+
+```javascript
+// Get currently focused item
+// Store in memory - refocus after executing functionality like closing methods
+
+var currentElement = document.activeElement;
+```
+
+### Tab Trapping / Focus Trapping
+
+Example:
+* Select your modal
+* [Find](https://github.com/jkup/focusable) and select all focusable children
+```JavaScript
+  document.querySelectorAll('.markdown-body.entry-content [tabindex="0"], .markdown-body.entry-content a[href]')
+```
+* Convert them to an Array
+* Find the first and last tabbable item inside the modal
+* Listen for keydown event
+* Check to see if it’s the tab key
+* *Also check if shift is being held down*
+* If moving forward and on the last item, focus the first item
+* If moving backward and on the first item, focus the last item
