@@ -4,8 +4,23 @@
     <meta charset="utf-8">
     <title>Keyboard Navigation</title>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="../css/style.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../learn-a11y/css/bootstrap.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../learn-a11y/css/style.css" media="screen" charset="utf-8">
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -50px; // it is off the screen
+        left: 0px;
+        background: red;
+        color: white;
+        padding: 8px;
+        z-index: 9999;
+      }
+
+      .skip-link:focus {
+        top: 10px; // move back into focus
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,6 +46,7 @@
             <li><a href="#skip-links">Skip Links</a></li>
             <li><a href="#form">Forms</a></li>
           </ul>
+          <a href="#main" class="skip-link" tabindex="1">Skip to Content</a>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -122,15 +138,15 @@ embed,
                 <option>Black</option>
               </select>
               <input type="checkbox"> Remember me
-              <div class="btn btn-default">Cancel</div>
-              <div class="btn btn-primary">Submit</div>
+              <div class="btn btn-default" tabindex="0">Cancel</div>
+              <div class="btn btn-primary" tabindex="0">Submit</div>
             </fieldset>
           </form>
         </main>
       </div>
     </div>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/focus.js"></script>
+    <script type="text/javascript" src="../learn-a11y/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../learn-a11y/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../learn-a11y/js/focus.js"></script>
   </body>
 </html>

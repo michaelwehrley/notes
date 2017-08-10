@@ -1,5 +1,7 @@
 # Web Accessibility (a11y)
 
+*a11y* is a _numeronym_ (a number-based word) where _11_ refers to the number of letters omitted from _accessibility_.
+
 People with disabilities can *perceive, understand, navigate, and interact* with the Web, and that they can *contribute* to the Web.
 
 * 1/6 Americans 45 years+ report vision impairment even when wearing glasses or corrective lenses;
@@ -24,9 +26,12 @@ People with disabilities can *perceive, understand, navigate, and interact* with
 1. Single switch
 1. Screen reader
 
-## Keyboard
+## Keyboard Navigation
 
-[WebAIM Update Example](./keyboard.md)
+1. The form at the bottom can’t be submitted with just a keyboard.
+1. There is no “skip link” for tabbing straight into the content.
+1. [Original Example](./learn-a11y/keyboard-navigation/index.html)
+1. [Updated Example](./keyboard-navigation/index.html)
 
 ### Shortcuts
 [Google Shortcuts](https://support.google.com/chromebook/answer/183101?hl=en)
@@ -66,7 +71,7 @@ These links allow a user to skip over excessive tabbable content:
 1. ![Skip to content button highlighted](/assets/skip_to_content.png)
 1. ![Main content highlighted after skipping](/assets/main_content_highlighted.png)
 
-Example 1:
+Example CSS:
 ```html
 <!DOCTYPE html>
 <html>
@@ -76,8 +81,8 @@ Example 1:
     <style>
       .skip-link {
         position: absolute;
-        top: -40px; // it is off the screen
-        left: 0;
+        top: -50px; // it is off the screen
+        left: 0px;
         background: red;
         color: white;
         padding: 8px;
@@ -85,7 +90,7 @@ Example 1:
       }
 
       .skip-link:focus {
-        top: 0; // move back into focus
+        top: 10px; // move back into focus
       }
     </style>
   </head>
@@ -105,6 +110,3 @@ Example 1:
 
 Happens all the time when people are just tabbing through your site.
 Have JS listen to `onkeyup` or `onclick` - not on focus.
-
-Example 2:
-[Form Submission](/assets/keyboard.html)
