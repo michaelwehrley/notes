@@ -152,3 +152,11 @@ _You may need to update the database due to any outstanding migrations if you ha
 ```Unix
 $ bundle exec rake db:migrate
 ```
+
+## Heroku
+
+Setting environmental configuration variables via [command line](https://devcenter.heroku.com/articles/config-vars):
+
+```Bash
+heroku config:set SOME_ENVIORNMENTAL_VARIABLE=false --app heroku-application-name
+```

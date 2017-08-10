@@ -1,7 +1,7 @@
 # Notes
 Programming notes of interest
 
-* [a11y](./web_accessibility.md)
+* [a11y](./a11y/web_accessibility.md)
 * [Arrays](./arrays.md)
 * [Big O](./big_o.md)
 * [Closure](./closure.md)

@@ -105,13 +105,29 @@ Rebase from the tracking branch of origin `$ git rebase origin`
 
 Rebase from the branch master of origin `$ git rebase origin/master`
 
-## Pushing to Branch
+## Pushing
 
-`$ git push origin HEAD`
+1. List tracked repositories (verbosely) `$ git remote -v`:
 
-to force...
+```Bash
+git remote -v
 
-`$ git push origin HEAD -f`
+# origin	git@github.com:michaelwehrley/notes.git (fetch)
+# origin	git@github.com:michaelwehrley/notes.git (push)
+# staging	git@heroku.com:mike-staging.git (fetch)
+# staging	git@heroku.com:mike-staging.git (push)
+```
+
+1. Pushing to repo from any branch (i.e., head). This repo could be on a Heroku server for instance.
+
+```Bash
+git push origin HEAD
+git push staging head:master
+
+# or forcefully
+git push -f origin HEAD
+git push -f staging head:master
+```
 
 ## Working on Someone Else's Branch
 

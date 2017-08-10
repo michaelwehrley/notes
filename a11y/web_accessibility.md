@@ -26,6 +26,8 @@ People with disabilities can *perceive, understand, navigate, and interact* with
 
 ## Keyboard
 
+[WebAIM Update Example](./keyboard.md)
+
 ### Shortcuts
 [Google Shortcuts](https://support.google.com/chromebook/answer/183101?hl=en)
 | Open a new tab | Command + t |
@@ -105,3 +107,4 @@ Happens all the time when people are just tabbing through your site.
 Have JS listen to `onkeyup` or `onclick` - not on focus.
 
 Example 2:
+[Form Submission](/assets/keyboard.html)
