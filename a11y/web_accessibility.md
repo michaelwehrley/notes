@@ -75,7 +75,7 @@ These links allow a user to skip over excessive tabbable content:
 1. ![Skip to content button highlighted](/assets/skip_to_content.png)
 1. ![Main content highlighted after skipping](/assets/main_content_highlighted.png)
 
-Example CSS:
+Example:
 ```html
 <!DOCTYPE html>
 <html>
@@ -123,6 +123,11 @@ var currentElement = document.activeElement;
 ```
 
 ### Tab Trapping / Focus Trapping
+
+1. When the modal appears, you are still able to tab through elements on the main page. Tabbable content should be restricted to the modal.
+1. Both hitting the escape key as well as clicking outside the modal should close it.
+1. [Original Example](./learn-a11y/focus-control/index.html)
+1. [Updated Example](./focus-control/index.html)
 
 Example:
 * Select your modal

@@ -140,3 +140,13 @@ $ git checkout remotes/origin/test # You are in a 'detached HEAD' state
 To push the current branch and set the remote as upstream, use
 
 `$ git push --set-upstream origin test`
+
+## Reopen Pull Request
+
+This happens when you close a PR but then force push.
+
+1. Get PR commit hash from PR.  (I am not yet sure the best way to do this except by visiting Github) *37b2wa2*
+1. `git push -f origin 37b2wa2:mw-hot-fix` ([commit]:[branch]
+1. Reopen PR
+1. Switch back: `git checkout mw-hot-fix`
+1. Push `git push -f origin head`

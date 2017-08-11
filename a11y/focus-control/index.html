@@ -69,5 +69,52 @@
     <script type="text/javascript" src="../learn-a11y/js/jquery.min.js"></script>
     <script type="text/javascript" src="../learn-a11y/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../learn-a11y/js/modal.js"></script>
+    <script type="text/javascript">
+      "use strict";
+
+      function closeModal() {
+        var modal = document.getElementsByClassName("focus-modal")[0];
+        var overlay = document.getElementsByClassName("focus-modal-overlay")[0];
+
+        overlays.setAttribute("style", "display:none;");
+        modal.setAttribute("style", "display:none;");
+      }
+
+      document.addEventListener("keyup", function checkKey(event) {
+        var CLOSING_KEY = "Escape";
+
+        if (event.key === CLOSING_KEY) {
+          closeModal();
+        }
+      }, false);
+
+      function focusOnFirstInput() {
+        document
+          .getElementsByClassName("focus-modal")[0]
+          .getElementsByTagName('input')[0]
+          .focus();
+      }
+
+      document
+        .getElementsByClassName("focus-modal-button")[0]
+        .addEventListener("click", function(event) {
+          focusOnFirstInput();
+          var TAB = "Tab";
+          var firstInput = document.querySelector("input[type=text]");
+          var lastInput = document.querySelector("input[type=submit]");
+
+          lastInput.addEventListener("keydown", function(event) {
+            // if (event.key === TAB && !event.shiftKey) {
+              firstInput.focus();
+            // }
+          });
+
+          // firstInput.addEventListener("keydown", function(event) {
+          //   if (event.key === TAB && event.shiftKey) {
+          //     lastInput.focus();
+          //   }
+          // });
+        });
+    </script>
   </body>
 </html>
