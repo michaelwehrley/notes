@@ -56,7 +56,6 @@
         <!-- A grey overlay for the background -->
         <div class="focus-modal-overlay"></div>
 
-
         <h2>This Modal Needs To:</h2>
 
         <ul>
@@ -72,48 +71,55 @@
     <script type="text/javascript">
       "use strict";
 
-      function closeModal() {
-        var modal = document.getElementsByClassName("focus-modal")[0];
-        var overlay = document.getElementsByClassName("focus-modal-overlay")[0];
+      var modal = document.querySelector(".focus-modal");
 
-        overlays.setAttribute("style", "display:none;");
-        modal.setAttribute("style", "display:none;");
+      function closeModal(bsModal) {
+        var overlay = document.querySelector(".focus-modal-overlay");
+
+        overlay.setAttribute("style", "display:none;");
+        bsModal.setAttribute("style", "display:none;");
       }
 
-      document.addEventListener("keyup", function checkKey(event) {
-        var CLOSING_KEY = "Escape";
-
-        if (event.key === CLOSING_KEY) {
-          closeModal();
-        }
-      }, false);
-
-      function focusOnFirstInput() {
-        document
-          .getElementsByClassName("focus-modal")[0]
-          .getElementsByTagName('input')[0]
+      function focusOnFirstInput(modal) {
+        modal
+          .querySelector('input')
           .focus();
       }
 
       document
-        .getElementsByClassName("focus-modal-button")[0]
-        .addEventListener("click", function(event) {
-          focusOnFirstInput();
+        .addEventListener("keyup", function checkKey(event) {
+        var CLOSING_KEY = "Escape";
+
+        if (event.key === CLOSING_KEY) {
+          closeModal(modal);
+        }
+      }, false);
+
+      document
+        .querySelector(".focus-modal-button")
+        .addEventListener("click", function(_event) {
+          focusOnFirstInput(modal);
+      })
+
+      document
+        .querySelector(".focus-modal-overlay")
+        .addEventListener("click", function() {
+          closeModal(modal);
+      })
+
+      modal
+        .addEventListener("keydown", function(event) {
           var TAB = "Tab";
-          var firstInput = document.querySelector("input[type=text]");
+          var firstInput = document.querySelector("input[type=text][placeholder=Email]");
           var lastInput = document.querySelector("input[type=submit]");
 
-          lastInput.addEventListener("keydown", function(event) {
-            // if (event.key === TAB && !event.shiftKey) {
-              firstInput.focus();
-            // }
-          });
-
-          // firstInput.addEventListener("keydown", function(event) {
-          //   if (event.key === TAB && event.shiftKey) {
-          //     lastInput.focus();
-          //   }
-          // });
+          if (document.activeElement === lastInput && event.key === TAB && !event.shiftKey) {
+            event.preventDefault();
+            firstInput.focus();
+          } else if (document.activeElement === firstInput && event.key === TAB && event.shiftKey) {
+            event.preventDefault();
+            lastInput.focus();
+          }
         });
     </script>
   </body>
