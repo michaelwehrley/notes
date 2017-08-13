@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Screen Readers</title>
+
+    <link rel="stylesheet" href="../learn-a11y/css/bootstrap.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../learn-a11y/css/style.css" media="screen" charset="utf-8">
+  </head>
+  <body>
+    <nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h1>Screen Reader Example</h1>
+
+        <img alt="kittens" src="../learn-a11y/images/pic.jpg" />
+
+        <h2>Sign up for our mailing list!</h2>
+
+        <form style="margin-bottom: 150px;">
+
+          <label for="email-address">Email Address:</label>
+          <input id="email-address" class="form-control" type="text" />
+
+          <label for="name">First and Last name:</label>
+          <input id="name" class="form-control" type="text" />
+
+          <label form="receive-email">How often would you like to recieve email from us?</label>
+          <select class="form-control" id="receive-email">
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Never">Never</option>
+          </select>
+
+          <label for="security">Security: What is in the above picture?</label>
+          <input id="security" class="form-control" type="text" />
+        </form>
+
+        <p>Your task is to make it so the entire form can be filled out with only the use of a screen reader.</p>
+
+      </div>
+    </div>
+    <script type="text/javascript" src="../learn-a11y/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../learn-a11y/js/bootstrap.min.js"></script>
+  </body>
+</html>

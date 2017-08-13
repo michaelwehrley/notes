@@ -38,8 +38,12 @@ _WebAIM 2.1: Make all functionality available from a keyboard_
 1. [Updated Example](./keyboard-navigation/index.html)
 
 ### Shortcuts
-[Google Shortcuts](https://support.google.com/chromebook/answer/183101?hl=en)
+* [Google Shortcuts](https://support.google.com/chromebook/answer/183101?hl=en)
+* Stick to general browser conventions
+
+Possible shortcuts:
 | Open a new tab | Command + t |
+| Go to url | Command + l |
 
 ### Navigation
 * Tabbable: *Shift + Tab* v. *Tab*
@@ -118,7 +122,6 @@ Happens all the time when people are just tabbing through your site.
 ```javascript
 // Get currently focused item
 // Store in memory - refocus after executing functionality like closing methods
-
 var currentElement = document.activeElement;
 ```
 
@@ -128,6 +131,14 @@ var currentElement = document.activeElement;
 1. Both hitting the escape key as well as clicking outside the modal should close it.
 1. [Original Example](./learn-a11y/focus-control/index.html)
 1. [Updated Example](./focus-control/index.html)
+1. All focusable [inputs](https://raw.githubusercontent.com/jkup/focusable/master/index.js).
+
+```JavaScript
+var elements = modal.querySelectorAll(focusable); // returns an array of all focusable elements
+var length = elements.length; // 4
+var firstElement = elements[0];
+var lastElement = elements[length - 1];
+```
 
 Example:
 * Select your modal
@@ -135,10 +146,44 @@ Example:
 ```JavaScript
   document.querySelectorAll('.markdown-body.entry-content [tabindex="0"], .markdown-body.entry-content a[href]')
 ```
-* Convert them to an Array
+* Convert them to an array
 * Find the first and last tabbable item inside the modal
 * Listen for keydown event
 * Check to see if it’s the tab key
-* *Also check if shift is being held down*
+* *Also check if shift is being held down*: [keycode.info](http://keycode.info/)
 * If moving forward and on the last item, focus the first item
 * If moving backward and on the first item, focus the last item
+
+## Screen Readers
+
+* Tools: ChromeVox; Command + F5 (on mac)
+* Alt text - add to images. An alt text of " " will skip reading; if no value, then it will read src property
+* UPPERCASE will read each letter <image alt="MIT" src="./university.png" />
+* Hiding: `display:none`; `visibility:hidden`; `<input hidden />`
+* labels = use `for=` and `id=`
+* [Original Example](./learn-a11y/screen-readers/index.html)
+* [Updated Example](./screen-readers/index.html)
+
+### Aria LabelBy
+Great for multi part forms
+```html
+<div id="billing">Billing Address</div>
+<div>
+  <div id="name">Name</div>
+  <input type="text" aria-labelledby="billing name"/>
+</div>
+<div>
+  <div id="address">Address</div>
+  <input type="text" aria-labelledby="billing address"/>
+</div>
+```
+
+### HTML & ARIA Roles
+
+```html
+<article role=“article”>Your Content</article>
+<!-- HTML 5 semantic versioning will turn into... -->
+<div role=“article”>Your Content</div>
+```
+
+## Semantic
