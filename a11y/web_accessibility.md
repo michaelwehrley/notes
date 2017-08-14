@@ -10,6 +10,7 @@ People with disabilities can *perceive, understand, navigate, and interact* with
 * [First website in 1991](http://info.cern.ch/hypertext/WWW/TheProject.html)
 * [WebAIM](http://webaim.org/)
 * [WebAIM Guidelines & Levels A, AA, AAA](http://webaim.org/standards/wcag/)
+* Validator: https://validator.w3.org/
 
 ## Types of Disabilities
 
@@ -35,7 +36,7 @@ _WebAIM 2.1: Make all functionality available from a keyboard_
 1. The form at the bottom can’t be submitted with just a keyboard.
 1. There is no “skip link” for tabbing straight into the content.
 1. [Original Example](./learn-a11y/keyboard-navigation/index.html)
-1. [Updated Example](./keyboard-navigation/index.html)
+1. [Updated Example](./learn-a11y/keyboard-navigation/updated-index.html)
 
 ### Shortcuts
 * [Google Shortcuts](https://support.google.com/chromebook/answer/183101?hl=en)
@@ -130,7 +131,7 @@ var currentElement = document.activeElement;
 1. When the modal appears, you are still able to tab through elements on the main page. Tabbable content should be restricted to the modal.
 1. Both hitting the escape key as well as clicking outside the modal should close it.
 1. [Original Example](./learn-a11y/focus-control/index.html)
-1. [Updated Example](./focus-control/index.html)
+1. [Updated Example](./learn-a11y/focus-control/updated-index.html)
 1. All focusable [inputs](https://raw.githubusercontent.com/jkup/focusable/master/index.js).
 
 ```JavaScript
@@ -162,7 +163,7 @@ Example:
 * Hiding: `display:none`; `visibility:hidden`; `<input hidden />`
 * labels = use `for=` and `id=`
 * [Original Example](./learn-a11y/screen-readers/index.html)
-* [Updated Example](./screen-readers/index.html)
+* [Updated Example](./learn-a11y/screen-readers/updated-index.html)
 
 ### Aria LabelBy
 Great for multi part forms
@@ -182,8 +183,64 @@ Great for multi part forms
 
 ```html
 <article role=“article”>Your Content</article>
-<!-- HTML 5 semantic versioning will turn into... -->
+<!-- HTML 5 semantic versioning will turn in to... -->
 <div role=“article”>Your Content</div>
 ```
 
 ## Semantic
+
+Used to create a broad outline of your page content: [Content_sectioning](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#Content_sectioning)
+
+* View headings with `Ctrl + option + u` while in screen reader mode.
+* Common: `main`, `nav`, `article`, `section`
+
+* [Original Example](./learn-a11y/semantic-html/index.html)
+* [Updated Example](./learn-a11y/semantic-html/updated-index.html)
+
+## ARIA - Accessible Rich Internet Applications
+
+If you have a `<span class="btn btn-default">Click Here</span>`, you can improve its accessibility:
+
+```html
+<span
+  tabindex=“0” role=“button” class=“button”
+  onclick=“btnClicked()” onKeyUp=“btnClicked()”>
+  Click Me
+</span>
+```
+
+### DescribedBy
+
+```html
+<button
+  aria-label="Close"
+  aria-describedby="descriptionClose"
+  onclick="myDialog.close()">
+  X
+</button>
+
+<div id="descriptionClose">
+  Closing this window will discard any information
+  entered and return you back to the main page
+</div>
+```
+
+### ARIA as CSS Selectors
+
+```css
+.dropdown[aria-expanded="false"] .icon::after {
+ content: '▶';
+}
+.dropdown[aria-expanded="true"] .icon::after {
+ content: '▼';
+}
+```
+
+### Precedence
+1. `aria-labelledby`
+1. `aria-label`
+1. `title`
+
+### Live Regions
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Keyboard Navigation</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css" media="screen" charset="utf-8">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <!-- <h1>ARIA Challenge</h1>
+
+        <ol>
+          <li>Write some JavaScript in aria.js to give increment and decrement functionality.</li>
+          <li>Use ARIA live regions so that screen readers announce when the count changes.</li>
+        </ol> -->
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <label class="sr-only" for="id">Count</label>
+            <p class="sr-only" id="count-description">More baby</p>
+            <div id="count" aria-live="assertive"  title="Bar" aria-label="Foo" aria-labelledby="hello-world" role="log">0</div>
+            <span class="sr-only" id="hello-world">What</span>
+          </div>
+        </div>
+
+        <button id="inc" aria-controls="count" class="btn btn-primary">Increment</button>
+        <button id="dec" aria-controls="count" class="btn btn-default">Decrement</button>
+
+      </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/aria.js"></script>
+    <script type="text/javascript">
+      var incrementBtn = document.getElementById('inc');
+      var decrementBtn = document.getElementById('dec');
+
+      incrementBtn.addEventListener("click", add);
+      decrementBtn.addEventListener("click", subtract);
+
+      function getValue(id) {
+        return Number(document.getElementById(id).innerHTML);
+      }
+
+      function add(event) {
+        var value = getValue("count");
+        value += 1;
+        document.getElementById('count').innerHTML = value;
+      }
+
+      function subtract(event) {
+        var value = getValue("count");
+        value -= 1;
+        document.getElementById('count').innerHTML = value;
+      }
+    </script>
+  </body>
+</html>
