@@ -244,3 +244,18 @@ If you have a `<span class="btn btn-default">Click Here</span>`, you can improve
 ### Live Regions
 
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
+
+* [Original Example](./learn-a11y/aria/index.html)
+* [Updated Example](./learn-a11y/aria/updated-index.html)
+
+## Color
+
+* *NoCoffee* is a Chrome extension used to simulated many visual conditions.
+* Color analyzer: https://accessibility.oit.ncsu.edu/tools/color-contrast/
+* Underlines not just changing color for *distinguishability* (WebAIM 1.4)
+* Links, must be distinguished that it is a link (bold, underline, size of text)
+
+* [Original Example](./learn-a11y/colors/index.html)
+* [Not Updated Example](./learn-a11y/colors/updated-index.html)
+
+## Tools
