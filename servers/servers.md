@@ -81,7 +81,17 @@ $ pg_ctl -D /usr/local/var/postgres -l logfile start
 Files with `d` or `.d` suffix stand for Deamon.
 Example: `/etc/init.d/nginx`
 
-## Downloading Remote Serve SQL
+## Downloading Local Database
+
+```Unix
+$ pg_dump -f file_name.sql -d database_name -h localhost
+```
+
+`-f` is a flag for the name of the output file.
+`-d` is the databse name such as "rails_app_development"
+`-h` host name such as "localhost"
+
+## Downloading Remote SQL Database
 
 1. SSH into the remote server: `$ ssh mike@11.111.11.11`
 
@@ -145,7 +155,7 @@ Why `z`, `x`, `v`, `f`?
 
 7. Load the sql file into your local database:
 
-`$ psql -d name_of_local_database < path_to_file.sql`
+`$ psql -d name_of_local_database < /path/to/file/file_name.sql`
 
 _You may need to update the database due to any outstanding migrations if you have any locally:_
 
@@ -160,3 +170,5 @@ Setting environmental configuration variables via [command line](https://devcent
 ```Bash
 heroku config:set SOME_ENVIORNMENTAL_VARIABLE=false --app heroku-application-name
 ```
+
+Rails c on staging server: `heroku run rails c -r staging`

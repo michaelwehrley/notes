@@ -1,5 +1,16 @@
 # SQL
 
+* Designed to work with *Relational Databases*
+* A query result is best described as a *record* (i.e., not a row as query results may be columns as well)
+
+## Language
+
+* Relational Database: a data store that is capable of representing relationships between different data sets.
+  - displayed in rows and columns
+* DML: add, query, manipulate, delete data from tables and datasets.
+* DDL: defines tables, indexes, and relationships.
+* DMS - Database Management System: Oracle, PostgreSQL, SQLite, MySQL
+
 ## LeftOuterJoin
 
 Keeps all the records on the left after the join occurs - otherwise, it would just join with the right table and return only those results that can be joined
