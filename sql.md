@@ -52,3 +52,42 @@ SELECT ?,?,? FROM ? WHERE ? LIKE %hammer% UNION (SELECT uLogin, uHash, uType FRO
 ![SQL_Injected_Products_Table](/assets/sql_injected_products_table.png)
 
 ## HTTP vs TCP vs UDP
+
+## SQL Practice
+
+```SQL
+  -- ORDER By
+  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+
+  -- Not Equal To <>
+  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+
+  -- AS for a column name
+  SELECT country.name, country.code, country.IndepYear AS 'Year of Independence' FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+```
+
+### Expressions
+
+```SQL
+-- COUNT
+SELECT COUNT('country.*') FROM country;
+-- COUNT('country.*')
+-- 239
+SELECT COUNT(*) FROM country;
+-- COUNT(*)
+-- 239
+```
+
+```SQL
+-- Arithmetic
+SELECT 1+10;
+```
+
+*SQLite* [date and time functions](https://sqlite.org/lang_datefunc.html)
+
+```SQL
+-- This is SQLite specific
+SELECT strftime('%j %H %w %f', datetime());
+-- strftime('%j %H %w %f', datetime())
+-- 228 12 3 11.000
+```
