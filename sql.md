@@ -11,6 +11,108 @@
 * DDL: defines tables, indexes, and relationships.
 * DMS - Database Management System: Oracle, PostgreSQL, SQLite, MySQL
 
+## SQL Practice
+
+### Format
+* SQL *statements* that begin with `SELECT` are commonly referred to as "SELECT Statements".
+```SQL
+-- KEYWORD;
+SELECT table.* FROM table;
+```
+* Common [SQL clauses](https://en.wikipedia.org/wiki/SQL_syntax#Queries): `FROM`, `WHERE`, `GROUP BY`, `ORDER BY`, `DISTINCT`
+```SQL
+-- Select all attributes with FROM and WHERE clause
+SELECT country.* FROM country WHERE country.continent = 'Asia';
+
+-- Select specific attributes
+SELECT country.name, country.population, country.region
+  FROM country
+  WHERE country.continent = 'Asia';
+
+-- Rename Attribute
+SELECT country.name, country.population as 'Pop', country.region
+  FROM country
+  WHERE country.continent = 'Asia';
+```
+* Functions: `COUNT(*)`
+```SQL
+SELECT COUNT(*) FROM country WHERE country.continent = 'Asia';
+```
+* Expressions: Used to derive data from a statement.
+```SQL
+-- Multiple expressions
+SELECT country.name, country.population / 1000000 as 'Pop (in millions)', country.region
+  FROM country
+  -- Logical Expression
+  WHERE country.continent = 'Asia' AND country.population > 1000000
+  -- With order clause
+  ORDER BY country.population DESC;
+```
+
+```SQL
+  -- ORDER By
+  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+
+  -- Not Equal To <>
+  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+
+  -- AS for a column name
+  SELECT country.name, country.code, country.IndepYear AS 'Year of Independence' FROM country WHERE country.code <> "AFG" ORDER BY country.code;
+```
+
+Return the capital cities of countries with more than a million population in order of continent and population.
+```SQL
+-- Countries where populations is >= 10 million
+SELECT country.continent, country.name, country.capital, country.population / 1000000 AS 'PopMM'
+  FROM country
+  WHERE country.population >= 10
+  ORDER BY country.continent ASC, country.population DESC
+```
+```SQL
+SELECT c.continent, c.name AS 'Country', c.capital, c.PopMM AS 'Population (in millions)', city.name AS 'Capital'
+  FROM (
+    -- Countries where populations is >= 10 million
+    SELECT country.continent, country.name, country.capital, country.population / 1000000 AS 'PopMM'
+      FROM country
+      WHERE country.population >= 10
+      ORDER BY country.continent ASC, country.population DESC
+  ) AS c
+  JOIN city
+  -- In this case you can use ON or WHERE
+  ON city.id = c.capital
+  ORDER BY c.continent, c.PopMM DESC;
+```
+
+### Expressions
+
+```SQL
+-- COUNT
+SELECT COUNT('country.*') FROM country;
+-- COUNT('country.*')
+-- 239
+SELECT COUNT(*) FROM country;
+-- COUNT(*)
+-- 239
+```
+
+```SQL
+-- Arithmetic
+SELECT 1+10;
+```
+
+*SQLite* [date and time functions](https://sqlite.org/lang_datefunc.html)
+
+```SQL
+-- This is SQLite specific
+SELECT strftime('%j %H %w %f', datetime());
+-- strftime('%j %H %w %f', datetime())
+-- 228 12 3 11.000
+```
+
+### Null
+
+* `NULL` is a state not a value.
+
 ## LeftOuterJoin
 
 Keeps all the records on the left after the join occurs - otherwise, it would just join with the right table and return only those results that can be joined
@@ -52,42 +154,3 @@ SELECT ?,?,? FROM ? WHERE ? LIKE %hammer% UNION (SELECT uLogin, uHash, uType FRO
 ![SQL_Injected_Products_Table](/assets/sql_injected_products_table.png)
 
 ## HTTP vs TCP vs UDP
-
-## SQL Practice
-
-```SQL
-  -- ORDER By
-  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
-
-  -- Not Equal To <>
-  SELECT country.* FROM country WHERE country.code <> "AFG" ORDER BY country.code;
-
-  -- AS for a column name
-  SELECT country.name, country.code, country.IndepYear AS 'Year of Independence' FROM country WHERE country.code <> "AFG" ORDER BY country.code;
-```
-
-### Expressions
-
-```SQL
--- COUNT
-SELECT COUNT('country.*') FROM country;
--- COUNT('country.*')
--- 239
-SELECT COUNT(*) FROM country;
--- COUNT(*)
--- 239
-```
-
-```SQL
--- Arithmetic
-SELECT 1+10;
-```
-
-*SQLite* [date and time functions](https://sqlite.org/lang_datefunc.html)
-
-```SQL
--- This is SQLite specific
-SELECT strftime('%j %H %w %f', datetime());
--- strftime('%j %H %w %f', datetime())
--- 228 12 3 11.000
-```
