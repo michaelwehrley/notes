@@ -35,6 +35,39 @@ Then you can run `$ git fetch origin` and it will run:
 * Which means a remote `heads/test` will be local `remotes/origin/test`
 * The plus sign means they'll be updated even if they are not fast-forward.
 
+## Global Git config
+
+If you desire multiple git configurations, you can specify a global configuration and/or a local one.
+
+### Locally
+```Bash
+git config user.name "Your Name Here"
+git config user.email your@email.com
+```
+This will append your `/path/to/project/.git/config` file:
+
+```
+# /path/to/project/.git/config
+[user]
+        name = Your Name Here
+        email = your@email.com
+```
+
+### Globally
+```Bash
+git config --global user.name "Your Name Here"
+git config --global user.email your@email.com
+```
+
+A `.gitconfig` will be created at `~/` directory.
+
+```
+# ~/.gitconfig
+[user]
+        name = Your Name Here
+        email = your@email.com
+```
+
 ## Origin (rough draft)
 
 `$ git remote -v`
