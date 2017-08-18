@@ -11,6 +11,20 @@
 * DDL: defines tables, indexes, and relationships.
 * DMS - Database Management System: Oracle, PostgreSQL, SQLite, MySQL
 
+## Joins
+
+* `INNER JOIN` or typically just `JOIN` as this is the default:
+![Inner Join](/assets/inner_join.png)
+
+* `LEFT OUTER JOIN` or typically just `LEFT JOIN`:
+![Left Join](/assets/left_outer_join.png)
+
+* `RIGHT OUTER JOIN` or typically just `RIGHT JOIN` - not supported in many database systems such as SQLite:
+![Right Join](/assets/right_outer_join.png)
+
+* `FULL OUTER JOIN` or typically just `FUL JOIN` - not supported in many database systems such as SQLite:
+![Right Join](/assets/full_outer_join.png)
+
 ## SQL Practice
 
 ### Format

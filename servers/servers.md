@@ -27,6 +27,9 @@ If we’re able to find a match, we’ll respond with its contents, using the fi
 
 If no matching file can be found, we’ll respond with a 404 Not Found error status.
 
+--- Move to PostgreSQL ---
+This info is slightly inaccurate and outdated.
+
 ## PostgreSQL Server
 
 *PG::ConnectionBad*

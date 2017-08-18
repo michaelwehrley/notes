@@ -14,3 +14,6 @@ The following command will only list files and will exclude directories, special
   - `l`: symbolic link
 
 `$ man find` for more options.
+
+Move multiple files at once to a new directory:
+`mv ~/Desktop/*.png ~/path/to/new/directory/`
