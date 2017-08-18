@@ -14,7 +14,7 @@
 ## Joins
 
 * `INNER JOIN` or typically just `JOIN` as this is the default:
-![Inner Join](/assets/inner_join.png)
+<img alt="Inner Join" src="/assets/inner_join.png" width="300">
 
 * `LEFT OUTER JOIN` or typically just `LEFT JOIN`:
 ![Left Join](/assets/left_outer_join.png)
