@@ -20,6 +20,47 @@
 
 `pg_ctl` is an executable used to start or stop a server so you could use it for both.
 
+### Create Database
+
+* Log in `psql postgres`
+
+* View users: `postgres=# \du`
+
+List of roles
+Role name |                   Attributes                   | Member of
+----------+------------------------------------------------+-----------
+mike      | Superuser, Create role, Create DB, Replication | {}
+
+* List database `postgres-# \l`
+                                    List of databases
+         Name    | Owner | Encoding |   Collate   |    Ctype    | Access privileges
+-----------------+-------+----------+-------------+-------------+-------------------
+ foo_development | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ foo_test        | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres        | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
+                 |       |          |             |             | mike=CTc/mike
+ template1       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
+                 |       |          |             |             | mike=CTc/mike
+
+* Connect to a specific database (analogous to `psql -d foo_development`): `postgres=# \connect foo_development`
+  - To exit: `psql postgres`
+
+* `which createdb` to verify it exists. Create: `createdb test -U mike`
+  - log in `psql postgres`
+  - List database `postgres=# \list`
+                                      List of databases
+           Name    | Owner | Encoding |   Collate   |    Ctype    | Access privileges
+  -----------------+-------+----------+-------------+-------------+-------------------
+   foo_development | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+   foo_test        | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+   postgres        | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+   template0       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
+                   |       |          |             |             | mike=CTc/mike
+   template1       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
+                   |       |          |             |             | mike=CTc/mike
+   test            | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+
 ### Permission Issues
 
 * You will likely need access to the `pgsql` & `data` directories:
