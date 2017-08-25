@@ -6,7 +6,9 @@
 * Locale for default database cluster
   - `initdb` also initializes the default locale for the database cluster
 
-## Creating Database Cluster
+## Overview
+
+### Creating Database Cluster
 
 * A database storage area must be initialized on disk to do anything.
   - We call this a _database cluster_.
@@ -31,7 +33,7 @@ template0    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
 template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike
 
-## Permission Issues
+### Directory Permission Issues
 
 * You will likely need access to the `pgsql` & `data` directories:
 
@@ -39,10 +41,51 @@ template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
 root# mkdir /usr/local/pgsql
 root# chown postgres /usr/local/pgsql
 root# su postgres
+
 postgres$ initdb -D /usr/local/pgsql/data
 ```
 
-## Database
+### Roles and Permissions
+
+* Utility from command line `$createuser bob` is the same as `CREATE ROLE bob;` (note: can't login)
+* `CREATE USER` is equivalent to `CREATE ROLE` except that `CREATE USER` assumes `LOGIN by default, while `CREATE ROLE` does not.
+
+`postgres=# CREATE ROLE bob;`
+`postgres=# CREATE USER foo;`
+`postgres=# CREATE ROLE colleen LOGIN CREATEROLE CREATEDB;`
+`postgres=# CREATE USER colleen SUPERUSER;`
+`postgres=# \du`
+                             List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+-----------
+ bob       | Cannot login                                   | {}        
+ foo       |                                                | {}
+ mike      | Superuser, Create role, Create DB, Replication | {}
+
+```
+ CREATE ROLE name [ [ WITH ] option [ ... ] ]
+
+ where option can be:
+
+     | SUPERUSER | NOSUPERUSER
+     | CREATEDB | NOCREATEDB
+     | CREATEROLE | NOCREATEROLE
+     | CREATEUSER | NOCREATEUSER
+     | INHERIT | NOINHERIT
+     | LOGIN | NOLOGIN
+     | REPLICATION | NOREPLICATION
+     | CONNECTION LIMIT connlimit
+     | [ ENCRYPTED | UNENCRYPTED ] PASSWORD 'password'
+     | VALID UNTIL 'timestamp'
+     | IN ROLE role_name [, ...]
+     | IN GROUP role_name [, ...]
+     | ROLE role_name [, ...]
+     | ADMIN role_name [, ...]
+     | USER role_name [, ...]
+     | SYSID uid
+```
+
+### Database
 
 * Log in `$ psql postgres`
 * View users: `postgres=# \du`
@@ -50,9 +93,10 @@ postgres$ initdb -D /usr/local/pgsql/data
 List of roles
 Role name |                   Attributes                   | Member of
 ----------+------------------------------------------------+-----------
+bob       | Cannot login                                   | {}
 mike      | Superuser, Create role, Create DB, Replication | {}
 
-## List Databases
+### List Databases
 
 * From command line: `$ psql -l` or `psql --list`
 * From within PostgreSQL: `postgres-# \l` or `postgres-# \list`
@@ -68,48 +112,9 @@ mike      | Superuser, Create role, Create DB, Replication | {}
  template1       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
                  |       |          |             |             | mike=CTc/mike
 
-## Accessing PostgreSQL
+* List database with *additional* information `postgres=# \l+`.
 
-Note: The letters `E`, `i`, `m`, `s`, `t`, and `v` stand for foreign table, index, materialized view, sequence, table, and view, respectively.
-
-* From command line to access database: `$ psql database_name_development`
-* List datatables once in psql:
-* ` \dt[S+] [ pattern ]`
-```sql
-database_name_development=# \dt
-```
-* Display one table:
-```sql
-database_name_development=# \d my_table
-```
-
-* Connect to a specific database (analogous to `$ psql -d foo_development`): `postgres=# \connect foo_development`
-  - You could also skip the `-d` flag: `$ psql foo_development`
-  - You will then be in "foo_development": `foo_development=#`
-  - To exit: `\q`
-
-## Create/Drop Database
-
-Create within PostgreSQL:
-* `postgres=# CREATE DATABASE dbname owner rolename;`
-
-Drop within PostgreSQL (cannot be executed while connected to the target database):
-* `postgres=# DROP DATABASE dbname;` or `postgres=#  DROP DATABASE IF EXISTS dbname;`
-* `$ dropdb dbname`
-
-`postgres=# DROP DATABASE test4;`
-`ERROR:  database "test4" does not exist`
-
-`postgres=# DROP DATABASE [IF EXISTS] test4;`
-`DROP DATABASE`
-
-Create within the terminal:
-  - `$ createdb test -U mike` (this will give that user privileges otherwise it is public)
-  - `createdb` is a postgres command that issues the `CREATE DATABASE` command.
-  - log in to via `$ psql postgres`
-  - List database `postgres=# \list` or `postgres=# \l` or `postgres=# \l+` for *additional* information.
-
-                                        List of databases
+                 List of databases
 Name         | Owner | Encoding |   Collate   |    Ctype    | Access privileges |  Size   | Tablespace |                Description                 
 -------------+-------+----------+-------------+-------------+-------------------+---------+------------+--------------------------------------------
 data_sci     | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   | 6620 kB | pg_default |
@@ -120,6 +125,61 @@ template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike     |         |            |
 test         | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   | 6620 kB | pg_default |
 (7 rows)
+
+
+### Accessing PostgreSQL
+
+* From command line to access database: `$ psql database_name_development`
+
+* Connect to a specific database (analogous to `$ psql -d foo_development`): `postgres=# \connect foo_development`
+  - You could also skip the `-d` flag: `$ psql foo_development`
+  - You will then be in "foo_development": `foo_development=#`
+  - To exit: `\q`
+
+### Listing Tables
+
+* List datatables within psql:
+* ` \dt[S+] [ pattern ]`
+Note: The letters `E`, `i`, `m`, `s`, `t`, and `v` stand for foreign table, index, materialized view, sequence, table, and view, respectively.
+
+```sql
+database_name_development=# \dtsi
+```
+
+Schema | Name  |   Type   | Owner |       Table                       
+-------+-=-----+----------+-------+-----------------------
+public | foo   | table    | mike  |
+public | bar   | sequence | mike  |
+public | baz   | index    | mike  | admin_comments
+
+* Display one table:
+```sql
+database_name_development=# \d my_table
+```
+
+### Create/Drop Database
+
+Create within the terminal:
+  - `$ createdb test -U mike` (this will give that user privileges otherwise it is public)
+  - `createdb` is a postgres command/utility that issues the `CREATE DATABASE` command.
+  - log in to via `$ psql postgres`
+  - List database `postgres=# \list` or `postgres=# \l` or `postgres=# \l+` for *additional* information.
+
+Create within PostgreSQL (cannot be executed while connected to the target database):
+* `postgres=# CREATE DATABASE dbname owner rolename;`
+* `postgres=# DROP DATABASE dbname;` or `postgres=# DROP DATABASE IF EXISTS dbname;`
+
+Drop db using the utility from UNIX command line: `$ dropdb dbname`
+
+From server:
+`postgres=# DROP DATABASE test4;`
+`DROP DATABASE`
+
+`postgres=# DROP DATABASE test4;`
+`ERROR:  database "test4" does not exist`
+
+`postgres=# DROP DATABASE [IF EXISTS] test4;`
+`DROP DATABASE`
 
 ## Commands
 
@@ -135,3 +195,5 @@ postgres=# select 1+1;
 ----------
         2
 ```
+
+<!-- select wb.user_id, (select users.email from users where users.id = wb.user_id) from waste_bags wb where wb.order = true limit 10; -->
