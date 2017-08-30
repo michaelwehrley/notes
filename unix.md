@@ -17,3 +17,8 @@ The following command will only list files and will exclude directories, special
 
 Move multiple files at once to a new directory:
 `mv ~/Desktop/*.png ~/path/to/new/directory/`
+
+# Linking Files
+
+* Link `$ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl`
+* Unlink `$ rm /usr/local/bin/subl`

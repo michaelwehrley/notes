@@ -181,6 +181,42 @@ From server:
 `postgres=# DROP DATABASE [IF EXISTS] test4;`
 `DROP DATABASE`
 
+## Privileges
+
+### Table Privileges
+
+`$ psql postgres`
+`postgres=# CREATE DATABASE data_sci; => CREATE DATABASE`
+`postgres=# \connect data_sci;`
+`data_sci=# CREATE TABLE users (first_name TEXT, last_name TEXT); => CREATE TABLE`
+`data_sci=# GRANT SELECT ON users TO PUBLIC; => GRANT`
+
+Grant access to a table:
+
+```
+data_sci=# \dp
+                           Access privileges
+ Schema | Name  | Type  | Access privileges | Column access privileges
+--------+-------+-------+-------------------+--------------------------
+ public | users | table | mike=arwdDxt/mike+|
+        |       |       | =r/mike           |
+(1 row)
+```
+
+Grant a permission on a column on the `users` table:
+`data_sci=# GRANT SELECT (first_name), UPDATE (first_name) ON users TO mike; => GRANT`
+
+
+```
+data_sci=# \dp
+                           Access privileges
+ Schema | Name  | Type  | Access privileges | Column access privileges
+--------+-------+-------+-------------------+--------------------------
+ public | users | table | mike=arwdDxt/mike+| first_name:             +
+        |       |       | =r/mike           |   mike=rw/mike
+(1 row)
+```
+
 ## Commands
 
 * Simple Arithmetic:
