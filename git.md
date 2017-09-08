@@ -21,9 +21,34 @@ remotes/origin/master
 remotes/origin/test
 ```
 
-## .git/config
+## AutoCompletion
 
+Request the file
+```bash
+curl -OL https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 ```
+`-O, --remote-name` flag causes only the file part of the remote file is used, the path is cut off.
+`-L, --location` flag says that if the HTTP GET request from the server reports that the requested page has moved to a different location then this option will make curl redo the request on the new place. 
+
+Rename:
+```bash
+mv ~/git-completion.bash ~/.git-completion.bash
+```
+
+Add to `~/.bash_profile`:
+```bash
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
+```
+
+## Configuration
+
+`~/path/to/project/.git/config`
+
+```Bash
+cat ~/path/to/project/.git/config
+
 [remote "origin"]
   url = git@github.com:michaelwehrley/notes.git
   fetch = +refs/heads/*:refs/remotes/origin/*
@@ -35,11 +60,14 @@ Then you can run `$ git fetch origin` and it will run:
 * Which means a remote `heads/test` will be local `remotes/origin/test`
 * The plus sign means they'll be updated even if they are not fast-forward.
 
-## Global Git config
-
-If you desire multiple git configurations, you can specify a global configuration and/or a local one.
+* System: `git config --system`
+* User: `git config --global`
+* Locally: `git config`
 
 ### Locally
+
+This can be used for different projects.
+
 ```Bash
 git config user.name "Your Name Here"
 git config user.email your@email.com
@@ -54,6 +82,11 @@ This will append your `/path/to/project/.git/config` file:
 ```
 
 ### Globally
+
+If you desire multiple git configurations, you can specify a global configuration and/or a local one.
+
+`git config --global --list` will create a file in `/Users/username/.gitconfig`
+
 ```Bash
 git config --global user.name "Your Name Here"
 git config --global user.email your@email.com
@@ -67,6 +100,13 @@ A `.gitconfig` will be created at `~/` directory.
         name = Your Name Here
         email = your@email.com
 ```
+
+### System
+
+`git config --system --list`
+
+To make Sublime the default editor when you save. `w` tells to wait, `l1` means to start at line 1.
+`git config --global core.editor "subl -wl1"`
 
 ## Origin (rough draft)
 
@@ -129,6 +169,10 @@ To unstage the last commit's changes: `$ git reset HEAD~`.
 This is helpful when you just added a commit and you want to "fixup" the last commit:
 
 `$ git comment --amend`
+
+## Viewing Diff Files
+
+`$ git diff --stat HEAD origin/master`
 
 ## Rebasing
 

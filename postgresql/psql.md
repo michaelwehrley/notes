@@ -232,4 +232,111 @@ postgres=# select 1+1;
         2
 ```
 
+## Queries
+
+Setup:
+1. log in: `$ pgsl postgres`;
+1. List databases: `postgres=# \l` or `postgres=# \list`;
+1. Create database: `postgres=# CREATE DATABASE world;`;
+1. Adding data can be done by copying and pasting the sql script when connected to db or `$ psql world < ./postgresql/world-pg.sql`;
+1. Connect: `postgres=# \c world` or `postgres=# \connect world`;
+1. Inspect database: `world=# \d`:
+  * View on the tables: `world=# \dt`
+  * View on the view: `world=# \dv`
+  * View on the sequence: `world=# \ds`
+
+```
+world=# \d
+              List of relations
+ Schema |      Name       |   Type   | Owner
+--------+-----------------+----------+-------
+ public | city            | table    | mike
+ public | city_id_seq     | sequence | mike
+ public | country         | table    | mike
+ public | countrylanguage | table    | mike
+ public | view_databases  | view     | mike
+ public | view_indexes    | view     | mike
+ public | view_tables     | view     | mike
+ public | view_views      | view     | mike
+(8 rows)
+```
+
+### Arithmetic...
+
+### Subqueries
+
+* Average population for each continent (Subquery in SELECT clause)
+
+`world=# SELECT country.code, country.population FROM country;`
+`world=# SELECT city.name, city.population, city.countrycode FROM city;`
+
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population
+FROM
+  country AS co,
+  city AS ci;
+```
+
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population,
+  (SELECT round(avg(co2.population)) FROM country AS co2 WHERE ci.population = 0)
+FROM
+  country AS co,
+  city AS ci;
+```
+
+## JOINS
+
+### INNER JOIN
+* What we want: `SELECT ci.name, ci.population, co.name`;
+* From where: `FROM city as ci` and `FROM country as co`;
+* What we want to `JOIN`:
+```
+FROM
+  city as ci
+JOIN
+  country as co
+```
+* How to join:
+```
+FROM
+  city AS ci
+JOIN
+  country AS co
+ON
+  ci.countrycode = co.code;
+```
+* Put it together:
+```
+SELECT
+  ci.name,
+  ci.population,
+  co.name
+FROM
+  city AS ci JOIN country AS co
+ON
+  ci.countrycode = co.code;
+```
+
+### LEFT JOIN / LEFT OUTER JOIN
+* What we want: `SELECT ci.name, ci.population, co.name`;
+* From where: `FROM city as ci` and `FROM country as co`;
+* What we want to `LEFT OUTER JOIN` just in case a country exists without a city:
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population
+FROM
+  country AS co LEFT OUTER JOIN city AS ci
+ON
+  co.code = ci.countrycode;
+```
+
 <!-- select wb.user_id, (select users.email from users where users.id = wb.user_id) from waste_bags wb where wb.order = true limit 10; -->
