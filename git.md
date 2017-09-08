@@ -90,6 +90,7 @@ If you desire multiple git configurations, you can specify a global configuratio
 ```Bash
 git config --global user.name "Your Name Here"
 git config --global user.email your@email.com
+git config --global color.ui true
 ```
 
 A `.gitconfig` will be created at `~/` directory.
@@ -105,8 +106,51 @@ A `.gitconfig` will be created at `~/` directory.
 
 `git config --system --list`
 
-To make Sublime the default editor when you save. `w` tells to wait, `l1` means to start at line 1.
+To make Sublime the default editor when you save. `w` tells to wait, `l1` means to start at *line 1*.
 `git config --global core.editor "subl -wl1"`
+
+## Architecture
+
+* 2-Tree Architecture: *working directory* --(`commit`)--> *repo*
+* 3-Tree Architecture: *working directory* --(`git add`)--> *staging index* --(`git commit`)--> *repo*
+
+## HEAD
+
+Points to the tip of the currently checked out branch from the *repository*
+
+`cat ./.git/HEAD` => `ref: refs/heads/master`
+`cat ./.git/refs/heads/master` => `527b3edrfad3a43ac9d93108218ad620ii03xc5w`
+
+## Fun Commnads
+
+* `git mv`
+* `git rm`
+
+## Reseting
+
+* Soft: `git reset --soft 855d9`
+  - moves HEAD to SHA-1 855d9.
+  - changes are stagged, but not committed
+  - `cat .git/refs/heads/master` will be 855d9...
+  - `git log` will have the lastest commit to be 855d9...
+  - HOWEVER, the working directory and staging index has changes from the previous commit.
+  - `git diff --staged` to see changes.
+* Mixed (default): `git reset 855d9` or `git reset --mixed 855d9`
+  - changes exist *but* are no longer stagged (i.e., not commited)
+* Hard: `git reset --hard 855d9`
+  - changes no longer exist and moves HEAD back to 855d9
+
+## Referencing Commits
+
+* Parent Commit
+  - `HEAD^`, `as8w3r^`, `master^`
+  - `HEAD~1`, `HEAD~`
+* Grandparent Commit
+  - `HEAD^^`, `as8w3r^^`, `master^^`
+  - `HEAD~2`
+* Great-Grandparent Commit
+  - `HEAD^^^`, `as8w3r^^^`, `master^^^`
+  - `HEAD~3`
 
 ## Origin (rough draft)
 
