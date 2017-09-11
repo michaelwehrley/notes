@@ -28,7 +28,7 @@ Request the file
 curl -OL https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 ```
 `-O, --remote-name` flag causes only the file part of the remote file is used, the path is cut off.
-`-L, --location` flag says that if the HTTP GET request from the server reports that the requested page has moved to a different location then this option will make curl redo the request on the new place. 
+`-L, --location` flag says that if the HTTP GET request from the server reports that the requested page has moved to a different location then this option will make curl redo the request on the new place.
 
 Rename:
 ```bash
@@ -111,14 +111,15 @@ To make Sublime the default editor when you save. `w` tells to wait, `l1` means 
 
 ## Architecture
 
-* 2-Tree Architecture: *working directory* --(`commit`)--> *repo*
-* 3-Tree Architecture: *working directory* --(`git add`)--> *staging index* --(`git commit`)--> *repo*
+* 2-Tree Architecture: *working directory* --(`commit`)--> *repo/HEAD*
+* 3-Tree Architecture: *working directory* --(`git add`)--> *staging index* --(`git commit`)--> *repo/HEAD*
 
 ## HEAD
 
 Points to the tip of the currently checked out branch from the *repository*
 
 `cat ./.git/HEAD` => `ref: refs/heads/master`
+
 `cat ./.git/refs/heads/master` => `527b3edrfad3a43ac9d93108218ad620ii03xc5w`
 
 ## Fun Commnads
@@ -139,6 +140,15 @@ Points to the tip of the currently checked out branch from the *repository*
   - changes exist *but* are no longer stagged (i.e., not commited)
 * Hard: `git reset --hard 855d9`
   - changes no longer exist and moves HEAD back to 855d9
+
+### Undoing File From Current Commit
+
+`$ git reset --mixed HEAD~ path/to/file`
+
+* `$ git diff --staged` will show what changes have been added
+* `$ git commit --amend` will add them to the repo/HEAD
+* `$ git checkout -- path/to/file` with now checkout the changes in the working directory
+* Happiness 
 
 ## Referencing Commits
 
@@ -216,7 +226,7 @@ This is helpful when you just added a commit and you want to "fixup" the last co
 
 ## Viewing Diff Files
 
-`$ git diff --stat HEAD origin/master`
+`$ git diff --stat HEAD master`
 
 ## Rebasing
 
@@ -261,6 +271,13 @@ $ git checkout remotes/origin/test # You are in a 'detached HEAD' state
 To push the current branch and set the remote as upstream, use
 
 `$ git push --set-upstream origin test`
+
+## Checking Out Files
+
+Git doesn't know if your checkout out is a file or branch unless you use `--`:
+
+* Checkout branch "assets" `$ git checkout assets`
+* Checkout directory "assets" `$ git checkout -- assets`
 
 ## Reopen Pull Request
 

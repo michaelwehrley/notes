@@ -33,6 +33,11 @@ template0    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
 template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike
 
+## Kill
+
+1. Find the processes running postgres: `$ ps -ef | grep postgres`
+1. Kill process: `$ sudo kill -9 "# of the connection"`
+
 ### Directory Permission Issues
 
 * You will likely need access to the `pgsql` & `data` directories:
