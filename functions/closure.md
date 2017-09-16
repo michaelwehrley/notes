@@ -1,5 +1,7 @@
 # Closure
 
+## Javascript
+
 * Functions are first class objects.
 
 ```JavaScript

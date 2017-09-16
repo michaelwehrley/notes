@@ -1,4 +1,4 @@
-# Semicolon Insertion
+# Javascript Semicolon Insertion
 
 ```JavaScript
 function foo1() {

@@ -1,5 +1,6 @@
 # NaN
 
+## Javascript
 ```JavaScript
 typeof NaN // "number"
 NaN === NaN // false

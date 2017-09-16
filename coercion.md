@@ -1,9 +1,9 @@
 # Coercion
 
-## Unicode
+## Javascript
 
+Sorting without a comparative function sorts based on **Unicode**
 ```JavaScript
-// Sorting without a comparative function sorts based on Unicode
 [3, 9, -3, 10].sort(); // [-3, 10, 3, 9]
 ```
 

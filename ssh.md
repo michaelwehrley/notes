@@ -7,7 +7,7 @@
 ## Generate
 
 `ssh-keygen -t rsa -b 4096 -C "mike@example.com"` or
-`ssh-keygen -t rsa -C "mike@example.com"``
+`ssh-keygen -t rsa -C "mike@example.com"`
 
 ## Usage
 

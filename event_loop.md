@@ -1,4 +1,4 @@
-# JS & Web EventLoop
+# JavaScript & Web EventLoop
 
 Anything using `setTimeout` will get set to the event loop.
 Because JS is single threaded; `setTimeout` will run after the `console.log(4)`,

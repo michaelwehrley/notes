@@ -1,8 +1,10 @@
-# this
+# `this` & `self`
+
+## Javascript
 
 The context of where the function was invoked.
 
-## apply vs call vs bind
+### `apply` vs `call` vs `bind`
 
 You can explicitly set this, by using `apply`, `call`, and `bind`.
 

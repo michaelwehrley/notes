@@ -1,4 +1,8 @@
-# Lexical Scope
+# Scope 
+
+## Javascript 
+
+### Lexical Scope
 
 ```JavaScript
 (function() {
@@ -16,7 +20,7 @@ b // 3 (attached to the window b/c not declared)
 }()); // ReferenceError: d is not defined
 ```
 
-## Garbage Collection
+### Garbage Collection
 
 ```JavaScript
 function foo() {

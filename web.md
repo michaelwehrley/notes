@@ -38,12 +38,13 @@ Request timeout for icmp_seq 4
 6 packets transmitted, 0 packets received, 100.0% packet loss
 ```
 
-## Cache Poisoning
+## DNS Cache Poisoning
 * No way for your local browser (i.e., Chrome or Safari) to not know that website.com is *not* at 999.999.999.999 but should be at 111.222.333.444
   - The server @ 111.222.333.444 has a verified certificate that says "DNS lives at this IP Address" so the browser knows it is the correct IPA address for the website.
 
-## Traceroute - sends ICMP
+## Traceroute
 * `$ traceroute netflix.com`
+* Traceroute sends Internet Control Message Packets (ICMP)
 *  homeportal (192.168.1.254)  2.978 ms  2.266 ms  2.023 ms (home router)
 * IP - Internet Protocol
 * TCP - Transmission Control Protocol
@@ -62,6 +63,7 @@ Request timeout for icmp_seq 4
 * generating a new key pair: `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"` [-b bits] [-t dsa |
 
 ## SSH Key
+1. Visit [ssh](/ssh.md) for more information
 1. Logging in with your ssh key for the first time: (remember your passkey - you will use that when you add it!)
 `ssh -i ~/.ssh/digital_ocean_ubuntu root@111.222.333.444` (`-i` is for identity; we are sending our private key so if the fingerprint message comes up - be careful)
 1. `~/.ssh/known_hosts` *is the directory that stores all keys your SERVER has connected with*

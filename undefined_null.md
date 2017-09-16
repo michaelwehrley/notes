@@ -1,5 +1,6 @@
-# Undefined & Null
+# Undefined/Null/Nil
 
+## Javascript
 * `undefined` is a property of the global object; `window.undefined => undefined`
 * `undefined` is a primitive value automatically assigned to variables that have just been declared or to formal arguments for which there are no actual arguments.
 
@@ -33,7 +34,7 @@ _ReferenceError_
 d // Uncaught ReferenceError: d is not defined
 ```
 
-## Types
+### Types
 ```JavaScript
 typeof null // "object"
 typeof undefined // "undefined"
@@ -54,7 +55,7 @@ But is `foo` and object?
 `function foo() {}`
 `typeof foo // "function"`
 
-## Environment
+### Environment
 
 ```JavaScript
 // ES 5
@@ -94,7 +95,7 @@ The `void` operator can be used to return `undefined`. For [example](https://dev
 </a>
 ```
 
-## Compilation vs Runtime
+### Compilation vs Runtime
 
 ```JavaScript
 var y = 1;

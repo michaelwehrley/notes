@@ -1,4 +1,4 @@
-# PSQL
+# PostgreSQL
 
 ## Installation
 

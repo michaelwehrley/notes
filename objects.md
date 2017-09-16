@@ -1,5 +1,7 @@
 # Objects
 
+## Javascript
+
 ```JavaScript
 typeof 1; // "number"
 typeof "1"; // "string"
@@ -15,13 +17,13 @@ typeof Boolean; // "function"
 typeof new Boolean(); // "object"
 ```
 
-## hasOwnProperty
+### hasOwnProperty
 
-## defineProperty
+### defineProperty
 
-## Properties
+### Properties
 
-## Stringify
+### Stringify
 
 JavaScript will implicitly stringify the parameter value.
 
@@ -37,7 +39,7 @@ console.log(a[b]) // 456
 
 In this case, since b and c are both objects, they will both be converted to "[object Object]"
 
-### delete
+#### delete
 
 `delete` only effects properties on objects, not local variables.
 ```JavaScript
@@ -61,7 +63,7 @@ delete trees[3]; // ["redwood","bay","cedar", undefined, "maple"]
 trees.length // 5
 ```
 
-### for in
+#### for in
 
 _for in_
 ```JavaScript

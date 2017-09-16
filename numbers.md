@@ -1,11 +1,13 @@
 # Numbers
 
+## Javascript
+
 ```JavaScript
 0.1 + 0.2 == 0.3; // false WTF?!
 0.1 + 0.2; // 0.30000000000000004 WTF?!
 ```
 
-## Binary
+### Binary
 
 Try to write *0.1* in binary:
 
@@ -24,7 +26,7 @@ You may see this written as (0.1)<sub>10</sub> = (0.000110011001100110011...)<su
 Converting *0.1* in double binary (8 bytes/64 bits):
 0.0001100110011001100110011001100110011001100110011001101
 
-## "Types"
+### "Types"
 
 Writing your own `isInteger` method:
 ```JavaScript
@@ -60,7 +62,7 @@ var num = 3;
 num.myIsIntegerFunc(); // true
 ```
 
-## Floating Point Precision
+### Floating Point Precision
 _notes...rough draft_
 
 Converting a binary number to IEE 754 we desire our number in normalized binary scientific notation:
