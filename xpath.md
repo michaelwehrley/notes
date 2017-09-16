@@ -1,6 +1,6 @@
 # XPath
 
-For testing visit [http://www.xpathtester.com/xpath](http://www.xpathtester.com/xpath)
+For testing visit [http://www.xpathtester.com/xpath](http://www.xpathtester.com/xpath) or [https://www.freeformatter.com/xpath-tester.html](https://www.freeformatter.com/xpath-tester.html)
 
 ## Predicate Expressions
 

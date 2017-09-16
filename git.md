@@ -122,10 +122,28 @@ Points to the tip of the currently checked out branch from the *repository*
 
 `cat ./.git/refs/heads/master` => `527b3edrfad3a43ac9d93108218ad620ii03xc5w`
 
+List all branch heads: `ls -la /git/refs/heads`
+
+```
+HomeChedminsMBP:notes mike$ ls -la .git/refs/heads/
+total 16
+drwxr-xr-x  4 mike  staff  136 Sep 16 09:57 .
+drwxr-xr-x  5 mike  staff  170 Aug 17 19:34 ..
+-rw-r--r--  1 mike  staff   41 Sep 16 09:57 master
+-rw-r--r--  1 mike  staff   41 Sep 16 09:57 new_feature
+```
+Print out commit each branch head references: `cat .git/refs/heads/new_feature` => 1233210f1bc3e26311d825...
+
 ## Fun Commnads
 
 * `git mv`
 * `git rm`
+
+## Git Log
+
+Convenience Commands
+`git log --until=2017-07-16`
+`git log --author=Mike`
 
 ## Reseting
 
@@ -183,6 +201,10 @@ origin is named origin not origin/master
 Via SSH:
 `git remote rm origin git@github.com:michaelwehrley/notes.git`
 `git remote add origin git@github.com:michaelwehrley/notes.git`
+
+## Reverting
+
+When you want to completely undo the changes for a commit: `$ git revert`
 
 ## Cleaning
 
@@ -274,7 +296,7 @@ To push the current branch and set the remote as upstream, use
 
 ## Checking Out Files
 
-Git doesn't know if your checkout out is a file or branch unless you use `--`:
+Git doesn't know if your checkout out is a **file** or branch unless you use `--`:
 
 * Checkout branch "assets" `$ git checkout assets`
 * Checkout directory "assets" `$ git checkout -- assets`
@@ -288,3 +310,18 @@ This happens when you close a PR but then force push.
 1. Reopen PR
 1. Switch back: `git checkout mw-hot-fix`
 1. Push `git push -f origin head`
+
+## History
+
+* Version Control System (VCS) vs Source Code Management (SCM)
+
+| Year | Name | Open/Closed Source | Notes |
+| ---- | ---- | ------------------ | ----- |
+| 1972 | Source Code Control System (SCCS) | closed source | but free with Unix |
+| 1982 | Revision Control System (RCS) | open source | |
+| 1986-1990 | Concurrent Versions System (CVS) | open source | |
+| 2000 | Apache Subversion (SVN) | open source | |
+| 2000 | BitKeeper SCM | closed source | proprietary; distributed version control; **community version** was free |
+| 2005 | BitKeeper SCM | closed source | **Free** version was no longer free  |
+| 2005 | Git | open source | Linus Torvalds |
+
