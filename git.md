@@ -1,5 +1,22 @@
 # Git
 
+## History
+
+* Version Control System (VCS)
+* Source Code Management (SCM)
+
+| Year | Name | Open/Closed Source | Notes |
+| ---- | ---- | ------------------ | ----- |
+| 1972 | Source Code Control System (SCCS) | closed source | but free with Unix |
+| 1982 | Revision Control System (RCS) | open source | |
+| 1986-1990 | Concurrent Versions System (CVS) | open source | |
+| 2000 | Apache Subversion (SVN) | open source | |
+| 2000 | BitKeeper SCM | closed source | proprietary; **distributed** version control; **community version** was free |
+| 2005 | BitKeeper SCM | closed source | **Free** version was no longer free  |
+| 2005 | Git | open source | Linus Torvalds |
+
+## Distributed Version Control System
+
 * _remote_ is just a git repo not on your computer (i.e. on Github);
 * _origin_ is the repo you cloned your repo from (i.e., git@github.com:michaelwehrley/notes.git);
 * _master_ is the default branch.
@@ -311,17 +328,4 @@ This happens when you close a PR but then force push.
 1. Switch back: `git checkout mw-hot-fix`
 1. Push `git push -f origin head`
 
-## History
-
-* Version Control System (VCS) vs Source Code Management (SCM)
-
-| Year | Name | Open/Closed Source | Notes |
-| ---- | ---- | ------------------ | ----- |
-| 1972 | Source Code Control System (SCCS) | closed source | but free with Unix |
-| 1982 | Revision Control System (RCS) | open source | |
-| 1986-1990 | Concurrent Versions System (CVS) | open source | |
-| 2000 | Apache Subversion (SVN) | open source | |
-| 2000 | BitKeeper SCM | closed source | proprietary; distributed version control; **community version** was free |
-| 2005 | BitKeeper SCM | closed source | **Free** version was no longer free  |
-| 2005 | Git | open source | Linus Torvalds |
 

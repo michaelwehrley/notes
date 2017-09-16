@@ -1,3 +1,34 @@
+# History
+
+* 1950s: Assembly
+
+* 1952: IBM 701
+  - IBM’s first commercial scientific computer
+  - **Vacuum tube** logic circuitry and electrostatic storage, consisting of 72 Williams tubes with a capacity of 1024 bits each, giving a total memory of 2048 words of 36 bits each.
+
+* 1954: IBM 704
+  - First mass-produced computer with floating-point arithmetic hardware
+  - vacuum tube logic circuitry
+
+* 1956: IPL (Information Processing Language)
+  - Assembly paradigm
+  - Focus on symbols & lists with Assemnbly-like syntax
+
+* 1957: FORTRAN (Formula Translation)
+  - IBM (John Backus) writes FORTRAN for math calculations
+  - built for the IBM 704
+  - The Fortran Automatic Coding System for the IBM 704 (15 October 1956), the first Programmer's Reference Manual for Fortran
+
+* 1958: LISP (LISt Processor)
+  - Influenced by the notation of Alonzo Church's **lambda calculus**
+
+* 1959: COBOL
+  - Grace Hopper inspired this lanuage
+  - **Portable** language: Improvement over FORTRAN in that it could run the same data processing programs on different computers: numbers and string inputs.
+
+* 1959: FLPL (Fortran-Compiled List-Processing Language)
+  - Built on top of FORTRAN to manipulate symbols nad lists
+
 # And Then There Was JavaScript
 
 ## History of JS
