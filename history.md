@@ -29,6 +29,14 @@
 * 1959: FLPL (Fortran-Compiled List-Processing Language)
   - Built on top of FORTRAN to manipulate symbols nad lists
 
+* 1960s - 1970s: Database modeling developed by IBM
+
+* Late 1970s - IBM develops SQL (compare to other query languages at the time: QUEL & QBE).
+
+* 1977-1985: UC Berkeley devevloped the relational database called _Ingres_
+* 1994: SQL features were added to Postgres and it was called Postgres95
+* 1996: Postgres95 was updated to PostgreSQL
+
 # And Then There Was JavaScript
 
 ## History of JS

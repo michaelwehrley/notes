@@ -1,5 +1,89 @@
 # PostgreSQL
 
+PostgreSQL is an open-source DBMS that incorportates the relational model for its databases and supports SQL. It contains nearly all the features you would find in other DBMSs and a few extras.
+
+## Introducation (Flat File ⟶ Database Management Systems)
+
+### Flat File
+
+**Flat files** are files without structure.
+
+Example of someone's age and favorite foods in a flat file can cause **repeating group** issue:
+```
+Mike 35 Pizza Hamburgers
+Liam 12 Pizza
+```
+Introducting more structure can solve this issue but consequently makes searching more difficult with ↑ size:
+```
+[Mike]
+35
+Pizza
+Hamburgers
+
+[Liam]
+12
+Pizza
+```
+
+### Databse Modeling
+
+* Developed during th 1960-70s (mostly at IBM)
+* **Hieratchical Database Model**
+* **Network Databse Model** uses pointers to point from one data record to the next.
+  - **Advantage**: Finds some data quickly such as all the food that a person likes.
+  - **Disadvantage**: Can't find all the people who like pizza quickly.
+
+```
+[Mike 35 ⤚]⟶ [Pizza ⤚]⟶ [Hamburgers nil]
+[Liam 12 ⤚]⟶ [Pizza nil]
+```
+
+### Relational Databases (RDBMS)
+
+In 1970 E. F. Codd published [A Relational Model of Data for Large Shared Data Banks](http://dl.acm.org/citation.cfm?id=362685). Codd emphasized **data integrity** over **efficency** in relational database management systems. These records in the tables/relations in a relational database are called **tuples** (i.e., rows).
+
+1. All tuples must follow the same pattern (same # of attributes): `{"Mike", 35, "Hamburgers"}` & `{"Liam", 12, "Pizza"}`;
+1. No tuple duplication within any table;
+1. Each tuple attribute must be **atomic** - it must a single piece of data;
+1. Each tuple (i.e., record) must have a **primary key** that makes it unique from all other records; and
+1. All the records must makes sense at all times - a relational databse must have **referenctial integerity**.
+
+### SQL
+
+Query lanagues developed in the late 1970s:
+* [QUEL](https://en.wikipedia.org/wiki/QUEL_query_languages)
+* [Query by Example](https://en.wikipedia.org/wiki/Query_by_Example)
+* IBM came out with SQL
+* Companies have developed their own standards and interfaces leading to different types of SQL.
+
+### Command Types
+
+* Data Manipulation Language (DML) - 90% of actions Deleting, updating, selecting data
+* Data Definition Language (DDL) - Allow for creating tables
+```postgresql
+CREATE TABLE customer
+{
+  id: serial
+  age: char(4) not null
+  first_name: varchar(32)
+  last_name: varchar(32) not null
+}
+```
+* Data Control Language (DCL) - Control permssions on data
+
+### Database Management Systems (DBMS)
+
+1. Provides all the access needed to **create the database**;
+1. Provides a way to **query data** such as SQL;
+1. **Multitask**: allow multiple users or systems to access the database concurrently (unless writing is occuring);
+1. Maintain and audit trails - keep a **log of all changes to the data** for a period of time;
+1. Provide **authorization**; and
+1. **Maintain referential integrity**.
+
+### Architecture - Database Server Process
+
+The **database server process** runs on a single server. Accessing the database required via the database server process.
+
 ## Installation
 
 * Default port the server will listen on: `5432`
@@ -141,7 +225,7 @@ test         | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   
   - You will then be in "foo_development": `foo_development=#`
   - To exit: `\q`
 
-### Listing Tables
+### Listing Tables (i.e. Relations)
 
 * List datatables within psql:
 * ` \dt[S+] [ pattern ]`
