@@ -1,6 +1,6 @@
 # PostgreSQL
 
-PostgreSQL is an open-source DBMS that incorportates the relational model for its databases and supports SQL. It contains nearly all the features you would find in other DBMSs and a few extras.
+PostgreSQL is an open-source DBMS that incorportates the relational model for its databases and supports SQL. It contains nearly all the features you would find in other DBMSs and a few extras. SQL is a declartive programming language - we tell the language how to behave, not how to do it.  Compare that to C or Java that is imperative. We would have to program C to go line by line and print out to the screen the information when satisfies our requirements. With SQL we can write how it should act: "Hey program get me all the customers who are from Verona."
 
 ## Introducation (Flat File ⟶ Database Management Systems)
 
@@ -40,9 +40,9 @@ Pizza
 
 ### Relational Databases (RDBMS)
 
-In 1970 E. F. Codd published [A Relational Model of Data for Large Shared Data Banks](http://dl.acm.org/citation.cfm?id=362685). Codd emphasized **data integrity** over **efficency** in relational database management systems. These records in the tables/relations in a relational database are called **tuples** (i.e., rows).
+In 1970 E. F. Codd published [A Relational Model of Data for Large Shared Data Banks](http://dl.acm.org/citation.cfm?id=362685). Codd emphasized **data integrity** over **efficency** in relational database management systems. These records in the tables/relations in a relational database are called `tuples` (i.e., rows).
 
-1. All tuples must follow the same pattern (same # of attributes): `{"Mike", 35, "Hamburgers"}` & `{"Liam", 12, "Pizza"}`;
+1. All `tuples` must follow the same pattern (same number of **attributes**/**columns**): `{"Mike", 35, "Hamburgers"}` & `{"Liam", 12, "Pizza"}`;
 1. No tuple duplication within any table;
 1. Each tuple attribute must be **atomic** - it must a single piece of data;
 1. Each tuple (i.e., record) must have a **primary key** that makes it unique from all other records; and
@@ -127,7 +127,7 @@ template0    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
 template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike
 
-## Kill
+## Kill Process
 
 1. Find the processes running postgres: `$ ps -ef | grep postgres`
 1. Kill process: `$ sudo kill -9 "# of the connection"`
@@ -147,19 +147,25 @@ postgres$ initdb -D /usr/local/pgsql/data
 ### Roles and Permissions
 
 * Utility from command line `$createuser bob` is the same as `CREATE ROLE bob;` (note: can't login)
-* `CREATE USER` is equivalent to `CREATE ROLE` except that `CREATE USER` assumes `LOGIN by default, while `CREATE ROLE` does not.
+* `CREATE USER` is equivalent to `CREATE ROLE` except that `CREATE USER` assumes `LOGIN` by default, while `CREATE ROLE` does not.
 
 `postgres=# CREATE ROLE bob;`
+
 `postgres=# CREATE USER foo;`
+
 `postgres=# CREATE ROLE colleen LOGIN CREATEROLE CREATEDB;`
+
 `postgres=# CREATE USER colleen SUPERUSER;`
+
 `postgres=# \du`
-                             List of roles
- Role name |                   Attributes                   | Member of
------------+------------------------------------------------+-----------
- bob       | Cannot login                                   | {}        
- foo       |                                                | {}
- mike      | Superuser, Create role, Create DB, Replication | {}
+
+List of roles
+
+| Role name |                   Attributes                   | Member of |
+|-----------+------------------------------------------------+-----------|
+| bob       | Cannot login                                   | {}        |
+| foo       |                                                | {}        |
+| mike      | Superuser, Create role, Create DB, Replication | {}        |
 
 ```
  CREATE ROLE name [ [ WITH ] option [ ... ] ]
@@ -272,22 +278,26 @@ Drop db using the utility from UNIX command line: `$ dropdb dbname`
 
 From server:
 `postgres=# DROP DATABASE test4;`
-`DROP DATABASE`
+=> `DROP DATABASE`
 
 `postgres=# DROP DATABASE test4;`
-`ERROR:  database "test4" does not exist`
+=> `ERROR:  database "test4" does not exist`
 
 `postgres=# DROP DATABASE [IF EXISTS] test4;`
-`DROP DATABASE`
+=> `DROP DATABASE`
 
 ## Privileges
 
 ### Table Privileges
 
 `$ psql postgres`
+
 `postgres=# CREATE DATABASE data_sci; => CREATE DATABASE`
+
 `postgres=# \connect data_sci;`
+
 `data_sci=# CREATE TABLE users (first_name TEXT, last_name TEXT); => CREATE TABLE`
+
 `data_sci=# GRANT SELECT ON users TO PUBLIC; => GRANT`
 
 Grant access to a table:
@@ -331,7 +341,7 @@ postgres=# select 1+1;
         2
 ```
 
-## Queries
+### Queries
 
 Setup:
 1. log in: `$ pgsl postgres`;
@@ -360,6 +370,16 @@ world=# \d
 (8 rows)
 ```
 
+### Selection vs Projection
+
+* `SELECT`: where we choose **rows**/**tuples** from a table/**relations**:
+  - `SELECT customer.* FROM customer WHERE customer.town = 'Verona'`
+  - `SELECT * FROM customer WHERE town = 'Verona'`
+
+* `SELECT`: where we choose **columns**/**attributes** from a table/relations:
+  - `SELECT customer.first_name, customer.last_name FROM customer`
+  - `SELECT first_name, last_name FROM customer`
+
 ### Arithmetic...
 
 ### Subqueries
@@ -367,6 +387,7 @@ world=# \d
 * Average population for each continent (Subquery in SELECT clause)
 
 `world=# SELECT country.code, country.population FROM country;`
+
 `world=# SELECT city.name, city.population, city.countrycode FROM city;`
 
 ```
