@@ -58,8 +58,16 @@ Query lanagues developed in the late 1970s:
 
 ### Command Types
 
-* Data Manipulation Language (DML) - 90% of actions Deleting, updating, selecting data
-* Data Definition Language (DDL) - Allow for creating tables
+#### Data Manipulation Language (DML)
+
+90% of actions/commands make up the data manipulation language (DML) - : `DELETE`, `UPDATE`, `SELECT` 
+  - These operations can be **undone!**
+  - Compare to DDL commands (i.e., `DROP` & `TRUNCATE`) that can't be undone.
+
+#### Data Definition Language (DDL)
+
+This language provides commands that are more structural in nature and can't be undone. Examples such a `CREATE`, `DROP` & `TRUNCATE`:
+
 ```postgresql
 CREATE TABLE customer
 {
@@ -69,7 +77,9 @@ CREATE TABLE customer
   last_name: varchar(32) not null
 }
 ```
-* Data Control Language (DCL) - Control permssions on data
+#### Data Control Language (DCL)
+
+This lanaguage is a set of commands focused on permssions on data and access rights of data.
 
 ### Database Management Systems (DBMS)
 
