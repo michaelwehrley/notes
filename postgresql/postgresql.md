@@ -118,6 +118,7 @@ The **database server process** runs on a single server. Accessing the database 
 There is no default, although locations such as `/usr/local/pgsql/data` or `/var/lib/pgsql/data` are popular:
 * note `postgres` and `template1` as default database.
 
+```
                                     List of databases
 Name         | Owner | Encoding |   Collate   |    Ctype    | Access privileges
 -------------+-------+----------+-------------+-------------+-------------------
@@ -126,6 +127,7 @@ template0    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike
 template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike
+```
 
 ## Kill Process
 
@@ -159,13 +161,14 @@ postgres$ initdb -D /usr/local/pgsql/data
 
 `postgres=# \du`
 
-List of roles
-
-| Role name |                   Attributes                   | Member of |
-|-----------+------------------------------------------------+-----------|
-| bob       | Cannot login                                   | {}        |
-| foo       |                                                | {}        |
-| mike      | Superuser, Create role, Create DB, Replication | {}        |
+```
+                              List of roles
+ Role name |                   Attributes                   | Member of
+-----------+------------------------------------------------+----------
+ bob       | Cannot login                                   | {}       
+ foo       |                                                | {}       
+ mike      | Superuser, Create role, Create DB, Replication | {}  
+```     
 
 ```
  CREATE ROLE name [ [ WITH ] option [ ... ] ]
@@ -195,17 +198,20 @@ List of roles
 * Log in `$ psql postgres`
 * View users: `postgres=# \du`
 
-List of roles
+```
+                            List of roles
 Role name |                   Attributes                   | Member of
 ----------+------------------------------------------------+-----------
 bob       | Cannot login                                   | {}
 mike      | Superuser, Create role, Create DB, Replication | {}
+```
 
 ### List Databases
 
 * From command line: `$ psql -l` or `psql --list`
 * From within PostgreSQL: `postgres-# \l` or `postgres-# \list`
 
+```
                                     List of databases
          Name    | Owner | Encoding |   Collate   |    Ctype    | Access privileges
 -----------------+-------+----------+-------------+-------------+-------------------
@@ -216,12 +222,14 @@ mike      | Superuser, Create role, Create DB, Replication | {}
                  |       |          |             |             | mike=CTc/mike
  template1       | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
                  |       |          |             |             | mike=CTc/mike
+```
 
 * List database with *additional* information `postgres=# \l+`.
 
+```
                  List of databases
 Name         | Owner | Encoding |   Collate   |    Ctype    | Access privileges |  Size   | Tablespace |                Description                 
--------------+-------+----------+-------------+-------------+-------------------+---------+------------+--------------------------------------------
+-------------+-------+----------+-------------+-------------+-------------------+---------+------------+--------
 data_sci     | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   | 6620 kB | pg_default |
 postgres     | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   | 6620 kB | pg_default | default administrative connection database
 template0    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +| 6497 kB | pg_default | unmodifiable empty database
@@ -230,7 +238,7 @@ template1    | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/mike          +
              |       |          |             |             | mike=CTc/mike     |         |            |
 test         | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   | 6620 kB | pg_default |
 (7 rows)
-
+```
 
 ### Accessing PostgreSQL
 
@@ -251,11 +259,13 @@ Note: The letters `E`, `i`, `m`, `s`, `t`, and `v` stand for foreign table, inde
 database_name_development=# \dtsi
 ```
 
+```
 Schema | Name  |   Type   | Owner |       Table                       
 -------+-=-----+----------+-------+-----------------------
 public | foo   | table    | mike  |
 public | bar   | sequence | mike  |
 public | baz   | index    | mike  | admin_comments
+```
 
 * Display one table:
 ```sql
