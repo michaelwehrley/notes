@@ -83,6 +83,8 @@ This lanaguage is a set of commands focused on permssions on data and access rig
 
 ### Database Management Systems (DBMS)
 
+A database management system provides for all the following: 
+
 1. Provides all the access needed to **create the database**;
 1. Provides a way to **query data** such as SQL;
 1. **Multitask**: allow multiple users or systems to access the database concurrently (unless writing is occuring);
@@ -94,30 +96,142 @@ This lanaguage is a set of commands focused on permssions on data and access rig
 
 The **database server process** runs on a single server. Accessing the database required via the database server process.
 
+## Relational Database Principles
+
+PostgreSQL ensure that conflicting updates do not occur. It gives the appearance of allowing **all** users unrestricted access of **all** data **all** the time, but behind the scenes postgreSQL is monitoring changes and preventing conflicts.
+
+### Selection vs Projection
+
+Selection `SELECT * FROM`:
+* Where we select a subset of **rows**/**tuples**
+* `SELECT`: where we choose **rows**/**tuples** from a table/**relations**:
+  - `SELECT customer.* FROM customer WHERE customer.town = 'Verona'`
+  - `SELECT * FROM customer WHERE town = 'Verona'`
+
+Projection `SELECT fname, lname FROM`:
+* Where we select a subset of **columns**/**attributes**
+* `SELECT`: where we choose **columns**/**attributes** from a table/relations:
+  - `SELECT customer.first_name, customer.last_name FROM customer`
+  - `SELECT first_name, last_name FROM customer`
+
+### Arithmetic...
+
+### Subqueries
+
+* Average population for each continent (Subquery in SELECT clause)
+
+`world=# SELECT country.code, country.population FROM country;`
+
+`world=# SELECT city.name, city.population, city.countrycode FROM city;`
+
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population
+FROM
+  country AS co,
+  city AS ci;
+```
+
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population,
+  (SELECT round(avg(co2.population)) FROM country AS co2 WHERE ci.population = 0)
+FROM
+  country AS co,
+  city AS ci;
+```
+
+## JOINS
+
+### INNER JOIN
+* What we want: `SELECT ci.name, ci.population, co.name`;
+* From where: `FROM city as ci` and `FROM country as co`;
+* What we want to `JOIN`:
+```
+FROM
+  city as ci
+JOIN
+  country as co
+```
+* How to join:
+```
+FROM
+  city AS ci
+JOIN
+  country AS co
+ON
+  ci.countrycode = co.code;
+```
+* Put it together:
+```
+SELECT
+  ci.name,
+  ci.population,
+  co.name
+FROM
+  city AS ci JOIN country AS co
+ON
+  ci.countrycode = co.code;
+```
+
+### LEFT JOIN / LEFT OUTER JOIN
+* What we want: `SELECT ci.name, ci.population, co.name`;
+* From where: `FROM city as ci` and `FROM country as co`;
+* What we want to `LEFT OUTER JOIN` just in case a country exists without a city:
+```
+SELECT
+  co.name,
+  ci.name,
+  ci.population
+FROM
+  country AS co LEFT OUTER JOIN city AS ci
+ON
+  co.code = ci.countrycode;
+```
+
+<!-- select wb.user_id, (select users.email from users where users.id = wb.user_id) from waste_bags wb where wb.order = true limit 10; -->
+
 ## Installation
 
+### Creating `postgres` User
+
+1. `postmaster` is the PostgreSQL main database process - responsible for dealing with **all** data access from **all** users to **all** database. 
+1. Create a user who `postmaster` can use to access the database files on behalf of other user; i.e., `postgres`;
+1. create data directory for database and initial database structure
+1. start `postmaster` process.
+
+See users:
+1. From the terminal: `$ psql postgres`
+1. View users: `postgres=# \du`
+1. From terminal, add user/role: `$ createuser foo`
+
+### Creating Database Directory - WHERE?
+
 * Default port the server will listen on: `5432`
-* Locale for default database cluster
-  - `initdb` also initializes the default locale for the database cluster
-
-## Overview
-
-### Creating Database Cluster
-
 * A database storage area must be initialized on disk to do anything.
   - We call this a _database cluster_.
   - A database cluster is a single *directory* under which all data will be stored (i.e., _data directory_ or _data area_)
   - The SQL standard uses the term catalog _cluster_.
   - After initialization, a database cluster will contain a database named _postgres_.
-
-`-D` specifies the path to the database cluster/data directory:
+  - `initdb` also initializes the default locale for the database cluster
 
 * `pg_ctl` is an executable used to start or stop a server so you could use it for both.
+* With homebrew installation, my directory was located via `/usr/local/var/postgres/`
+
+### Intializing Database Cluster
+
 * `$ pg_ctl -D /usr/local/pgsql/data initdb` or `$ initdb -D /usr/local/pgsql/data`.
+  - `-D` specifies the path to the database cluster/data directory
+  - you may have to update owner `postgres` via `$ chown /usr/local/var/postgres/`
 
 There is no default, although locations such as `/usr/local/pgsql/data` or `/var/lib/pgsql/data` are popular:
-* note `postgres` and `template1` as default database.
+* note `postgres` and `template1` as default databases.
 
+`postgres=# \l`
 ```
                                     List of databases
 Name         | Owner | Encoding |   Collate   |    Ctype    | Access privileges
@@ -148,7 +262,7 @@ postgres$ initdb -D /usr/local/pgsql/data
 
 ### Roles and Permissions
 
-* Utility from command line `$createuser bob` is the same as `CREATE ROLE bob;` (note: can't login)
+* Utility from command line `$ createuser bob` is the same as `CREATE ROLE bob;` (note: can't login)
 * `CREATE USER` is equivalent to `CREATE ROLE` except that `CREATE USER` assumes `LOGIN` by default, while `CREATE ROLE` does not.
 
 `postgres=# CREATE ROLE bob;`
@@ -379,94 +493,3 @@ world=# \d
  public | view_views      | view     | mike
 (8 rows)
 ```
-
-### Selection vs Projection
-
-* `SELECT`: where we choose **rows**/**tuples** from a table/**relations**:
-  - `SELECT customer.* FROM customer WHERE customer.town = 'Verona'`
-  - `SELECT * FROM customer WHERE town = 'Verona'`
-
-* `SELECT`: where we choose **columns**/**attributes** from a table/relations:
-  - `SELECT customer.first_name, customer.last_name FROM customer`
-  - `SELECT first_name, last_name FROM customer`
-
-### Arithmetic...
-
-### Subqueries
-
-* Average population for each continent (Subquery in SELECT clause)
-
-`world=# SELECT country.code, country.population FROM country;`
-
-`world=# SELECT city.name, city.population, city.countrycode FROM city;`
-
-```
-SELECT
-  co.name,
-  ci.name,
-  ci.population
-FROM
-  country AS co,
-  city AS ci;
-```
-
-```
-SELECT
-  co.name,
-  ci.name,
-  ci.population,
-  (SELECT round(avg(co2.population)) FROM country AS co2 WHERE ci.population = 0)
-FROM
-  country AS co,
-  city AS ci;
-```
-
-## JOINS
-
-### INNER JOIN
-* What we want: `SELECT ci.name, ci.population, co.name`;
-* From where: `FROM city as ci` and `FROM country as co`;
-* What we want to `JOIN`:
-```
-FROM
-  city as ci
-JOIN
-  country as co
-```
-* How to join:
-```
-FROM
-  city AS ci
-JOIN
-  country AS co
-ON
-  ci.countrycode = co.code;
-```
-* Put it together:
-```
-SELECT
-  ci.name,
-  ci.population,
-  co.name
-FROM
-  city AS ci JOIN country AS co
-ON
-  ci.countrycode = co.code;
-```
-
-### LEFT JOIN / LEFT OUTER JOIN
-* What we want: `SELECT ci.name, ci.population, co.name`;
-* From where: `FROM city as ci` and `FROM country as co`;
-* What we want to `LEFT OUTER JOIN` just in case a country exists without a city:
-```
-SELECT
-  co.name,
-  ci.name,
-  ci.population
-FROM
-  country AS co LEFT OUTER JOIN city AS ci
-ON
-  co.code = ci.countrycode;
-```
-
-<!-- select wb.user_id, (select users.email from users where users.id = wb.user_id) from waste_bags wb where wb.order = true limit 10; -->
