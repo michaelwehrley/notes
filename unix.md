@@ -1,5 +1,21 @@
 # Unix/Bash
 
+## .bashrc or .bash_profile
+
+`.bashrc` was originally a separate file from `.bash_profile` for performance reasons and work habits. There are certain command someone probably only needs to run once in the morning when they log in.[✝](http://mywiki.wooledge.org/DotFiles)
+
+`.bash_profile` typically launched when a users logs in and provides username and password. 
+`.bashrc` is the default bash profiling file for Unix or Linux and runs when a new terminal window is opened.
+`.bash_profile` on MacOS when Terminal.app on macOS opens a new terminal, it will run `.bash_profile` not `.bashrc` as would happen on Unix.
+
+Solution for MacOS users if you want to be consistent with Unix or Linux bc MacOS only reads `.bashrc` for non-login shells::
+```bash
+# .bash_profile
+if [ -r ~/.bashrc ]; then
+   source ~/.bashrc
+fi
+```
+
 `rvm use "$(cat .ruby-version)"`
 
 The following command will only list files and will exclude directories, special files, pipes, symbolic links etc:
