@@ -421,7 +421,7 @@ CHIP Or8Way {
  */
 
 CHIP Mux4Way16 {
-    IN a[16], b[16], c[16], d[16], sel[2];
+    IN a[16], b[16], c[16], d[16], sel[3];
     OUT out[16];
 
     PARTS:
@@ -446,25 +446,10 @@ CHIP Mux4Way16 {
     Not(in=sel[1], out=sel011);
     And(a=sel011, b=sel[0], out=sel01);
 
-    Mux(a=a[0], b=b[0], sel=sel01, out=muxAB0);
-    Mux(a=a[1], b=b[1], sel=sel01, out=muxAB1);
-    Mux(a=a[2], b=b[2], sel=sel01, out=muxAB2);
-    Mux(a=a[3], b=b[3], sel=sel01, out=muxAB3);
-    Mux(a=a[4], b=b[4], sel=sel01, out=muxAB4);
-    Mux(a=a[5], b=b[5], sel=sel01, out=muxAB5);
-    Mux(a=a[6], b=b[6], sel=sel01, out=muxAB6);
-    Mux(a=a[7], b=b[7], sel=sel01, out=muxAB7);
-    Mux(a=a[8], b=b[8], sel=sel01, out=muxAB8);
-    Mux(a=a[9], b=b[9], sel=sel01, out=muxAB9);
-    Mux(a=a[10], b=b[10], sel=sel01, out=muxAB10);
-    Mux(a=a[11], b=b[11], sel=sel01, out=muxAB11);
-    Mux(a=a[12], b=b[12], sel=sel01, out=muxAB12);
-    Mux(a=a[13], b=b[13], sel=sel01, out=muxAB13);
-    Mux(a=a[14], b=b[14], sel=sel01, out=muxAB14);
-    Mux(a=a[15], b=b[15], sel=sel01, out=muxAB15);
+    Mux16(a=a, b=b, sel=sel01, out=muxAB);
 
     /**
-    * 10
+    * sel == 10
     * sel[0] == the 0 in 10
     * sel[1] == the 1 in 10
     */
@@ -476,22 +461,7 @@ CHIP Mux4Way16 {
 
     And(a=sel[0], b=sel[1], out=sel11);
 
-    Mux(a=c[0], b=d[0], sel=sel11, out=muxCD0);
-    Mux(a=c[1], b=d[1], sel=sel11, out=muxCD1);
-    Mux(a=c[2], b=d[2], sel=sel11, out=muxCD2);
-    Mux(a=c[3], b=d[3], sel=sel11, out=muxCD3);
-    Mux(a=c[4], b=d[4], sel=sel11, out=muxCD4);
-    Mux(a=c[5], b=d[5], sel=sel11, out=muxCD5);
-    Mux(a=c[6], b=d[6], sel=sel11, out=muxCD6);
-    Mux(a=c[7], b=d[7], sel=sel11, out=muxCD7);
-    Mux(a=c[8], b=d[8], sel=sel11, out=muxCD8);
-    Mux(a=c[9], b=d[9], sel=sel11, out=muxCD9);
-    Mux(a=c[10], b=d[10], sel=sel11, out=muxCD10);
-    Mux(a=c[11], b=d[11], sel=sel11, out=muxCD11);
-    Mux(a=c[12], b=d[12], sel=sel11, out=muxCD12);
-    Mux(a=c[13], b=d[13], sel=sel11, out=muxCD13);
-    Mux(a=c[14], b=d[14], sel=sel11, out=muxCD14);
-    Mux(a=c[15], b=d[15], sel=sel11, out=muxCD15);
+    Mux16(a=c, b=d, sel=sel11, out=muxCD);
 
     /* sel == 00 or sel == 01 */
 
@@ -501,23 +471,88 @@ CHIP Mux4Way16 {
 
     Or(a=sel10, b=sel11, out=sel10Or11);
 
-    Mux(a=muxAB0, b=muxCD0, sel=sel10Or11, out=out[0]);
-    Mux(a=muxAB1, b=muxCD1, sel=sel10Or11, out=out[1]);
-    Mux(a=muxAB2, b=muxCD2, sel=sel10Or11, out=out[2]);
-    Mux(a=muxAB3, b=muxCD3, sel=sel10Or11, out=out[3]);
-    Mux(a=muxAB4, b=muxCD4, sel=sel10Or11, out=out[4]);
-    Mux(a=muxAB5, b=muxCD5, sel=sel10Or11, out=out[5]);
-    Mux(a=muxAB6, b=muxCD6, sel=sel10Or11, out=out[6]);
-    Mux(a=muxAB7, b=muxCD7, sel=sel10Or11, out=out[7]);
-    Mux(a=muxAB8, b=muxCD8, sel=sel10Or11, out=out[8]);
-    Mux(a=muxAB9, b=muxCD9, sel=sel10Or11, out=out[9]);
-    Mux(a=muxAB10, b=muxCD10, sel=sel10Or11, out=out[10]);
-    Mux(a=muxAB11, b=muxCD11, sel=sel10Or11, out=out[11]);
-    Mux(a=muxAB12, b=muxCD12, sel=sel10Or11, out=out[12]);
-    Mux(a=muxAB13, b=muxCD13, sel=sel10Or11, out=out[13]);
-    Mux(a=muxAB14, b=muxCD14, sel=sel10Or11, out=out[14]);
-    Mux(a=muxAB15, b=muxCD15, sel=sel10Or11, out=out[15]);
+    Mux16(a=muxAB, b=muxCD, sel=sel10Or11, out=out);
 }
 ```
 
 #### Mux8Way16
+
+```vhdl
+/**
+ * 8-way 16-bit multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       etc.
+ *       h if sel == 111
+ */
+
+CHIP Mux8Way16 {
+    IN a[16], b[16], c[16], d[16],
+       e[16], f[16], g[16], h[16],
+       sel[3];
+    OUT out[16];
+
+    PARTS:
+
+    /* 000 */
+    Not(in=sel[2], out=num0004);
+    Not(in=sel[1], out=num0002);
+    Not(in=sel[0], out=num0001);
+    And(a=num0004, b=num0002, out=num00042);
+    And(a=num00042, b=num0001, out=num000);
+
+    /* 001 */
+    Not(in=sel[2], out=num0014);
+    Not(in=sel[1], out=num0012);
+    And(a=num0014, b=num0012, out=num00142);
+    And(a=num00142, b=sel[0], out=num001);
+
+    /* 010 */
+    Not(in=sel[2], out=num0104);
+    Not(in=sel[0], out=num0101);
+    And(a=num0104, b=num0101, out=num01041);
+    And(a=num01041, b=sel[1], out=num010);
+
+    /* 011 */
+    Not(in=sel[2], out=num0114);
+    And(a=sel[1], b=sel[0], out=num01121);
+    And(a=num0114, b=num01121, out=num011);
+
+    /* 100 */
+    Not(in=sel[0], out=num1001);
+    Not(in=sel[1], out=num1002);
+    And(a=num1001, b=num1002, out=num10021);
+    And(a=sel[2], b=num10021, out=num100421);
+
+    /* 101 */
+    And(a=sel[0], b=sel[2], out=num10141);
+    Not(in=sel[1], out=num1012);
+    And(a=num10141, b=num1012, out=num101);
+
+    /* 110 */
+    Not(in=sel[0], out=num1101);
+    And(a=sel[2], b=sel[1], out=num11042);
+    And(a=num1101, b=num11042, out=num110);
+
+    /* 111 */
+    And(a=sel[2], b=sel[1], out=num11142);
+    And(a=num11142, b=sel[0], out=num111);
+
+    /* Narrow down */
+    Mux16(a=a, b=b, sel=num001, out=mux000OR001);
+    Mux16(a=c, b=d, sel=num011, out=mux010OR011);
+    Or(a=num010, b=num011, out=num010OR011);
+    Mux16(a=mux000OR001, b=mux010OR011, sel=num010OR011, out=mux000OR001OR010OR011);
+
+    Or(a=num000, b=num001, out=num000OR001);
+    Or(a=num000OR001, b=num010OR011, out=num000OR001OR010OR011);
+    
+    Mux16(a=e, b=f, sel=num101, out=mux100OR101);
+    Mux16(a=g, b=h, sel=num111, out=mux110OR111);
+
+    Or(a=num110, b=num111, out=num101OR111);
+    Mux16(a=mux100OR101, b=mux110OR111, sel=num101OR111, out=mux100OR101OR110OR111);
+
+    Mux16(a=mux100OR101OR110OR111, b=mux000OR001OR010OR011, sel=num000OR001OR010OR011, out=out);
+}
+```
