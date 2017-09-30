@@ -138,7 +138,7 @@ CHIP Or {
 }
 ```
 
-#### Xor(a, b)
+#### Exclusive-or Gate: Xor(a, b)
 
 |   a   |   b   |  `Xor(a, b)`  |
 |-|-|-|
@@ -166,7 +166,7 @@ CHIP Xor {
 }
 ```
 
-#### Mux(a, b, sel)
+#### Multiplexor(a, b, sel)
 
 A **Multiplexor** enables **selecting** and outputting on of two possible inputs. It allows for a gate to return either be an `And` gate or `Or` gate for instance; i.e., a **programmable gate**.
 
@@ -180,7 +180,6 @@ A **Multiplexor** enables **selecting** and outputting on of two possible inputs
 |   1   |   0   |   1   |   0   |
 |   1   |   1   |   0   |   1   |
 |   1   |   1   |   1   |   1   |
-
 
 ```
 if (sel == 0)
@@ -220,7 +219,7 @@ CHIP Mux {
 }
 ```
 
-#### DMux(a, b, sel)
+#### Demultiplexer(a, b, sel)
 
 A **Demultiplexer** takes a single input line and routes it to one of several digital output lines.
 
@@ -256,7 +255,7 @@ Allows for us to pass in 16 bits:
 
 <img src="https://github.com/michaelwehrley/notes/blob/master/assets/And16.png" width=500>
 
-#### Not16
+#### 16-bit Not
 
 ```vhdl
 /**
@@ -288,7 +287,7 @@ CHIP Not16 {
 }
 ```
 
-#### And16
+#### 16-bit bitwise And
 ```vhdl
 /**
  * 16-bit bitwise And:
@@ -319,7 +318,7 @@ CHIP And16 {
 }
 ```
 
-#### Or16
+#### 16-bit bitwise Or
 
 ```vhdl
 /**
@@ -351,7 +350,7 @@ CHIP Or16 {
 }
 ```
 
-#### Mux16
+#### 16-bit multiplexor
 
 ```vhdl
 /**
@@ -386,7 +385,7 @@ CHIP Mux16 {
 
 ### Multi-Way Variants
 
-#### Or8Way
+#### 8-way Or
 
 ```vhdl
 /**
@@ -409,7 +408,7 @@ CHIP Or8Way {
 }
 ```
 
-#### Mux4Way16
+#### 4-way 16-bit Multiplexor
 
 ```vhdl
 /**
@@ -475,7 +474,7 @@ CHIP Mux4Way16 {
 }
 ```
 
-#### Mux8Way16
+#### 8-way 16-bit Multiplexor
 
 ```vhdl
 /**
@@ -554,5 +553,115 @@ CHIP Mux8Way16 {
     Mux16(a=mux100OR101, b=mux110OR111, sel=num101OR111, out=mux100OR101OR110OR111);
 
     Mux16(a=mux100OR101OR110OR111, b=mux000OR001OR010OR011, sel=num000OR001OR010OR011, out=out);
+}
+```
+
+#### 4-way Demultiplexor
+
+```vhdl
+/**
+ * 4-way demultiplexor:
+ * {a, b, c, d} = {in, 0, 0, 0} if sel == 00
+ *                {0, in, 0, 0} if sel == 01
+ *                {0, 0, in, 0} if sel == 10
+ *                {0, 0, 0, in} if sel == 11
+ */
+
+CHIP DMux4Way {
+    IN in, sel[2];
+    OUT a, b, c, d;
+
+    PARTS:
+    /* 00 */
+    Not(in=sel[0], out=num001);
+    Not(in=sel[1], out=num002);
+    And(a=num001, b=num002, out=num00);
+
+    /* 01 */
+    Not(in=sel[1], out=num012);
+    And(a=sel[0], b=num012, out=num01);
+
+    /* 10 */
+    Not(in=sel[0], out=num101);
+    And(a=num101, b=sel[1], out=num10);
+
+    /* 11 */
+    And(a=sel[0], b=sel[1], out=num11);
+
+    And(a=num00, b=in, out=a);
+    And(a=num01, b=in, out=b);
+    And(a=num10, b=in, out=c);
+    And(a=num11, b=in, out=d);
+}
+```
+
+#### 8-way Demultiplexor
+
+```vhdl
+/**
+ * 8-way demultiplexor:
+ * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+ *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+ *                            etc.
+ *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    /* 000 */
+    Not(in=sel[0], out=num0001);
+    Not(in=sel[1], out=num0002);
+    Not(in=sel[2], out=num0004);
+    And(a=num0001, b=num0002, out=num00021);
+    And(a=num00021, b=num0004, out=num000421);
+
+    /* 001 */
+    Not(in=sel[1], out=num0012);
+    Not(in=sel[2], out=num0014);
+    And(a=num0012, b=num0014, out=num00142);
+    And(a=num00142, b=sel[0], out=num001421);
+
+    /* 010 */
+    Not(in=sel[0], out=num0011);
+    Not(in=sel[2], out=num0104);
+    And(a=num0011, b=num0104, out=num01041);
+    And(a=num01041, b=sel[1], out=num010421);
+
+    /* 011 */
+    Not(in=sel[2], out=num0114);
+    And(a=sel[0], b=sel[1], out=num01121);
+    And(a=num0114, b=num01121, out=num011421);
+
+    /* 100 */
+    Not(in=sel[0], out=num1001);
+    Not(in=sel[1], out=num1002);
+    And(a=num1001, b=num1002, out=num10021);
+    And(a=num10021, b=sel[2], out=num100421);
+
+    /* 101 */
+    Not(in=sel[1], out=num1012);
+    And(a=sel[2], b=sel[0], out=num10141);
+    And(a=num1012, b=num10141, out=num101421);
+
+    /* 110 */
+    Not(in=sel[0], out=num1101);
+    And(a=sel[2], b=sel[1], out=num10042);
+    And(a=num10042, b=num1101, out=num110421);
+
+    /* 111 */
+    And(a=sel[2], b=sel[1], out=num11142);
+    And(a=num11142, b=sel[0], out=num111421);
+
+    And(a=num000421, b=in, out=a);
+    And(a=num001421, b=in, out=b);
+    And(a=num010421, b=in, out=c);
+    And(a=num011421, b=in, out=d);
+    And(a=num100421, b=in, out=e);
+    And(a=num101421, b=in, out=f);
+    And(a=num110421, b=in, out=g);
+    And(a=num111421, b=in, out=h);
 }
 ```
