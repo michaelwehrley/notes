@@ -70,6 +70,8 @@
 |   0   |   1   |
 |   1   |   0   |
 
+<img src="https://github.com/michaelwehrley/notes/blob/master/assets/build_a_computer/NotGate.png" width=200>
+
 ```vhdl
 /**
  * Not gate:
