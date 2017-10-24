@@ -29,3 +29,31 @@ CHIP PC {
     Inc16(in=regOut, out=incOut);
 }
 ```
+
+## Memory
+
+When building a computer, the memory is one of, if not the most costly part.  The *faster* or *larger* the memory the more expensive.  Is it worth it to spend that money there or with the processor.
+
+The solution is typically a large, cheap memory with a small, fastm and expensive memory.
+
+Therefore, the data that is used by the processor is usually stored in the cheap faster memory and the memory that is rarely used resides in the larger slower memory.  The faster and smaller memory is called a *Cache*. 
+
+All of these types of memory: the RAM, ROM, and Cache all look alike.  They all behave like a sequence of registers that are addressable and we can access anyone of these registers and do something with the bit contnent of these registers.
+
+### RAM
+
+The RAM (Randome Access Memory) is volatile.  When the prower supply is lost, the memory stored in RAM is lost.
+
+### ROM
+
+Boot process uses *ROM* (Read-Only Memory).  This is not volatile and doesn't depend on external power supply.
+
+### Flash
+
+Flash memory essentially combines the good parts of both RAM and ROM:
+* It is has read/write behavior
+* Doesn't depend on external power supply
+
+### Cache
+
+Cache memory (and cache memory architecture) is the set of cheap fast memory that is close to the processor.  The closer to processor, the smaller and faster and more expensive the cache memory is.
