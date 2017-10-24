@@ -426,53 +426,9 @@ CHIP Mux4Way16 {
     OUT out[16];
 
     PARTS:
-    /** 
-     * Multiplexor:
-     * out = a if sel == 0
-     *       b otherwise
-     */
-
-    /* sel == 00 */
-
-    Not(in=sel[0], out=sel000a);
-    Not(in=sel[1], out=sel000b);
-    And(a=sel000a, b=sel000b, out=sel00);
-
-    /**
-    * sel == 01
-    * sel[1] == the 0 in 01
-    * sel[0] == the 1 in 01
-    */
-
-    Not(in=sel[1], out=sel011);
-    And(a=sel011, b=sel[0], out=sel01);
-
-    Mux16(a=a, b=b, sel=sel01, out=muxAB);
-
-    /**
-    * sel == 10
-    * sel[0] == the 0 in 10
-    * sel[1] == the 1 in 10
-    */
-
-    Not(in=sel[0], out=sel101);
-    And(a=sel[1], b=sel101, out=sel10);
-
-    /* sel == 11 */
-
-    And(a=sel[0], b=sel[1], out=sel11);
-
-    Mux16(a=c, b=d, sel=sel11, out=muxCD);
-
-    /* sel == 00 or sel == 01 */
-
-    Or(a=sel00, b=sel01, out=sel00Or01);
-
-    /* sel == 10 or sel == 11 */
-
-    Or(a=sel10, b=sel11, out=sel10Or11);
-
-    Mux16(a=muxAB, b=muxCD, sel=sel10Or11, out=out);
+    Mux16(a=a, b=b, sel=sel[0], out=muxAB);
+    Mux16(a=c, b=d, sel=sel[0], out=muxCD);
+    Mux16(a=muxAB, b=muxCD, sel=sel[1], out=out);
 }
 ```
 

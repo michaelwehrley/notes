@@ -290,14 +290,18 @@ git remote -v
 
 1. Pushing to repo from any branch (i.e., head). This repo could be on a Heroku server for instance.
 
+`git push [-f] [location] [branch]:[branch]`
+
 ```Bash
 git push origin HEAD
-git push staging head:master
+git push staging HEAD:master
 
 # or forcefully
 git push -f origin HEAD
-git push -f staging head:master
+git push -f staging HEAD:master
 ```
+
+?`git push -f origin head` Default is HEAD:HEAD when `HEAD`?
 
 ## Working on Someone Else's Branch
 
