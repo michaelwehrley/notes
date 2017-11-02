@@ -369,6 +369,24 @@ test         | mike  | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                   
 * ` \dt[S+] [ pattern ]`
 Note: The letters `E`, `i`, `m`, `s`, `t`, and `v` stand for foreign table, index, materialized view, sequence, table, and view, respectively.
 
+To list all associated information:
+```sql
+mike_development=# \d+ book_promotions
+                                                          Table "public.book_promotions"
+    Column    |            Type             |                          Modifiers                           | Storage | Stats target | Description 
+--------------+-----------------------------+--------------------------------------------------------------+---------+--------------+-------------
+ id           | integer                     | not null default nextval('book_promotions_id_seq'::regclass) | plain   |              | 
+ book_id      | integer                     |                                                              | plain   |              | 
+ promotion_id | integer                     |                                                              | plain   |              | 
+ created_at   | timestamp without time zone |                                                              | plain   |              | 
+ updated_at   | timestamp without time zone |                                                              | plain   |              | 
+Indexes:
+    "book_promotions_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "fk_rails_09bc80a4fa" FOREIGN KEY (promotion_id) REFERENCES promotions(id)
+    "fk_rails_41010e9ead" FOREIGN KEY (book_id) REFERENCES books(id)
+```
+
 ```sql
 database_name_development=# \dtsi
 ```
