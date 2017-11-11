@@ -27,10 +27,17 @@ If we’re able to find a match, we’ll respond with its contents, using the fi
 
 If no matching file can be found, we’ll respond with a 404 Not Found error status.
 
---- Move to PostgreSQL ---
-This info is slightly inaccurate and outdated.
+## Sqlite3 Database
 
-## PostgreSQL Server
+Start via `$ sqlite3 db/development.sqlite3`
+
+`sqlite> .help` for help in commands
+
+`sqlite> .quit` to exit
+
+## PostgreSQL Database
+
+**This info is slightly inaccurate and outdated.**
 
 *PG::ConnectionBad*
 ```Unix
