@@ -57,7 +57,7 @@ $ printf "blob 11\000Home Chef\041\n" | openssl sha1
 
 1. Create directory: `$ mkdir home_chef`
 2. Navigate into that direcory: `$ cd home_chef/`
-3. Initialze git:
+3. Initialize git:
 ```bash
 $ git init
 Initialized empty Git repository in ~/home_chef/.git/

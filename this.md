@@ -25,6 +25,9 @@ function foo(bar) {
 }
 
 foo.call(test, "bye");
+
+// hi
+// bye
 ```
 
 `apply`: you can pass in an array of arguments for parameters
@@ -47,4 +50,8 @@ function foo(arrayOfArguments) {
 }
 
 foo.call(test, ["good", "bye"])
+
+// hi
+// good
+// bye
 ```
