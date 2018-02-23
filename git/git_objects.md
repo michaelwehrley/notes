@@ -102,6 +102,9 @@ Initialized empty Git repository in ~/git_home_chef/.git/
 ```bash
 $ ls .git
 HEAD    config    description hooks   info    objects   refs
+```
+5. View contents of `.git/objects` directory:
+```bash
 $ ls .git/objects
 info  pack
 ```
@@ -110,11 +113,11 @@ info  pack
 $ echo 'Home Chef!' > home_chef.txt
 ```
 
-**hash-object**
+##### Hash-Object
 Note: `man git-hash-object` vs `git hash-object`
 Add this to to the git database by creating a git hash object (and writing it to the db):
 
-* `git-hash-object` - Computes object ID and optionally creates a blob from a file. (i.e., does what it says; it hashes the content into the object database)
+* `git-hash-object` - Computes object ID and optionally creates a blob from a file. (i.e., does what it "says": it hashes the content into the object database)
 * `-w` - Write the object into the **object** database.
 
 ```bash
@@ -143,15 +146,10 @@ $ find .git/objects/
 
 $ find .git/objects/ -type f
 .git/objects//40/c46548972e0d0eff2725522e5ba22fde44d346
+# "type" here is limited to files (not directories etc)
 ```
 
 1. The content is stored as a key-value pair in the object database: `.git/objects`
-
-```bash
-# "type" here is limited to files (not directories etc)
-$ find .git/objects -type f
-.git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
-```
 
 View the contents of any key in the `.git` folder using `git cat-file (<type>) <object>`
 ```bash
@@ -167,37 +165,55 @@ Tree objects are complete snapshot of the entire project directory.
 `git update-index` - already has the `hash-object` functionality built into it. `update-index` will check to see if the exists.  If it does, it will use it; otherwise, it will create it under the hood.
 
 Create a staging area where we can index our tree objects: `$ git update-index --add hello_world.txt`.
+
+Staging:
+```bash
+$ git status
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+  new file:   home_chef.txt
+```
+
+`git-ls-files`: Show information about files in the index and the working tree
 View this staging area via `$ git ls-files --stage` or `$ git status`
-Not the staging area is in constant flux.
+Note: The staging area is in constant flux.
 
 ```bash
 # `git ls-files` just to see the files
 $ git ls-files --stage
-100644 980a0d5f19a64b4b30a87d4206aade58726b60e3 0 hello_world.txt
+100644 40c46548972e0d0eff2725522e5ba22fde44d346 0 home_chef.txt
 ```
 
-`$ git add hello_world.txt` is analagous to
+`$ git add home_chef.txt` is analagous to
 
-`$ git hash-object -w hello_world.txt;git update-index --add hello_world.txt` or
+`$ git hash-object -w home_chef.txt;git update-index --add home_chef.txt` or
 
-`$ git update-index --add hello_world.txt`
+`$ git update-index --add home_chef.txt`
+
+Note: You must `git update-index` before you can create a tree object from the current index.
 
 Make a tree object with stagged files: `git write-tree`.  It looks familiar to the staging area - but it is a finalized snapshot, captured and persisted. 
 ```bash
 $ git write-tree
-d1df156691ebcab17bba4e20226fda99132617f2 # we are writing to the objects  folder so we get back a hash
-$ git cat-file -p d1df156691ebcab17bba4e20226fda99132617f2
-100644 blob 980a0d5f19a64b4b30a87d4206aade58726b60e3  hello_world.txt
+47210561be8fdf07c9b9e924d597684f0458aabb
+# We are writing to the objects folder so we get back a hash
+$ git cat-file -p 47210561be8fdf07c9b9e924d597684f0458aabb
+100644 blob 40c46548972e0d0eff2725522e5ba22fde44d346  home_chef.txt
 ```
 
-Note that all of these snapshots are in the objects directory:
+Note: All of these **snapshots** are in the objects directory:
 ```bash
 $ find .git/objects -type f
-.git/objects/0c/1b4e6feb7eaed08e75d20e3ce2e2a3207c78b3
-.git/objects/1d/f50e25fbea5bd8a8ba58e2204fff063376f421
-.git/objects/81/864cc123ffccf8110aa9da6c2be6e0c440c3ef
-.git/objects/98/0a0d5f19a64b4b30a87d4206aade58726b60e3
-.git/objects/d1/df156691ebcab17bba4e20226fda99132617f2
+.git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
+.git/objects/47/210561be8fdf07c9b9e924d597684f0458aabb
+```
+
+```
+$ git cat-file -p 47210561be8fdf07c9b9e924d597684f0458aab
+100644 blob 40c46548972e0d0eff2725522e5ba22fde44d346  home_chef.txt
+$ git cat-file -p 40c46548972e0d0eff2725522e5ba22fde44d346
+Home Chef!
 ```
 
 ### Commit Objects
