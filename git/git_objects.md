@@ -35,9 +35,32 @@ For Git, hash objects are the data store that contains all file content - but li
 #### SHA-1 Hashing
 
 ```bash
-# Because of the '!', you will need to use single quotes.
 $ echo 'Home Chef!' | openssl sha1
 3623b9146b99265c340dc681ad45040ac7800ca8
+```
+You will need to use single quotes. Because of the '!' is a special character in bash.
+
+Example:
+```bash
+!1
+```
+
+Strings in single quotes are not expanded by bash - everything is preserved without exception.
+
+Example:
+```bash
+$ foo="Big Foo"
+$ echo $foo
+Big Foo
+$ echo 'My name is $foo'
+My name is $foo
+$ echo "My name is $foo"
+My name is Big Foo
+```
+
+You could write it like this:
+```bash
+echo "Home Chef"'!' | openssl sha1
 ```
 
 Many applications still rely on SHA-1; however, it is no longer consider secure as theoretical attacks have been known since 2005. SHA-1 was officially deprecated in 2011.[1](https://shattered.it/)
