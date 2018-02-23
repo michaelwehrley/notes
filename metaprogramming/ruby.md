@@ -58,7 +58,7 @@ Some fun common `Kernel` methods:
 # Methods
 
 ## Ghost Methods
-Only introduce more **Ghost Methods** than necessary.
+Don't introduce more **Ghost Methods** than necessary.
 
 ```ruby
 class Roulette

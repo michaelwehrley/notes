@@ -1,9 +1,11 @@
 # You've Got To Be Gitin' Me
 
+## Part I
+
 Git is a simple key-value data store filesystem (i.e., a content-addressable filesystem).
 Add any content into the data store and get the address back!
 
-## Hash Objects :gem:
+### Hash Objects :gem:
 
 A Hash is a dictionary-like collection of unique keys and their values:
 
@@ -28,9 +30,9 @@ for (var key in hash) {
 
 For Git, hash objects are the data store that contains all file content - but literally **only** the file content.
 
-## Blobs :eyes:
+### Blobs :eyes:
 
-### SHA-1 Hash
+#### SHA-1 Hashing
 
 ```bash
 # Because of the '!', you will need to use single quotes.
@@ -38,29 +40,40 @@ $ echo 'Home Chef!' | openssl sha1
 3623b9146b99265c340dc681ad45040ac7800ca8
 ```
 
+Many applications still rely on SHA-1; however, it is no longer consider secure as theoretical attacks have been known since 2005. SHA-1 was officially deprecated in 2011.[1](https://shattered.it/)
+
+* [Announcing the first SHA1 collision](https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html)
+* [Here](https://shattered.it/) are two PDF files that display different content, yet have the same SHA-1 digest.
+
 Git uses the cryptography library [OpenSSL](https://en.wikipedia.org/wiki/OpenSSL) and the [SHA-1 (Secure Hash Algorithm 1)](https://en.wikipedia.org/wiki/SHA-1) hash function:
+
 ```bash
 $ printf "blob 11\000Home Chef\041\n" | openssl sha1
 40c46548972e0d0eff2725522e5ba22fde44d346
-
-# `git cat-file -s 40c46548972e0d0eff2725522e5ba22fde44d346` will return "11"
-# [-s] Instead of the content `-s` show the object size identified by <object>.
-# "11" is the nmber of bytes in the blob
-
-# `git cat-file -t 40c46548972e0d0eff2725522e5ba22fde44d346` will return "blob"
-# [-t] Instead of the content `-t` will show the object type identified by <object>.
-# "blob" is the type
-
-# "000" (or \0) denotes a `null` character
-# "041" denotes an exclamation mark 
 ```
 
-1. Create directory: `$ mkdir home_chef`
-2. Navigate into that direcory: `$ cd home_chef/`
+Size (bytes) `-s`:
+```bash
+git cat-file -s 40c46548972e0d0eff2725522e5ba22fde44d346
+# `-s` returns the object size identified by <object>.
+# "11" is the nmber of bytes in the blob
+```
+
+Type `-t`:
+```bash
+git cat-file -t 40c46548972e0d0eff2725522e5ba22fde44d346
+# [-t] returns the object type identified by <object>.
+# "blob" is the type
+```
+* "000" (or \0) denotes a `null` character
+* "041" denotes an exclamation mark 
+
+1. Create directory: `$ mkdir git_home_chef`
+2. Navigate into that direcory: `$ cd git_home_chef/`
 3. Initialize git:
 ```bash
 $ git init
-Initialized empty Git repository in ~/home_chef/.git/
+Initialized empty Git repository in ~/git_home_chef/.git/
 ```
 4. View contents of `.git` directory:
 ```bash
@@ -74,10 +87,12 @@ info  pack
 $ echo 'Home Chef!' > home_chef.txt
 ```
 
+**hash-object**
+Note: `man git-hash-object` vs `git hash-object`
 Add this to to the git database by creating a git hash object (and writing it to the db):
 
-* `git-hash-object` - Computes object ID and optionally creates a blob from a file.
-* `-w` - Write the object into the object database.
+* `git-hash-object` - Computes object ID and optionally creates a blob from a file. (i.e., does what it says; it hashes the content into the object database)
+* `-w` - Write the object into the **object** database.
 
 ```bash
 $ git hash-object -w home_chef.txt
@@ -88,10 +103,14 @@ View contents of `.git` directory:
 ```bash
 $ ls .git
 HEAD    config    description hooks   info    objects   refs
-
+```
+View contents of `objects` directory:
+```bash
 $ ls .git/objects
 40  info  pack
-
+```
+View contents of `40` directory:
+```bash
 $ find .git/objects/
 .git/objects/
 .git/objects//pack
@@ -118,7 +137,7 @@ git cat-file -p 40c46548972e0d0eff2725522e5ba22fde44d346
 Home Chef!
 ```
 
-## Tree Objects
+### Tree Objects
 
 Tree objects are complete snapshot of the entire project directory.
 
@@ -158,7 +177,7 @@ $ find .git/objects -type f
 .git/objects/d1/df156691ebcab17bba4e20226fda99132617f2
 ```
 
-## Commit Objects
+### Commit Objects
 
 Create a commit object with the sha hash of the tree object
 ```bash
@@ -181,7 +200,9 @@ committer Mike <mike@ex.co> 1509081962 -0500
 my commit
 ```
 
-### Updates
+## Part II
+
+#### Updates
 
 Update a file: `$ echo "Gold Star is not a Packer Bar anymore." >> bar.txt`
 Update Index:
@@ -204,7 +225,7 @@ $ git cat-file -p cea74affb155db683d9c9164800843494332bcb2
 100644 blob c77713e7cb36c8cdc19967ca1ce55fc68e5ddb76  home_chef.txt
 ```
 
-### Linking Commits
+#### Linking Commits
 ```
 $ git write-tree
 a22fc70b3d7139f6540711b0f7c6f661c7512097
@@ -221,7 +242,7 @@ committer Mike <mike@ex.co> 1511155667 -0600
 A second commit
 ```
 
-### View Log (`git log --stat <object>`)
+#### View Log (`git log --stat <object>`)
 
 We can start to see the history of the second git commit that is linked [f4d139fc1f1fa894b3c0ed552220619ac86bcc98]:
 ```
@@ -246,13 +267,13 @@ Date:   Sun Nov 19 23:10:54 2017 -0600
  2 files changed, 3 insertions(+)
 ```
 
-### Directed Acyclic Graph (DAG) & Merkle Tree
+#### Directed Acyclic Graph (DAG) & Merkle Tree
 
 * Keeps data integrity;
 * Prohibts duplication;
 * Fast b/c of the hash indexing of content
 
-## Branches & HEADS
+### Branches & HEADS
 
 Branches are just aliases to **commits**.
 
@@ -279,7 +300,7 @@ $ cat .git/refs/heads/feature
 f4d139fc1f1fa894b3c0ed552220619ac86bcc98
 ```
 
-### HEAD
+#### HEAD
 
 The `HEAD` just tells you what branch (alias to a commit) you are working on
 ```
@@ -287,7 +308,7 @@ $ cat .git/HEAD
 ref: refs/heads/feature
 ```
 
-### Detached HEAD
+#### Detached HEAD
 
 All this is, is you HEAD is pointing to a commit that isn't a feature branch.
 ```
@@ -321,7 +342,7 @@ $ git status
 On branch feature
 ```
 
-## Pack Objects
+### Pack Objects
 
 ```
 $ find .git/objects -type f
@@ -341,7 +362,7 @@ $ git count-objects -H
 8 objects, 32.00 KiB
 ```
 
-### Garbage Collector :scream:
+#### Garbage Collector :scream:
 
 `git gc` or garbase collect packs all the deltas up.
 
@@ -358,7 +379,7 @@ $ find .git/objects -type f
 .git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
 ```
 
-### Verify Packed Items
+#### Verify Packed Items
 ```
 $ git verify-pack -v .git/objects/pack/pack-0f68e8cca9dba49a21644913acfde289d0dbd00a.pack
 f4d139fc1f1fa894b3c0ed552220619ac86bcc98 commit 244 160 12
