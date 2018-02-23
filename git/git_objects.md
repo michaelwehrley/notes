@@ -112,6 +112,10 @@ info  pack
 ```bash
 $ echo 'Home Chef!' > home_chef.txt
 ```
+* blob: stores file content.
+* tree: stores directory layouts and filenames.
+* commit: stores commit info and forms the Git commit graph.
+* tag: stores annotated tag.
 
 ##### Hash-Object
 Note: `man git-hash-object` vs `git hash-object`
@@ -156,6 +160,12 @@ View the contents of any key in the `.git` folder using `git cat-file (<type>) <
 # [-p] here is for pretty
 git cat-file -p 40c46548972e0d0eff2725522e5ba22fde44d346
 Home Chef!
+```
+
+```bash
+# [-t] here is for type
+git cat-file -t 40c46548972e0d0eff2725522e5ba22fde44d346
+blob
 ```
 
 ### Tree Objects
