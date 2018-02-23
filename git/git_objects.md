@@ -109,20 +109,23 @@ $ ls .git/objects
 info  pack
 ```
 
-```bash
-$ echo 'Home Chef!' > home_chef.txt
-```
+#### Hash-Object
+
+Definitions:
 * blob: stores file content.
 * tree: stores directory layouts and filenames.
 * commit: stores commit info and forms the Git commit graph.
 * tag: stores annotated tag.
 
-##### Hash-Object
 Note: `man git-hash-object` vs `git hash-object`
 Add this to to the git database by creating a git hash object (and writing it to the db):
 
 * `git-hash-object` - Computes object ID and optionally creates a blob from a file. (i.e., does what it "says": it hashes the content into the object database)
 * `-w` - Write the object into the **object** database.
+
+```bash
+$ echo 'Home Chef!' > home_chef.txt
+```
 
 ```bash
 $ git hash-object -w home_chef.txt
@@ -147,7 +150,8 @@ $ find .git/objects/
 .git/objects//info
 .git/objects//40
 .git/objects//40/c46548972e0d0eff2725522e5ba22fde44d346
-
+```
+```bash
 $ find .git/objects/ -type f
 .git/objects//40/c46548972e0d0eff2725522e5ba22fde44d346
 # "type" here is limited to files (not directories etc)
@@ -168,31 +172,133 @@ git cat-file -t 40c46548972e0d0eff2725522e5ba22fde44d346
 blob
 ```
 
+```bash
+# Compressed...
+cat .git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
+```
+
+Edit the file:
+```bash
+$ echo "We used to be called Mealhand and Relished." >> home_chef.txt
+# Note: We aren't use `>`.
+```
+```bash
+git hash-object -w home_chef.txt
+cc0ec884d71714b244266fa61743465d5be87869
+```
+
+Multiple Git Objects
+```bash
+$ find .git/objects/
+.git/objects/
+.git/objects//pack
+.git/objects//info
+.git/objects//cc
+.git/objects//cc/0ec884d71714b244266fa61743465d5be87869
+.git/objects//40
+.git/objects//40/c46548972e0d0eff2725522e5ba22fde44d346
+```
+
+```bash
+git cat-file -p cc0ec884d71714b244266fa61743465d5be87869
+Home Chef!
+We used to be called Mealhand and Relished.
+```
+
+:blowfish: **Note:** This is **NOT** a **DIFF**!
+
 ### Tree Objects
 
-Tree objects are complete snapshot of the entire project directory.
+To link **blobs** together to form a snapshot, we need tree objects.
+**BUT** before we can do that, we need an **index file** to make trees: i.e,. a **staging area.**
+
+So we are going to add files into our staging area:
+
+```bash
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+  home_chef.txt
+```
+
+```bash
+$ git update-index --add home_chef.txt
+```
 
 `git update-index` - already has the `hash-object` functionality built into it. `update-index` will check to see if the exists.  If it does, it will use it; otherwise, it will create it under the hood.
-
-Create a staging area where we can index our tree objects: `$ git update-index --add hello_world.txt`.
 
 Staging:
 ```bash
 $ git status
+On branch master
+
+No commits yet
+
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
   new file:   home_chef.txt
 ```
 
-`git-ls-files`: Show information about files in the index and the working tree
+Add another file:
+```bash
+$ echo 'The day after today.' > tomorrow.txt
+```
+
+```bash
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+  new file:   home_chef.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+  tomorrow.txt
+```
+
+```bash
+$ git update-index --add tomorrow.txt
+```
+
+```bash
+ $ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+  new file:   home_chef.txt
+  new file:   tomorrow.txt
+```
+
+#### Index
+```bash
+$ ls .git/
+HEAD    config    description hooks   index   info    objects   refs
+```
+
+`git-ls-files`: Show information about files in the index (staging area) and the working tree
 View this staging area via `$ git ls-files --stage` or `$ git status`
 Note: The staging area is in constant flux.
 
 ```bash
-# `git ls-files` just to see the files
+# `git ls-files` to see the files in the staging area
 $ git ls-files --stage
-100644 40c46548972e0d0eff2725522e5ba22fde44d346 0 home_chef.txt
+100644 cc0ec884d71714b244266fa61743465d5be87869 0 home_chef.txt
+100644 415707d1975e1ca65b1b8a7b190b07d7814a59e9 0 tomorrow.txt
 ```
 
 `$ git add home_chef.txt` is analagous to
@@ -203,50 +309,71 @@ $ git ls-files --stage
 
 Note: You must `git update-index` before you can create a tree object from the current index.
 
-Make a tree object with stagged files: `git write-tree`.  It looks familiar to the staging area - but it is a finalized snapshot, captured and persisted. 
+#### Git Write Tree :palm_tree:
+
 ```bash
 $ git write-tree
-47210561be8fdf07c9b9e924d597684f0458aabb
+43c5f15d8f95432194c396e5f007f765b494f45d
+```
+```bash
 # We are writing to the objects folder so we get back a hash
-$ git cat-file -p 47210561be8fdf07c9b9e924d597684f0458aabb
-100644 blob 40c46548972e0d0eff2725522e5ba22fde44d346  home_chef.txt
+$ git cat-file -p 43c5f15d8f95432194c396e5f007f765b494f45d
+100644 blob cc0ec884d71714b244266fa61743465d5be87869  home_chef.txt
+100644 blob 415707d1975e1ca65b1b8a7b190b07d7814a59e9  tomorrow.txt
 ```
 
 Note: All of these **snapshots** are in the objects directory:
 ```bash
-$ find .git/objects -type f
+ $ find .git/objects -type f
+.git/objects/43/c5f15d8f95432194c396e5f007f765b494f45d
+.git/objects/cc/0ec884d71714b244266fa61743465d5be87869
+.git/objects/41/5707d1975e1ca65b1b8a7b190b07d7814a59e9
 .git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
-.git/objects/47/210561be8fdf07c9b9e924d597684f0458aabb
 ```
 
+```bash
+$ git cat-file -p 43c5f15d8f95432194c396e5f007f765b494f45d
+100644 blob cc0ec884d71714b244266fa61743465d5be87869  home_chef.txt
+100644 blob 415707d1975e1ca65b1b8a7b190b07d7814a59e9  tomorrow.txt
 ```
-$ git cat-file -p 47210561be8fdf07c9b9e924d597684f0458aab
-100644 blob 40c46548972e0d0eff2725522e5ba22fde44d346  home_chef.txt
-$ git cat-file -p 40c46548972e0d0eff2725522e5ba22fde44d346
+
+Make a tree object with stagged files: `git write-tree`.  It looks similar to the **staging** area - but it is a **finalized** snapshot, captured and **persisted**.
+
+```bash
+$ git cat-file -p cc0ec884d71714b244266fa61743465d5be87869
+Home Chef!
+We used to be called Mealhand and Relished.
+```
+
+```bash
+ $ git cat-file -p 40c46548972e0d0eff2725522e5ba22fde44d346
 Home Chef!
 ```
 
-### Commit Objects
+### Commit Object - MetaData
 
-Create a commit object with the sha hash of the tree object
+Create a commit object (meta data) with the sha hash of the tree object
 ```bash
-$ echo "my commit" | git commit-tree d1df156691ebcab17bba4e20226fda99132617f2
-$ find .git/objects -type f
-.git/objects/0c/1b4e6feb7eaed08e75d20e3ce2e2a3207c78b3
-.git/objects/1d/f50e25fbea5bd8a8ba58e2204fff063376f421
-.git/objects/81/864cc123ffccf8110aa9da6c2be6e0c440c3ef
-.git/objects/98/0a0d5f19a64b4b30a87d4206aade58726b60e3
-.git/objects/bb/0be81df086316319daed635acd58f57c326351
-.git/objects/d1/df156691ebcab17bba4e20226fda99132617f2
+$ echo "Home Chef demo commit" | git commit-tree 43c5f15d8f95432194c396e5f007f765b494f45d
+5c15f53e9c2db14cbb3e50dc58fc979c0ad45ea2
 ```
 
 ```bash
-$ git cat-file -p bb0be81df086316319daed635acd58f57c326351
-tree d1df156691ebcab17bba4e20226fda99132617f2
-author Mike <mike@ex.co> 1509081962 -0500
-committer Mike <mike@ex.co> 1509081962 -0500
+$ find .git/objects -type f
+.git/objects/43/c5f15d8f95432194c396e5f007f765b494f45d
+.git/objects/5c/15f53e9c2db14cbb3e50dc58fc979c0ad45ea2
+.git/objects/cc/0ec884d71714b244266fa61743465d5be87869
+.git/objects/41/5707d1975e1ca65b1b8a7b190b07d7814a59e9
+.git/objects/40/c46548972e0d0eff2725522e5ba22fde44d346
+```
 
-my commit
+```bash
+$ git cat-file -p 5c15f53e9c2db14cbb3e50dc58fc979c0ad45ea2
+tree 43c5f15d8f95432194c396e5f007f765b494f45d
+author Mike <mike@homechedminsmbp.attlocal.net> 1519367211 -0600
+committer Mike <mike@homechedminsmbp.attlocal.net> 1519367211 -0600
+
+Home Chef demo commit
 ```
 
 ## Part II
