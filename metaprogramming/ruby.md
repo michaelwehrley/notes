@@ -75,3 +75,21 @@ number_of = Roulette.new
 puts number_of.bob
 puts number_of.frank
 ```
+
+# Blocks
+
+## Managing Exceptions With Blocks
+
+```ruby
+["example"](File.join(File.dirname(__FILE__), "blocks/test"))
+
+module Kernel
+  def using(resource)
+    yield
+  ensure
+    resource.dispose
+  end
+end
+```
+
+

@@ -327,8 +327,10 @@ Git doesn't know if your checkout out is a **file** or branch unless you use `--
 This happens when you close a PR but then force push.
 
 1. Get PR commit hash from PR.  (I am not yet sure the best way to do this except by visiting Github) *37b2wa2*
+1. Checkout the associated branch; i.e., `git checkout mw-hot-fix`
+1. Checkout the commit hash from above; i.e., `git checkout 37b2wa2`
 1. `git push -f origin 37b2wa2:mw-hot-fix` (i.e., [commit hash]:[branch])
-1. Reopen PR
+1. Reopen PR from GitHub portal
 1. Switch back: `git checkout mw-hot-fix`
 1. Push `git push -f origin head`
 
