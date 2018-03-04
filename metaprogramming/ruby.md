@@ -78,10 +78,14 @@ puts number_of.frank
 
 # Blocks
 
+Blocks are **NOT** objects.
+
 ## Managing Exceptions With Blocks
 
+
+[example](./blocks/spec.rb)
 ```ruby
-["example"](File.join(File.dirname(__FILE__), "blocks/test"))
+["example"](File.join(File.dirname(__FILE__), "blocks/spec"))
 
 module Kernel
   def using(resource)
@@ -186,4 +190,35 @@ end
 
 sauvignon_blanc.taste # Herbaceous wines are the antithesis of fruit-forward wines.
 ```
+
+## Calling Blocks - Proc Objects & Deferred Evaluation
+
+Because blocks are not objects, in order to store them and execute later, we will need an object!
+
+We use `Proc`.  A `Proc` is a block that is turned into an **object**.
+
+### `Proc.new()`
+
+```ruby
+# if this is your goal
+something do |x|
+  x * 3
+end
+# your block would be:
+multiplier = Proc.new { |x| x * 3 } # => #<Proc:0x007fa39d041990@(irb):1> 
+# call later
+multiplier.call(2) # => 6
+```
+
+### Kernel Alternatives `lambda()` & `proc()`
+
+```ruby
+multiplier = lambda { |x| x * 3 } # => #<Proc:0x007fd292936220@(irb):1 (lambda)> 
+# call later
+multiplier.call(2) # => 6
+```
+
+## `&`
+
+
 
