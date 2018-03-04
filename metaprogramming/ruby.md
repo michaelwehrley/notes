@@ -92,4 +92,98 @@ module Kernel
 end
 ```
 
+## Flattening Scopes
+
+We use `class`, `module`, and `def` to create basic scopes for variables.
+
+However, we can open the capture the current bindings and pass them the closure.
+We do this by replacing:
+* `class` with `Class.new()`
+* `module` with `Module.new()`
+* `def` with `define_method`
+
+```ruby
+genus = "Vitis"
+species = "Vinifera"
+
+class Wine
+  puts "#{genus} #{species}"
+end
+
+# NameError: undefined local variable or method `genus' for Wine:Class
+# Did you mean?  genus
+```
+
+```ruby
+genus = "Vitis"
+species = "Vinifera"
+
+class Wine
+  def terroir
+    puts "terroir is not #{genus} #{species}"
+  end
+end
+
+Wine.new.terroir
+# NameError: undefined local variable or method `genus' for #<Wine:0x007f91630574d0>
+# from (irb):6:in `terroir'
+```
+
+## Flatten Scopes with `Class.new()` and `define_method`
+
+```ruby
+genus = "Vitis"
+species = "Vinifera"
+
+Wine = Class.new do
+  puts "#{genus} #{species}"
+
+  define_method :terroir do
+    puts "terroir is not #{genus} #{species}"
+  end
+end
+# Vitis Vinifera
+
+Wine.new.terroir # terroir is not Vitis Vinifera
+```
+
+## Instance Variables
+
+```ruby
+class Herbaceous
+  def initialize
+    @flavor = "The dominate flavor of a herbaceous wine is not of a sweet fruit."
+  end
+
+  def taste
+    return puts @flavor
+  end
+end
+
+sauvignon_blanc = Herbaceous.new
+sauvignon_blanc.taste # The dominate flavor of a herbaceous wine is not of a sweet fruit.
+```
+
+### `instance_eval()` - Great for setting up specs
+
+```ruby
+class Herbaceous
+  def initialize
+    @flavor = "The dominate flavor of a herbaceous wine is not of a sweet fruit."
+  end
+
+  def taste
+    return puts @flavor
+  end
+end
+
+sauvignon_blanc = Herbaceous.new
+sauvignon_blanc.taste # The dominate flavor of a herbaceous wine is not of a sweet fruit.
+
+sauvignon_blanc.instance_eval do
+  @flavor = "Herbaceous wines are the antithesis of fruit-forward wines."
+end
+
+sauvignon_blanc.taste # Herbaceous wines are the antithesis of fruit-forward wines.
+```
 
