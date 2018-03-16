@@ -30,10 +30,16 @@ Dir.glob("**/*events.rb").each do |rspec_file|
   @setups = []
   load rspec_file
 
-  @events.each do |event_name, event_block|
-    @setups.each { |setup| setup.call }
+  @events.each_pair do |event_name, event_block| # vs. `each`
+    clean_room_event = Object.new
+    @setups.each do |setup|
+      # setup.call
+      clean_room_event.instance_eval(&setup)
+    end
     # @setups.each(&:call)
-    puts "ALERT: #{event_name}" if event_block.call
+    # puts "ALERT: #{event_name}" if event_block.call
+    puts "ALERT: #{event_name}" if clean_room_event.instance_eval(&event_block)
+
   end
 end
 
