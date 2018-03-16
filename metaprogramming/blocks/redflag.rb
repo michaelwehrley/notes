@@ -1,3 +1,4 @@
+require "pry"
 # RSpec set up - come to this by starting with basic setup
 #
 
@@ -11,13 +12,14 @@
 # end
 
 def event(name, &block)
-  # convert blocks to `Proc`s and stores them in a hash
+  # convert blocks to `Proc`s and stores them in a hash :-) #########
   # has is a top-level instance variable so it is visible
 
   # name is the "text we right" of the method
   @events[name] = block # still a proc...I haven't called `call()`
 end
 
+# def setup(when = :each, &block)
 def setup(&block)
   @setups << block
 end
@@ -30,16 +32,17 @@ Dir.glob("**/*events.rb").each do |rspec_file|
   @setups = []
   load rspec_file
 
-  @events.each_pair do |event_name, event_block| # vs. `each`
-    clean_room_event = Object.new
+  @events.each_pair do |event_name, event_proc| # vs. `each`
+    my_first_clean_room = Object.new # Scope protection
+
     @setups.each do |setup|
       # setup.call
-      clean_room_event.instance_eval(&setup)
+
+      my_first_clean_room.instance_eval(&setup)
     end
     # @setups.each(&:call)
     # puts "ALERT: #{event_name}" if event_block.call
-    puts "ALERT: #{event_name}" if clean_room_event.instance_eval(&event_block)
-
+    puts "ALERT: #{event_name}" if my_first_clean_room.instance_eval(&event_proc)
   end
 end
 
