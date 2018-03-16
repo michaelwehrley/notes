@@ -1,8 +1,3 @@
-require "pry"
-
-@events = {}
-@setups = []
-
 # RSpec set up - come to this by starting with basic setup
 #
 
@@ -30,14 +25,16 @@ end
 # https://ruby-doc.org/core-1.9.3/Dir.html#method-c-glob
 # load File.join(Dir.pwd,"metaprogramming", "blocks", "events.rb")
 # Dir.glob("*")
-Dir.glob("**/*events.rb").each do |file|
-  load file
-end
+Dir.glob("**/*events.rb").each do |rspec_file|
+  @events = {}
+  @setups = []
+  load rspec_file
 
-@events.each do |event_name, event_block|
-  @setups.each { |setup| setup.call }
-  # @setups.each(&:call)
-  puts "ALERT: #{event_name}" if event_block.call
+  @events.each do |event_name, event_block|
+    @setups.each { |setup| setup.call }
+    # @setups.each(&:call)
+    puts "ALERT: #{event_name}" if event_block.call
+  end
 end
 
 # Setting up sky
