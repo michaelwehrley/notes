@@ -40,6 +40,7 @@ Greeting.speak # => "Hello World"
 ```
 
 ## Module Class Methods
+
 Create a module with class methods that other classes can inherit.
 
 ```ruby
@@ -48,13 +49,26 @@ module ActAsDog
     "ruf"
   end
 end
-```
 
-```ruby
 class Animal
   include ActAsDog
 end
 
 Animal.bark # NoMethodError: undefined method `bark' for Animal:Class
 ```
-`class` methods are not stored on the class/module, but on the class/module's `eigenclass` - see above.
+`class` methods are not stored on the class/module, but on the class/module's `eigenclass`.
+
+Instead, let's create the method as an instance method, but add that instance method as a class method:
+```ruby
+module ActAsDog
+  def bark
+    "ruf"
+  end
+end
+
+class Animal
+  class << self
+    include ActAsDog
+  end
+end
+```
