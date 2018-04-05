@@ -22,6 +22,7 @@ class Greeting
 end
 
 Greeting.speak # => "Hello World"
+Greeting.singleton_methods # => [:speak] 
 ```
 
 ### Use the class's eigenclass `class << self`
@@ -56,9 +57,11 @@ end
 
 Animal.bark # NoMethodError: undefined method `bark' for Animal:Class
 ```
-`class` methods are not stored on the class/module, but on the class/module's `eigenclass`.
+`class` methods are not stored on the class/module, but on the class/module's **eigenclass**.
 
-Instead, let's create the method as an instance method, but add that instance method as a class method:
+## Class Extension / Obect Extension
+
+Instead, let's create the method as an instance method and add that to the class's **eigenclass** via **Class Extenstion**
 ```ruby
 module ActAsDog
   def bark
@@ -71,4 +74,32 @@ class Animal
     include ActAsDog
   end
 end
+```
+
+```ruby
+class Foo
+  def self.foo
+    "self.object_id: #{self.object_id}" # => 70227945944020
+    self.name
+  end
+
+  def Foo.bar
+    "self.object_id: #{self.object_id}" # => 70227945944020
+    self.name
+  end
+
+  def more
+    "self.class.object_id: #{self.object_id}" # => 70227942664520
+    self.class.name
+  end
+
+  class << self
+    def baz
+      "self.object_id: #{self.object_id}" # => 70227945944020
+      self.name
+    end
+  end
+end
+
+Foo.singleton_methods #=> [:foo, :bar, :baz]
 ```

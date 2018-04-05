@@ -2,13 +2,23 @@
 
 ## :tropical_drink: Pre-Workout
 
-1. Nearly everything in ruby is an object. Is a `block`? [Answer](./pre_workout_answer_1.md)
+1. Nearly everything in ruby is an object. Is a `block` an object? [Answer](./pre_workout_answer_1.md)
 1. hmm...
 1. Define a simple method without a block. [Answer](./pre_workout_answer_2.rb)
 1. Augment the method ^ to display a block if one was provided (hint: `yield`) [Answer](./pre_workout_answer_3.rb)
 
-## Vocabulary
+## Ultimate Goals:
+Write our own `RSpec` like framework.  However, in order to understand how to do that we need to yield to blocks and procs :laugh:.
 
+## Today's Objectives
+1. Find cases in our own application that implement `yield`
+1. Write a method using yield
+1. Understanding the `yield self` pattern and see how rails harness it.
+1. Write a method using a `proc`
+1. Write our own `Symbol#to_proc` method
+1. Use our the idea behind `Symbol#to_proc` to created our own `to_proc` method
+
+## Vocabulary
 * Clean Room Pattern
 * Deferred Evaluation
 * `Proc` & `yield`
@@ -32,6 +42,11 @@ Raised when Ruby can't `yield` as requested.
 A typical scenario is attempting to yield when no block is given.
 ```
 home_chef # => LocalJumpError: no block given (yield)
+```
+```ruby
+3.times do |time|
+  return time
+end # => LocalJumpError: unexpected return
 ```
 
 ## `self yield`
