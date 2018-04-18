@@ -366,3 +366,5 @@ end
 ```
 
 Using `proc`s and blocks to build our own `RSpec` DSL in :mag: Upon Further RSpection - Blocks, `Proc`s, and `RSpec` (Part II)
+
+# Upon Further RSpection - Blocks, Procs, and RSpec (Part II)
