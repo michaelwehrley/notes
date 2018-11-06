@@ -1,5 +1,7 @@
 # JS Asynchronicity
 
+## Promises
+
 Features of the Web Browswer allow us to run **JS asynchronously** - outside our JS Engine itself.
 
 ### Browser Features (i.e., Web Browser APIs):
@@ -89,8 +91,121 @@ Steps:
 1. declare a named function `display` in memory
 2. set a const `futureData` to `undefined`
 3. Invoke `fetch` which runs **both** a Web API and JS (unlike `setTimeout`)
-* Creates a Promise object `{value: ..., c: [...]}`
+* Creates a Promise object `{value: ..., onFulfillment: [...], status: ....}`
 * XMLHTTPRequest in the Web Browser (`XHR`) - unlike the `Timer` we used for `setTimeout`
-4. `futureData` is set to `{value: ...., onFulfillment: []}`
+4. `futureData` is set to `{value: ...., onFulfillment: [], status: ....}`
 5. One fulfilled, we want the response of `fetch` to update the property `value` of `futureData`
 6. Trigger all functions in `futureData`
+7. However, promises are added to the **Job/Microtask** Queue which the **Event Loop** prioritizes over the **Callback Queue**
+
+#### MicroTask Queue
+
+MicroTask Queue, Callback Queues, and Event Loop Example 1:
+```js
+function display(data) { console.log(data) }
+function printHello() { console.log("Hello") }
+function blockFor300ms() { /* some code */ }
+
+setTimeout(printHello, 0);
+
+const futureData = fetch("http://twitter.com/asdf/tweets/1") 
+futureData.then(display)
+blockFor300ms()
+```
+
+MicroTask Queue, Callback Queues, and Event Loop [Example 2](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/):
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+
+// script start
+// script end
+// promise1
+// promise2
+// setTimeout
+```
+
+## Iterators
+
+We want a flow of data and keep track of the current element. This is in contrast to a typical loop:
+
+```js
+array = [4,5,6]
+for (var i = 0; i < array.length; i++) {
+  console.log(array[i])
+}
+```
+
+```js
+function createNewFunction() {
+  function add2(num) {
+    return num + 2;
+  }
+  return add2;
+}
+
+const newFunction = createNewFunction() // returns add2
+// invoke
+const result = newFunction(3) // 5
+```
+
+### Streaming
+
+```js
+function createFunction(array) {
+  let i = 0;
+
+  function inner() {
+    element = array[i];
+    i++;
+
+    return element;
+  }
+
+  return inner;
+}
+
+const returnNextElement = createFunction([4, 5, 6]);
+returnNextElement() // 4
+returnNextElement() // 5
+returnNextElement() // 6
+```
+
+```js
+function createNewFunction(num) {
+  var sum = 0;
+
+  function add2(num) {
+    return num + 2;
+  }
+
+  // return add2;
+
+  function add2OrReturnSum(num) {
+    if (num) {
+      sum = sum + add2(num)
+      return add2OrReturnSum;
+    } else {
+      return sum;
+    }
+  }
+
+  return add2OrReturnSum;
+}
+
+const newFunction = createNewFunction() // returns add2 and sets `sum` in closure
+newFunction(3)(); // 5
+newFunction(3)(5)(); // 12
+newFunction(3)(5)(2)(); // 16
+````
