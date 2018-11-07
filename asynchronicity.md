@@ -138,6 +138,8 @@ console.log('script end');
 
 ## Iterators
 
+http://csbin.io/iterators
+
 We want a flow of data and keep track of the current element. This is in contrast to a typical loop:
 
 ```js
@@ -182,6 +184,104 @@ returnNextElement() // 5
 returnNextElement() // 6
 ```
 
+#### `iterate()`
+
+```js
+const array = [1, 2, 3, 4];
+console.log(sumFunc(array));
+
+function returnIterator(arr) {
+  var i = 0;
+  
+  function foo() {
+    var value = arr[i]
+    i++;
+
+    return value;
+  }
+  
+  return foo;
+}
+```
+
+#### `next()`
+```js
+function nextIterator(arr) {
+  var i = 0;
+
+  function foo() {
+    var bar = arr[i];
+    i++
+ 
+    return bar
+  }
+ 
+  return {
+    next: foo
+  }
+}
+```
+
+#### Sets & Next
+
+```js
+function setIterator(set) {
+  var values = set.values()
+  
+  function foo() {   
+    return values.next().value;
+  }
+  
+  return {
+    next: foo
+  }
+}
+
+const mySet = new Set('hey');
+const iterateSet = setIterator(mySet);
+console.log(iterateSet.next()); // 'h'
+console.log(iterateSet.next()); // 'e'
+console.log(iterateSet.next()); // 'y'
+```
+Note:
+
+```
+iteratorWithIndex
+  next: ƒ foo()
+    [[Scopes]]: Scopes[3]
+      0: Closure (indexIterator)
+        arr: (4) ["a", "b", "c", "d"]
+      i: 2
+      1: Script {type: "script", name: "", object: {…}}
+      2: Global {type: "global", name: "", object: Window}
+```
+
+```js
+function indexIterator(arr) {
+  var i = 0;
+ 
+  function foo() {   
+    var value = arr[i];
+    var before_i = i;
+    i++;
+    
+    return [before_i, value];
+  }
+  
+  return {
+    next: foo
+  }
+}
+
+const array5 = ['a', 'b', 'c', 'd'];
+const iteratorWithIndex = indexIterator(array5);
+console.log(iteratorWithIndex.next()); // [0, 'a']
+console.log(iteratorWithIndex.next()); // [1, 'b']
+console.log(iteratorWithIndex.next()); // [2, 'c']
+```
+
+## To Do...
+
 ```js
 function createNewFunction(num) {
   var sum = 0;
@@ -208,4 +308,7 @@ const newFunction = createNewFunction() // returns add2 and sets `sum` in closur
 newFunction(3)(); // 5
 newFunction(3)(5)(); // 12
 newFunction(3)(5)(2)(); // 16
-````
+```
+
+
+```
