@@ -364,7 +364,7 @@ We have the `yield` functionality so we can "pause" until a promise is returned.
 
 ```JS
 function doWhenDataReceived(value) {
-  returnNextElement.next(value)
+  returnNextElement.next(value) // this technique is used to back into the "yield" with the value from the promise
 }
 
 function* createFlow() {
@@ -398,6 +398,21 @@ futureData.then(doWhenDataReceived)
 
 `async`/`await` simplies this even further.
 
+```JS
+async function foo() {
+  console.log("me first")
+  const response = await fetch("https://swapi.co/api/people/2/?format=json");
+  console.log(response);
+}
+
+foo();
+console.log("me second");
+
+// me first
+// me second
+// ...
+// Response object
+```
 
 ## To Do...
 
