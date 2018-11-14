@@ -414,35 +414,34 @@ console.log("me second");
 // Response object
 ```
 
-## To Do...
+## Iterators WOW!
 
 ```js
-function createNewFunction(num) {
-  var sum = 0;
+function makeRangeIterator(start = 0, end = Infinity, step = 1) {
+    let nextIndex = start;
+    let iterationCount = 0;
 
-  function add2(num) {
-    return num + 2;
-  }
-
-  // return add2;
-
-  function add2OrReturnSum(num) {
-    if (num) {
-      sum = sum + add2(num)
-      return add2OrReturnSum;
-    } else {
-      return sum;
-    }
-  }
-
-  return add2OrReturnSum;
+    const rangeIterator = {
+       next: function() {
+           let result;
+           if (nextIndex <= end) {
+               result = { value: nextIndex, done: false }
+               nextIndex += step;
+               iterationCount++;
+               return result;
+           }
+           return { value: iterationCount, done: true }
+       }
+    };
+    return rangeIterator;
 }
-
-const newFunction = createNewFunction() // returns add2 and sets `sum` in closure
-newFunction(3)(); // => 5
-newFunction(3)(5)(); // => 12
-newFunction(3)(5)(2)(); // => 16
-```
-
-
+iterator = makeRangeIterator()
+iterator.next() // {value: 0, done: false}
+iterator.next() // {value: 1, done: false}
+iterator.next() // {value: 2, done: false}
+iterator.next() // {value: 3, done: false}
+iterator.next() // {value: 4, done: false}
+iterator.next() // {value: 5, done: false}
+iterator.next() // {value: 6, done: false}
+iterator.next() // {value: 7, done: false}
 ```
