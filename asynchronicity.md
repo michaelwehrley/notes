@@ -285,7 +285,7 @@ console.log(iteratorWithIndex.next()); // => [1, 'b']
 console.log(iteratorWithIndex.next()); // => [2, 'c']
 ```
 
-### Generators & `yield` & ES7
+### Generators/Iterators & `yield` & ES7
 
 Leveraging the idea of streams and flows by using ES6 generator `functions*`
 
@@ -414,7 +414,15 @@ console.log("me second");
 // Response object
 ```
 
-## Iterators WOW!
+## Iterators v. Observers
+
+### Iterators - PULLS Data Out
+* OMG!  These are so awesome!
+* Gang of 4 described this *ITERATOR* pattern in the 1980s.
+* The Consumer PULLS Data OUT
+
+There is an *iterator (i.e., the producer)* and a *consumer*.
+Ex: s`var consumer = [1,2,3].iterator()`
 
 ```js
 function makeRangeIterator(start = 0, end = Infinity, step = 1) {
@@ -435,13 +443,27 @@ function makeRangeIterator(start = 0, end = Infinity, step = 1) {
     };
     return rangeIterator;
 }
-iterator = makeRangeIterator()
-iterator.next() // {value: 0, done: false}
-iterator.next() // {value: 1, done: false}
-iterator.next() // {value: 2, done: false}
-iterator.next() // {value: 3, done: false}
-iterator.next() // {value: 4, done: false}
-iterator.next() // {value: 5, done: false}
-iterator.next() // {value: 6, done: false}
-iterator.next() // {value: 7, done: false}
+consumer = makeRangeIterator()
+
+// The consumer is PULLing data out
+consumer.next() // {value: 0, done: false}
+consumer.next() // {value: 1, done: false}
+consumer.next() // {value: 2, done: false}
+consumer.next() // {value: 3, done: false}
+consumer.next() // {value: 4, done: false}
+consumer.next() // {value: 5, done: false}
+consumer.next() // {value: 6, done: false}
+consumer.next() // {value: 7, done: false}
 ```
+
+### Observers - PUSHES Data to the Consumer
+
+The producer PUSHes data at the consumer.
+```js
+document.addEventListener("mousemove", function next(e) { console.log(e) });
+// MouseEvent {isTrusted: true, screenX: 393, screenY: 277, clientX: 393, clientY: 144, …}
+// MouseEvent {isTrusted: true, screenX: 403, screenY: 263, clientX: 403, clientY: 130, …}
+// MouseEvent {isTrusted: true, screenX: 410, screenY: 253, clientX: 410, clientY: 120, …}
+// ...
+```
+
