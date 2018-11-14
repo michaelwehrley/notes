@@ -6,13 +6,14 @@ Features of the Web Browswer allow us to run **JS asynchronously** - outside our
 
 ### Browser Features (i.e., Web Browser APIs):
 
-| ------------- | ------------- |
-| local storage | `console`     |
-| ------------- | ------------- |
-| JS Engine     | DOM           |
-| ------------- | ------------- |
-| XHR Ability   |               |
-| ------------- | ------------- |
+|               |            |   
+| ------------- | ---------- |
+| local storage | `console`  |
+| ------------- | ---------- |
+| JS Engine     | DOM        |
+| ------------- | ---------- |
+| XHR Ability   |            |
+| ------------- | ---------- |
 
 Other ways of addressing asynchronicity in JS could be **Node background threads**.
 
@@ -285,7 +286,9 @@ console.log(iteratorWithIndex.next()); // => [1, 'b']
 console.log(iteratorWithIndex.next()); // => [2, 'c']
 ```
 
-### Generators/Iterators & `yield` & ES7
+### Generators & `yield` & ES7
+
+*Note:* A generator is an interator that you can push data into and pull data out of.
 
 Leveraging the idea of streams and flows by using ES6 generator `functions*`
 
@@ -417,9 +420,8 @@ console.log("me second");
 ## Iterators v. Observers
 
 ### Iterators - PULLS Data Out
-* OMG!  These are so awesome!
 * Gang of 4 described this *ITERATOR* pattern in the 1980s.
-* The Consumer PULLS Data OUT
+* The Consumer PULLS Data OUT of an *iterable* (i.e., an `Array`)
 
 There is an *iterator (i.e., the producer)* and a *consumer*.
 Ex: s`var consumer = [1,2,3].iterator()`
@@ -455,10 +457,17 @@ consumer.next() // {value: 5, done: false}
 consumer.next() // {value: 6, done: false}
 consumer.next() // {value: 7, done: false}
 ```
+*Note*: if you call `next(4)` an iterator will ignore it, while a generator will actually consume that data.
 
-### Observers - PUSHES Data to the Consumer
+The consumer can continue to *PULL* data out of the array/iterator until:
+1) End of data
+2) There is an error
+
+### Observer/Producers (Events/Callbacks) - PUSHES Data to the Consumer
 
 The producer PUSHes data at the consumer.
+
+The produced decides when to send data: when it decides, it will call your callback!
 ```js
 document.addEventListener("mousemove", function next(e) { console.log(e) });
 // MouseEvent {isTrusted: true, screenX: 393, screenY: 277, clientX: 393, clientY: 144, …}
@@ -466,4 +475,35 @@ document.addEventListener("mousemove", function next(e) { console.log(e) });
 // MouseEvent {isTrusted: true, screenX: 410, screenY: 253, clientX: 410, clientY: 120, …}
 // ...
 ```
+The observer pattern idea can push data until...well forever! The only thing we pass the observer is a callback function.  This is a flaw in their thinking!
 
+We need a way for the producer to tell the observer, "I HAVE NO MORE DATA!"  `Node` streams have ends!
+
+#### Streams & Interface(s)
+
+Consequntly, b/c there is no standard around to let an observer know when the producer is finished sending data we have a multiple ways of implementing this functionality:
+
+* DOM Events
+* Websockets
+* Server-sent Events
+* Node Streams
+* Service Workers
+* jQuery Events
+* XMLHttpRequest
+* setInterval
+
+#### Observables
+
+`Observable === Collection + Time`
+
+Reactive Extensions (RxJS - Reactive Extensions Library for JavaScript, `rx.js`):
+* http://reactivex.io/
+* https://github.com/ReactiveX/rxjs
+* Events as Streams
+* Open Source (Apache2)
+* Ported ot many languages
+  * C
+  * .Net
+  * JavaScript
+  * Java (Netflix)
+  * Objective-C
