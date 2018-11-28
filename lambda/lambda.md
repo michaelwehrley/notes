@@ -56,3 +56,7 @@ module.exports.handler = (evt, ctx, done) => {
     "message": "hello"
 }
 ```
+
+#### Sync Lambda vs Async in Lambda
+* Sync is like an API call - we wait for the response.
+* Async we never care - like sending an email.
