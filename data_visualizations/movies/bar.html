@@ -4,21 +4,22 @@
   <title>Embedding Vega-Lite</title>
   <script src="https://cdn.jsdelivr.net/npm/vega@4.3.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc8"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20.0"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 </head>
 <body>
-
+  <!-- file:///data_visualizations/movies/bar.html -->
   <div id="vis"></div>
 
   <script type="text/javascript">
     let cleanData;
     let numWins
     jQuery.getJSON( "https://gist.githubusercontent.com/sxywu/b94eb86c807b05080d7ee470bd1e815c/raw/bc0e59845dae332100acaa73f510580ccbe317bd/110_movies.json", function(data) {
+
       cleanData = _.map(data, function(d) {
         numWins = d.Awards.match(/(\d+) win/);
         return {
@@ -27,14 +28,15 @@
         }
       });
 
+      console.log(cleanData)
       var yourVlSpec = {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.0.json",
         "description": "A simple bar chart with embedded data.",
-        "data": {"values": cleanData },
+        "data": { "values": cleanData },
         "mark": "bar",
         "encoding": {
-          "x": {"bin": "true", "field": "Metascore", "type": "quantitative"},
-          "y": {"field": "wins", "aggregate":"count", "type": "quantitative"}
+          "x": { "bin": "true", "field": "Metascore", "type": "quantitative"},
+          "y": { "field": "wins", "aggregate":"count", "type": "quantitative"}
         }
       }
 
@@ -42,4 +44,4 @@
     });
   </script>
 </body>
-</html>s
+</html>
