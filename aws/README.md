@@ -200,7 +200,7 @@ If you need more customization you can use CloudFormation which allows you to qu
 
 ## Rersources
 
-React App: https://github.com/stevekinney/grudges
+Original React App: https://github.com/stevekinney/grudges
 
 * Mobile Hub
 * Amplify
