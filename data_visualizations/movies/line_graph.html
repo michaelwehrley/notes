@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embedding Vega-Lite</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4.3.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <a href="https://vega.github.io/editor/#/url/vega-lite/N4KABGBEAkDODGALApgWwIaQFxUQFzwAdYsB6UgN2QHN0A6agSz0QFcAjOxge1IRQyUa6ALQAbZskoBmOgAY6AK1jcAdpAA04KABNkCAE6NCeHupyQAgmFiNUhMcjATVT6gfSFEYAO7NvaOzIOno6YDroePSa2pB+OizYYACMcmlaEJAojNT4SQBs6bERUUmgEJkU6GKs+kkA2toVYMCQAJrI6AZJkMkAnH0A7CJy+SIATIMAKnIArFhpCwppcgBamlAAsshRCNwGyEkAHOMaUADiyKoHPZbwpmqQAL4ZzS3tnd0W-UMiyeN-PozfJLJbyNLrM6Qba7eD7Q44WanC5XG4WO4PdQvJoVVodLo9H7DUYTOQzeaLNLgtYbaE7dB7NFgWZyKGXa4IqAAYW4qGCAE9nq9mnjPoSBkcRskRkDRqCqStIVt6YzOYNWSiOT0ACIeDBCnEQUUE74DYb-CazYHy5YQ2kwhlwpn5QZs1GcyA8vk6QXYt7vfFfKBEkbDcZWuY26lKumw+EFZJurXo+5mA3+41B3pmkbSCbJa2U200qEO1VJdVJpme3kC9NvTPi35zCbSclRxX2lVOzmzPpVj0YtN+huGiofE3BnNyYnjdtF6Mxf2ZMs9iuJseZdnVyw6KiqPCsG5jkciidZkMW-qFuRgzul7vxnCDWYDnV6zCn3GbqCBpuSi1wxvO87WFN5Y0dJ8wHDMDmkgbcPQAIR4dxPEQQUT1ggMxVNPpJRbcYyUjBd72VOMmWkZF4PdW5U0eL8jXPf8RlmEYjnnW8FVAsjIKZAAWDVqOTKAh3orDG1w-C+j+djiM44sY1XKDCjfFNMXrM8-0kkYxnGfIOJAksePLHA+PyVTuVrH0NNxJjtOSaVRmArijIgkywD4xNNWrL06wYlofzsqc8L+aUgLlEjQMCpSmUGV1AoQ25VDsSI00wscJOC-DzQjCl5MXB9yM5fJ+28j1fOs-zMuzEKZylAyXMUx9+KoxK1OHcSgpq7KJj4hqFK7Iqkj6QS2qgXV0H1Kqup+aS6ukIi8sMpqhpwI4vKE6sAAl9gMfYbMYrTgrm4YFv6grjLXHBpFKzbyqs31OqOmq5tYmdztItyro8o4LKsOisSenDjp0y0Pu4r6oM8v6KsejLAue2bQeSWSlsapdl0h2L+wSmj0WSjB1PSjMZoGOa82kAsIvyz6YrVaQ-tEwGMtJgZkaptGBsK3je1usb-vUqqEeBl7Qt65yuei5rOSOX7ceEqwCdSx5iYbVm5vw-S5OWwaeYKPi-omqagcnUWW2vbX0e59zZg2-mmYO7DTcItJQ3zcHXLppJbcNj9Heql25Dd97La5y6od+sqelh-2usDt3kj60OLqx4qDaj9qxJZ5749SHSPZWvXnwZjPLO9OGSZzlZQbO5Pael72+bxkSAdjqvXavCMQUiz2G9M11S5rcu25F+OWzmAvdfcl1Gdb6b26Dgik85lOvcRJuFYdoXl1-Ufq8AudqZ1rCVz7sBBgZ+Wdz3K5D2Pf1573jvpWSaYj6t8P+PMweY8f520kcmGN+K966rWZKNZuAsOrZyfoAmSk9rbfT4q1SBW8TZZhdi-AEIdu40whmvc+6c7rRyMHyEe-85COVYuFEB+Cz58SIfbOe6CeiYJYiMZeHY6FgL4pHYhmdmaV1gWxXMCDP6cl4bPQW4lhYUKofAuuUUd6p2OAbK+g4lZEwfjI5R7cX6OUPrg4+UswGDDlso+2mi0raPhro4RV5ZRGKtiYouYA+inHUbcG+B4jyHFViKWRGCAFi2SFrJxktlEEPyGoixqDvF3z8TYoRFC8yUPFu-MOKi1ooIVr-HRmN27YLzMkLuXCSwuOnqyTx+MUpaLeH-IJchsHEjbIo3uPCN47mYTAihzSJha1oe01x+QcldOkT0xp2D8KH0GYXG2nSPRG0-CwiwLspkjBmWUuZ30Rkwwev7QJrC0gAgcn8UpPdIQVJ2ZfWJm94m+MgP42yhT2GhLEVk5kjDUHdIzIc1Zxy-gnNkuEgqVyoJHHirc6++4EmPKSWrF549WmzKnt9C+UjoHJMacUgE4UQWgNcWZPZw8GlHLkMUqhEtV70IHvwlu4ysVktSbOd5UTv50qgVnRl-zyVixwVs1Fykvm5P2aSnlqS3qbIuYK50fCmEMoRU-CVrZWX0PZfzPJEymWvNygKxBylRmDh+YqlJwdZQov1c6EuHK0G2IKUqwFfw374qUZjAhfQYmY3tvc++9T8n+jjmkZVtcLVgqZCNE+g9LBWJVvCgJdiKF8T+IvDmeqw0SPMV61BMb1BPMOk-JNpyLYuqGe5G6GKuUmsaUmuq4xkV6vERWa18rMWjgTdWkJRES2XMiWffIG4oUaNqdYv1WqeU1uoajBtHy+K0pbZW+N9rE2gzkJw6VkaPknA3d6mFDy80BXbWSwtlKMmgt7WAiN1SRI5rhaO7lUAXaFtxYY6dBDoY-1FSsh9aQa1jBDa+s+Rxm3fIVYugN7cJ2AgQemisr4r2K2HbGu9VayVvTGKkVVYDZivijcasD4F25vWocAtN57XGzEhVmzeN793lCXY0t6OVoNkfcoMDxg6vG7t9c0MV37x7od1euxtz4IGbzw88p+jGzmYeGcKnyn6x18dYleJO3aZUyztiB1t+G4KEdBuMc1pG3Vn3RfB3cXHEnIZ0+OPTRbgVGYDQQ9a264kWdvTx-1BHJOOrkI4hz4ECEvhc3ctztHA3j2U4ZoTHz8hyq0wuiTFD0Mv2dQBsBRxRNjO09+Q9PKxi8splS+8MHESZoDZYxDua405fo2S5LTqiuuscyZyj5Xs2VfcxUXjkAXb5d0lO6LgXDW0VA4lxpLSZSNdLd9JEFbBEoby68qLeDptQ3VZAzY-JYB4GQAYCuC2+P5eoQMtL5G4tidG0aP5h2V3LeMSxtFNyqM7ho9Vq7uWbsHymz24zPCyvgR3bfPdb2naNPy8SEjg2z6zGAxd7L73as8uJLpO7ziHtQT6OZMzr2rM1fA0-c0JzVP+bggQ8t2OOthfboT92p6CXuUkbhy7oOyXEnwvWqH6WcM2vE-mihNPE7ffUwUbn-MlkHI+z1tIEPQrMd+64wYA7nuDh9ZZjzimpd1QIoJlb2yoIsjm+Q8bwcOe6+Fzgfthvt6I748SZTA2zcboIbMf7cEKuExHer+9mu7ccJk-Mq3nndNP3Z38NdjuSvnyV216jlOQcBzSABF+xPOdncD3a-HFCk+hiF07vt0eAftY90hr3B3NfZ-GFTNTlrezrYVuL63mfGma3zm0n7zXTFPZjy9uPuOEdN7JS3yYcuO+uL6HBjjNTi9Vb7yznlPUmn+6QQskb8O598fwtQqVjvhNgHyKL+L83NIh-YYvtv5vz4r4EUbwfCcHfH131upna+E++cdXi07Ns52H4lzbzX0lAJWlq9I9oYKdp9OsIBG8vMKEACwou0Sdxxncu9C8FZkJuBUIvAMJ49wtXo2Il9wVhtr9usXY5ojt8DYpYd5MSUg8bMn5cCDMR8AtANXdxx3dlYZ9S9rNMh25YDSRc8QDPVu8VdQt49rt-8E4dd7t5dWMWCtxXMgduMusv1xCSRxhw8H8PlpAD84cEs+dGkACgVc9H9KCjVmc6MB9-k85Tk1D+D0dYoC83ci92CICwAoDg9-485eU9JGDScTNBCUCe9wDaMxDCJPDqFU111I8XdgtAjnDgjJdQjF5iRUcIlpC0V2Nlckpe9OCxsjlPDzQTtU9WM5NTCX8QjKEg4i0-NIi7DioJ9Mj0RVcXC3DaCPDF4-1FoEDT4sNZCo0miqc94wic9z8a9vZv8dCj88doCglPCJVbC0j9dkDHCQsFC1clCM9pi8j2iFFQ1ajhoMihCsigjsCq5Tl+NyDexxistdD18pci0TkwlP8kFztrjJj+9NjLDHJdJ1C0cFimQKMYih1jjZ8E97jadq9d90Vn8bjQTHIk0GCRjd98g69Xib9Pj2FCILikg+JtDUTiDKF5FvDESZ0Sjo4FNfkEiCSQl7Mai-iJF6jDjGiRCQTA0ziUcsTTJCD6UyjKSzimMRjI8IVATONVjmiaDuDBjUlUkaSI89jTJ-DljoVRSBiPDlUbDiSolNMJjf8LDv1kgcU-ggCuikSsdJ8RJ+jRDeTUldIIjZS6SRdhSp84iTjJTk0-cNSz5MdfZJplkNdQjrSw8OTmRcTSiYTyj9STcfDEC+0DiAigTnSQTwyKUJhUtaTR9ijHTr1sj1jvd-TT9TcNCokuTOU3jbi8zrCX0ii0UUTQzSzzCPi9Tj1hjgC5TCFMyENgSci9C8jIM60gygtoS6zWTIN-0qz9cazV8YThz9NIcd9NDizbUKS-9Qin0Gs6cmsmCsMcYzSrALTEzeSa1ml5j0zvogN2zo1szIDlCVyOF3SLVITMtay0TGyRFKF+yJyiDrzKEmzK8jCYtSTPy-TKE3oX5HixzYoFzecyzgK+UwK5yolHzJyhzTi3pikCyP4YsrjFk-YWiJSPDlNF5t8pCTzwUqkdzzNlSXT8KxZMT1zVtnQQykKdSGy7ipMMMBTWzZhTSGiszOycyy9Qi3oa10LMkoksKmLcLd5qKSQLZdj7ScAPVzyccuzoKSlT9bTCy+0PzuSpyULkYiKMLncr8dLkLBjlNDC6K9cmRnNBzmL3CZj0NcUq9jSPk+wlLLzXCvzQlXzJDDL6FELALczKF8s8waEnioYAKTK7LWiHLcx3SWz5Lz5eibVlL+Lj8PD8sTlKz4K+1GLAq21lzgrbySkozuiFdWs4yRSfFFCryNj7K8jwc8COLErLcwCEyVLQSjtW97yPkByeczDwy+s1y5KSLYoKrFT4y6kOrWTHK-g4LNKwF9908grX4QlUycqeE8qorJLWTkcRBRy7TRqJFtyeKOz2q0rcjLDzRHIRLqVTFIqSzny7jkimqeqoljLIAG8vKZcQ43qTMTCJLvrT9fLRK+1xL8r0qZiadaKITXKXinz8TVqSQz8-rTFtLHrEaJtX4gylrB4AAxSaRgMQfbSGvIgXc5Da1xI4LajGnEAAXW0BHEgAwAMAAGsegXBDhXhIArg4QdBGBVBqAygcRIAAAPMoSAAAM0YGQDEB0B6D-ChDwH5EIA9B23sH2GqBskgEFBwFaGltlvlosC9iVpVo9AAEdWB0ADxmBUoqBta4QxB9o9apaZa5aehEpTbVaehVBeQBatanhGbua4RVBpaha9bA6nggA">Example</a>
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    let cleanData;
+    let firstGenre;
+
+    jQuery.getJSON("https://gist.githubusercontent.com/sxywu/b94eb86c807b05080d7ee470bd1e815c/raw/bc0e59845dae332100acaa73f510580ccbe317bd/110_movies.json", function(data) {
+
+      cleanData = _.map(data, function(d) {
+        // firstGenre = d.Genre.match(/^((\w|\s)*)/);
+        firstGenre = d.Genre.split(", ")[0];
+
+        return {
+          Year: new Date(d.Released),
+          Metascore: +d.Metascore,
+          Genre: firstGenre
+        }
+      });
+
+      var yourVlSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v3.0.json",
+        "description": "A simple line graph with embedded data.",
+        "width": 1000,
+        "height": 600,
+        "data": {"values": cleanData },
+        "mark": "line",
+        "encoding": {
+          "x": { "field": "Year", "type": "temporal"},
+          "y": { "field": "Metascore", "type": "quantitative"},
+          "color": {"field": "Genre", "type": "nominal"},
+        }
+      }
+
+      vegaEmbed("#vis", yourVlSpec);
+    });
+  </script>
+</body>
+</html>

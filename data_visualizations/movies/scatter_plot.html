@@ -16,15 +16,16 @@
   <div id="vis"></div>
 
   <script type="text/javascript">
-    let cleanData;
-    let wins
-    jQuery.getJSON( "https://gist.githubusercontent.com/sxywu/b94eb86c807b05080d7ee470bd1e815c/raw/bc0e59845dae332100acaa73f510580ccbe317bd/110_movies.json", function(data) {
+    let cleanData, wins;
+
+    jQuery.getJSON("https://gist.githubusercontent.com/sxywu/b94eb86c807b05080d7ee470bd1e815c/raw/bc0e59845dae332100acaa73f510580ccbe317bd/110_movies.json", function(data) {
 
       cleanData = _.map(data, function(d) {
         wins = d.Awards.match(/(\d+) win/);
+
         return {
           Metascore: +d.Metascore,
-          wins: (wins ? +wins [1] : 0)
+          wins: (wins ? +wins[1] : 0)
         }
       });
 
