@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embedding Vega-Lite</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4.3.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.20"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <a href="">Example</a>
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    let cleanData;
+    let firstGenre;
+
+    jQuery.getJSON("https://gist.githubusercontent.com/sxywu/b94eb86c807b05080d7ee470bd1e815c/raw/bc0e59845dae332100acaa73f510580ccbe317bd/110_movies.json", function(data) {
+
+      cleanData = _.map(data, function(d) {
+        firstGenre = d.Genre.split(", ")[0]; // Heavily favored for "Action"
+
+        return {
+          // Release: d.Released,
+          Release: new Date(d.Released),
+          votes: +d.imdbVotes.replace(/\,/g, ""),
+          Genre: firstGenre
+        }
+      });
+
+      var yourVlSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v3.0.json",
+        "description": "A simple heat map with embedded data.",
+        "width": 1000,
+        "height": 600,
+        "data": {"values": cleanData },
+        "mark": "rect",
+        // "mark": "circle",
+        "encoding": {
+          "x": { "field": "Release", "type": "ordinal", "timeUnit": "month"},
+          "y": { "field": "Genre", "type": "nominal"},
+          "color": {
+            "field": "votes",
+            "type": "quantitative",
+            "aggregate": "median"
+          },
+        }
+      }
+
+      vegaEmbed("#vis", yourVlSpec);
+    });
+  </script>
+</body>
+</html>
