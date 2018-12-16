@@ -1,7 +1,17 @@
-<h1> Platonic Shapes</h1>
+<h1>Data Visualizations</h1>
+
+<a href="https://frontendmasters.com/courses/svg-animation">https://frontendmasters.com/courses/svg-animation</a>
+
+<h2>Platonic Shapes</h2>
+
+https://www.sarasoueidan.com/blog/svg-coordinate-systems/
+
+Specifying a viewbox has a result similar to cropping the graphic to that viewbox and then zooming it in so that it fills the entire viewport area. Remember that we're still maintaining the same aspect ratio as the viewport in this case.
+
+<h3>Original Viewport & Original ViewBox (fits all content by default)</h3>
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-  x="0px" y="0px" width="450px" height="100px" viewBox="0 0 450 100">
+  x="0px" y="0px" width="450px" height="100px" viewBox="0 0 450 100" class="viewBox">
   <rect x="10" y="5" fill="white" stroke="black" width="90" height="90"/>
   <circle fill="white" stroke="green" cx="170" cy="50" r="45"/>
   <polygon fill="red" stroke="black" points="279,5 294,35 328,40 303,62 309,94 
@@ -10,9 +20,10 @@
   <line fill="none" stroke="black" x1="360" y1="6" x2="360" y2="95"/>
 </svg>
 
+<h3>Original Viewport BUT ViewBox is "Cropped" First Larger</h3>
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-  x="0px" y="0px" width="900px" height="200px" viewBox="0 0 450 100">
+  x="0px" y="0px" width="450px" height="100px" viewBox="0 0 900 200" class="viewBox">
   <rect x="10" y="5" fill="white" stroke="black" width="90" height="90"/>
   <circle fill="white" stroke="green" cx="170" cy="50" r="45"/>
   <polygon fill="red" stroke="black" points="279,5 294,35 328,40 303,62 309,94 
@@ -20,3 +31,43 @@
   <line fill="none" stroke="black" x1="410" y1="95" x2="440" y2="6"/>
   <line fill="none" stroke="black" x1="360" y1="6" x2="360" y2="95"/>
 </svg>
+
+<h3>Smaller Viewport & Original ViewBox</h3>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  x="0px" y="0px" width="225px" height="50px" viewBox="0 0 450 100" class="viewBox">
+  <rect x="10" y="5" fill="white" stroke="black" width="90" height="90"/>
+  <circle fill="white" stroke="green" cx="170" cy="50" r="45"/>
+  <polygon fill="red" stroke="black" points="279,5 294,35 328,40 303,62 309,94 
+  279,79 248,94 254,62 230,39 263,35 "/>
+  <line fill="none" stroke="black" x1="410" y1="95" x2="440" y2="6"/>
+  <line fill="none" stroke="black" x1="360" y1="6" x2="360" y2="95"/>
+</svg>
+
+<h3>Viewbox Starting Different min-x and min-y</h3>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+  x="0px" y="0px" width="450px" height="100px" viewBox="50 47.5 450 100" class="viewBox">
+  <rect x="10" y="5" fill="white" stroke="black" width="90" height="90"/>
+  <circle fill="white" stroke="green" cx="170" cy="50" r="45"/>
+  <polygon fill="red" stroke="black" points="279,5 294,35 328,40 303,62 309,94 
+  279,79 248,94 254,62 230,39 263,35 "/>
+  <line fill="none" stroke="black" x1="410" y1="95" x2="440" y2="6"/>
+  <line fill="none" stroke="black" x1="360" y1="6" x2="360" y2="95"/>
+</svg>
+
+<style>
+
+.viewBox {
+  background-color: green;
+}
+</style>
+
+<h2>preserveAspectRatio</h2>
+
+<h2>Paths and Groups</h2>
+`g` is a way to group elements. Helpful for styling.
+
+Optimize: <a href="https://jakearchibald.github.io/svgomg/">https://jakearchibald.github.io/svgomg/</a>
+
+Builder: <a href="https://codepen.io/anthonydugois/pen/mewdyZ">https://codepen.io/anthonydugois/pen/mewdyZ</a>

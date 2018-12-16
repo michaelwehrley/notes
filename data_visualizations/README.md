@@ -69,6 +69,3 @@ Channels: position, color, shape, tilt, size (length, area, volume)
 
 ## SVGs
 
-```html
-
-```
