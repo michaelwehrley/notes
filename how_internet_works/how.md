@@ -24,7 +24,82 @@ This I found it is a loaded question:
 	* Android
 	* iOS
 	* Symbian
-	* Heroku maintains a stack (i.e., an operating system) for applications.  It uses a buildpack for allowing an application to be executed on a certain stack. A _stack_ is an operating system _image_ that is curated and maintained by Heroku. Stacks are typically based on an existing open-source Linux distribution, such as Ubuntu. Heroku applications target a specific stack, and _buildpacks_ are responsible for transforming an app’s source code into an _executable package_ that is compatible with that stack.
+
+## Heroku
+	Overview: `app`=( buildpack )=>`slug`=( procfile )=>`container`
+	* all run on a virtual machine on an e2 instance
+
+ `Your App - Deploy`
+
+ `app=( buildpack/ruby )=>slug=>`
+
+ 	```
+ 	* preboot is already enabled.
+	* Deploying master to production
+	* Counting objects: 17, done.
+	* Delta compression using up to 8 threads.
+	* Compressing objects: 100% (12/12), done.
+	* Writing objects: 100% (16/16), 2.14 KiB | 2.14 MiB/s, done.
+	* Total 16 (delta 13), reused 4 (delta 4)
+	* remote: Compressing source files... done.
+	* remote: Building source:
+	* remote: -----> Deleting 1 files matching .slugignore patterns.
+	* remote: -----> Node.js app detected
+	* remote:
+	* remote: -----> Creating runtime environment
+	* remote:
+	* remote:        FOO_CONFIG_LOGLEVEL=error
+	* remote:        BAR_VERBOSE=false
+	* remote:
+	* remote: -----> Installing binaries       
+	* remote: -----> Restoring cache   
+	* remote: -----> Building dependencies
+	* remote: -----> Caching build
+	* remote: -----> Pruning devDependencies
+	* remote: -----> Build succeeded!
+	* remote: -----> PhantomJS app detected
+	* remote: -----> Extracting PhantomJS 2.1.1 binaries to /tmp/build_foo/vendor/* phantomjs
+	* remote: -----> exporting PATH and LIBRARY_PATH
+	* remote: -----> Ruby app detected
+	* remote: -----> Compiling Ruby/Rails
+	* remote: -----> Using Ruby version: ruby-2.3.2
+	* remote: -----> Installing dependencies using bundler 1.15.2
+	* remote: -----> Detecting rake tasks
+	* remote: -----> Preparing app for Rails asset pipeline
+	* remote: -----> Detecting rails configuration
+	* remote: -----> Discovering process types
+	* remote:        Procfile declares types     -> foo, bar, web, worker
+	* remote:        Default types for buildpack -> console, rake
+	* remote: -----> Compressing...
+	* remote:        Done: 100.M
+	* remote: -----> Launching...
+	* remote:        https://foo.herokuapp.com/ deployed to Heroku
+	* remote: Verifying deploy... done.
+	```
+
+ `Slug`:
+ 	* `.slugignore` & limited ot 15 minutes & maximum of 500 MB.
+	* app + dependencies + language runtime;
+ 	* compressed and pre-packaged copy of your application (i.e., images). 
+
+ `Container` (isolated environments)
+ 	* Not a virtual machine!
+ 	* Has many dynos, i.e., processes that are running (Procfile)
+
+ `Dyno`
+ 	* https://www.heroku.com/dynos
+  * lightweight, *Linux* isolated environments that provide compute, memory, an OS, and an ephemeral filesystem
+ 	* (?i.e., JAR file in Java to execute on JVM) builds a _Virtual Machine_ *Image*?)
+
+ `=( Procfile command )=>` to specify the Dynos needed for the application:
+
+ Slug.new (i.e., Dyno w/ 1 process)
+ 	- Dyno is a virtualized Unix container
+ 	- Think of a running dyno as a lightweight, secure, virtualized Unix container that contains your application slug in its file system.
+
+## Heroku II
+	Heroku maintains a stack (i.e., an operating system) for applications.
+	* It uses a buildpack for allowing an application to be executed on a certain stack. A _stack_ is an operating system _image_ that is curated and maintained by Heroku. Stacks are typically based on an existing open-source Linux distribution, such as Ubuntu. Heroku applications target a specific stack, and _buildpacks_ are responsible for transforming an app’s source code into an _executable package_ that is compatible with that stack.
 		* Images
 			- In computing, a system image is a serialized copy of the entire state of a computer system stored in some non-volatile form such as a file. A system is said to be capable of using system images if it can be shut down and later restored to exactly the same state. In such cases, system images can be used for backup.
 				- serialization: The process of translating data structures or object state into a format that can be stored (for example, in a file or memory buffer) or transmitted (for example, across a network connection link) and reconstructed later (possibly in a different computer environment).
@@ -70,20 +145,6 @@ This I found it is a loaded question:
 
 #### Arbitration
 	* Manages hardware (i.e., distribute memory between multiple processes)
-
-## Heroku
-
- Your App
-
- =( buildpack/ruby )=>
-
- Slug - (app + dependencies + language runtime; i.e., JAR file in Java to execute on JVM) builds a _Virtual Machine_ *Image*
-
- =( Procfile command )=>
-
- Slug.new (i.e., Dyno w/ 1 process)
- 	- Dyno is a virtualized Unix container (maybe considered a virtual operating system?)
- 	- Think of a running dyno as a lightweight, secure, virtualized Unix container that contains your application slug in its file system.
 
 ## Diagram
 
