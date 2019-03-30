@@ -2,8 +2,8 @@ function lotteryNum() {
 	return (Math.round(Math.random() * 100) % 58) + 1;
 }
 
-function pickNumber(nums){
-	var newNums = nums.slice();
+function pickNumber(nums)
+	var newNums = nums.slice(); // :-)
 	var num;
 	do {
 		num = lotteryNum();
@@ -19,7 +19,7 @@ var luckyLotteryNumbers = [];
 
 for (var i = 0; i < 6; i++) {
 	luckyLotteryNumbers = pickNumber(
-		Object.freeze(luckyLotteryNumbers)
+		Object.freeze(luckyLotteryNumbers) // :-)
 	);
 }
 

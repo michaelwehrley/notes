@@ -2,7 +2,11 @@ function lotteryNum() {
 	return (Math.round(Math.random() * 100) % 58) + 1;
 }
 
-function pickNumber(){}
+function pickNumber(){
+
+
+	
+}
 
 var luckyLotteryNumbers = [];
 

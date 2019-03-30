@@ -1,5 +1,7 @@
 # History
 
+* 1804: Joseph Marie Jacquard demonstrated a mechanism to automate loom operation w/ *punch cards*
+
 * 1950s: Assembly
 
 * 1952: IBM 701
@@ -31,11 +33,40 @@
 
 * 1960s - 1970s: Database modeling developed by IBM
 
+* 1970s: Steve Wozniak and Steve Jobs invented Apple I
+
 * Late 1970s - IBM develops SQL (compare to other query languages at the time: QUEL & QBE).
 
+* 1980s: MS DOS: Microsoft *Disk Operating System*
+* 1972: Pong & Atari & Aracde games
 * 1977-1985: UC Berkeley devevloped the relational database called _Ingres_
 * 1994: SQL features were added to Postgres and it was called Postgres95
 * 1996: Postgres95 was updated to PostgreSQL
+
+## Macintosh / Microsoft / Unix / GNU
+Operating Systems: https://commons.wikimedia.org/wiki/File:Unix_timeline.en.svg
+*Disk Operating System* is a way to store info on a disk.
+
+### Apple
+* https://en.wikipedia.org/wiki/List_of_Apple_operating_systems
+* Apple I/1976 - built by Wozniak: There was no OS for the Apple I.
+* Apple II/1977: Apple DOS (*Disk Operating System*) is the first operating system for Apple computers. 8-bit home computer, 
+* 1984:  "Classic" Mac OS
+
+### Microsoft
+* 1980s: MS DOS: Microsoft *Disk Operating System*
+
+### Unix
+* 1970s at the Bell (AT&T) Labs & one of the earliest OS
+* Ken Thompson and Dennis Ritchie
+  - Ken Thompson invented the B programming language (direct predecessor to C) along with co-inventing the Go programming language.
+  - Create C programming language
+
+### GNU - GNU's Not Unix! (recursive_acronym)
+* GNU: Richard Stallman
+* Not really an OS but a set of rules that allows for the development of open source tools and OS
+* Free operating system based on Unix
+* Linux Kernel + GNU tools = Linux OS
 
 # And Then There Was JavaScript
 
