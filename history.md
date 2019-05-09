@@ -1,6 +1,6 @@
 # History
 
-* 1804: Joseph Marie Jacquard demonstrated a mechanism to automate loom operation w/ *punch cards*
+* 1804: Joseph Marie Jacquard demonstrated a mechanism to automate loom operation w/ *punch cards* Just like in a loom, a 0 is something, just not 1 or open.  It is "closed" - and impacts the loom's logic.  With computers, a computer would read a hole as 1 and no hole as a 0.  Today, we use transistors.
 
 * 1950s: Assembly
 
@@ -68,7 +68,19 @@ Operating Systems: https://commons.wikimedia.org/wiki/File:Unix_timeline.en.svg
 * Free operating system based on Unix
 * Linux Kernel + GNU tools = Linux OS
 
-# And Then There Was JavaScript
+## ASCII => UTF-8
+* **values out of our 256** (i.e., 8 BITs or 1 BYTE) and it last a veerrrrryyyy long time!
+* http://www.asciitable.com/
+* First character encoding - a way to translate 0s and 1s into letters (binary table)
+* Ex: First character was 
+
+ASCII | Binary  | Decimal | Hex | Base64
+------|---------|---------|-----|-------
+a     | 01100001| 097     |0x61 |YQ==
+
+* **UTF-8** (binary)allows us to user a **VARIABLE number** of **BYTES**
+* UTF-8 includes ASCII and a UTF standard
+* ☺ = 11100010:10011000:10111010
 
 ## History of JS
 
