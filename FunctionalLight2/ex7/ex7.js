@@ -22,7 +22,6 @@ function add(a, b) {
 
 add(foo(), bar()); // 7
 
-
 // 3. Write an `add2(..)` that takes two functions instead of two numbers,
 //    and it calls those two functions and then sends those values to `add(..)`,
 //    just like you did in (2) above.
@@ -50,20 +49,35 @@ foo2(3)(); // 3
 //    Try it with built-in array functional helpers (map/reduce).
 
 // LOOP
-function addn(arrayOfFns) {
-  return add2(arrayOfFns[0], arrayOfFns[1]);
-}
-
-var arrayOfFns = [foo, bar, baz];
-
-addn(arrayOfFns); // 7
-
-function baz() {
-  return 7;
-}
-
-var arrayOfFns = [foo, bar, baz];
-
-addn(arrayOfFns); // 14
 
 // RECURSION
+
+function foo(num) {
+  return function() {
+    return num;
+  }
+}
+
+three = foo(3);
+four = foo(4);
+five = foo(5);
+
+function add(a, b) {
+  return a + b;
+}
+
+function addFn(fn1, fn2) {
+  return add(fn1(), fn2());
+}
+
+function addN(car, ...cdr) {
+  if (cdr.length == 1) return car() + cdr[0]();
+
+  var fn = cdr.pop()
+  sumFn = function() {
+    return addFn(car, fn);
+  }
+  return addN(sumFn, ...cdr);
+}
+
+addN(three, four, five);
