@@ -105,21 +105,20 @@ function exclude(array, fn) {
 
 exclude([1,3,4,3,6,1,12], inCollection);
 
+
+newArray = []
+
 function inCollection(value, collection) {
   return collection.includes(value)
 }
 
-newArray = []
+var array = [1,3,4,3,6,1,12]
+var reducer = function (accumulator, currentValue) {
+  debugger;
+  if (!accumulator.includes(currentValue)) { accumulator.push(currentValue) }
+}
 
-[1,3,4,3,6,1,12].filter((value) => inCollection(value, newArray));
-
-const result = words.filter(word => word.length > 6);
-
-[1,3,4,3,6,1,12].filter(function(value, _index, array) {
-  inCollection(value, array);
-})
-
-
+console.log(array.reduce(reducer, []));
 
 
 
