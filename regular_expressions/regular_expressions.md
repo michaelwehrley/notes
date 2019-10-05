@@ -1,5 +1,20 @@
 # Regular Expressions
 
+## Ken Thompson
+
+Popular text editor for the Unix operating system at the time was [ed](https://en.wikipedia.org/wiki/Ed_(text_editor)).  Just a fun fact, this `ed` os was written in [PDP-11 Assembly language](https://en.wikipedia.org/wiki/PDP-11_architecture) and today `ed` is written in `C`.  But computers where so low on memory like 64 KB (not MB) that you couldn't load a file such as the [Feteralist Papers](https://en.wikipedia.org/wiki/The_Federalist_Papers) into memory and a do an analysis on it like [Lee McMahon](https://en.wikipedia.org/wiki/Lee_E._McMahon) wanted to do in order to do some natural language anaylsis on it to determine who wrote what.  The Federalist Papers when published were published anonymously under the pseudonym **Publius**.  Ken Thompson introduced regular expression in the *ed* text editor.  It would find something like `/prin/` and find "printed", "print", "princess", and "printed". So Lee contacted Ken Thompson b/c he wanted load all the papers in memory with `ed` and search with regular experssions.  Overnight, Ken Thompson wrote a program called `grep`.
+
+In `ed` we had a `g` command just like we had commands `w` for *write*, `p` for *print*, `d` for *delete*, or `a` for *append*.  For example:
+* Print the first line: `1 p`
+* Print the lines 1-10: `1,10 p`
+* Delete line 3: `3 d`
+* Print last line `$ p`
+* Delete last line `$ d`
+
+Ken's new program was to leverage `g` and use the **regex** and then print the results:
+* If searching for `prin` then `g/print/p`.
+* Or more generally: `g/re/p`.
+
 ## JavaScript
 
 Regular expression literals can be used to match or replace a pattern:
